@@ -1,0 +1,18 @@
+<div class="clr-row custom-header">
+    <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
+    <div class="clr-col-10 clr-col-sm-6 clr-col-md-6 clr-col-lg-8">
+        <span class="title">{{'navbarPage.title' | translate}}</span>
+        <clr-dropdown class="languageDropDown">
+            <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
+                {{currentLanguage}}
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+            <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
+                <div clrDropdownItem *ngFor="let language of languageList" (click)="changeLanguage(language.code)">
+                    <a>{{language.display}}</a>
+                </div>
+            </clr-dropdown-menu>
+        </clr-dropdown>
+    </div>
+    <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
+</div>

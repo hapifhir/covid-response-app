@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+html, body {
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+
+.additionalPadding {
+    padding-bottom: 20px;
+}
+
+.dividerMargin {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.custom-btn {
+    border-color: #02B2E3 !important;
+}
+
+.btn-primary {
+    background-color: #02B2E3 !important;
+}

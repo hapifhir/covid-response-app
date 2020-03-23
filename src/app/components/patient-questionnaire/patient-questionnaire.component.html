@@ -1,0 +1,41 @@
+<div class="clr-row">
+    <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
+    <div class="clr-col-10 clr-col-sm-6 clr-col-md-6 clr-col-lg-8">
+        <button class="btn btn-link back-button" *ngIf="resultString" (click)="changeView()">
+            <clr-icon shape="caret left"></clr-icon>{{ 'patientQuestionnairePage.backBtn' | translate }}
+        </button>
+        <h2>{{ 'covidAssessmentToolHeader' | translate }}</h2>
+        <app-consent *ngIf="!getConsent()"></app-consent>
+        <form clrForm clrLayout="vertical" *ngIf="questionSet && getConsent() && !resultString"
+            [formGroup]="questionnaireResponseForm" (ngSubmit)="onSubmit()" #formDir="ngForm">
+            <clr-checkbox-container formArrayName="answerSet" class="additionalPadding">
+                <label class="questionLabels additionalPadding">
+                    {{ 'patientQuestionnairePage.questionSetLabel' | translate }}</label>
+                <clr-checkbox-wrapper
+                    *ngFor="let answer of questionnaireResponseForm.get('answerSet')['controls']; let i=index">
+                    <input type="checkbox" clrCheckbox [formControlName]="i" />
+                    <label class="clr-control-label">{{questionSet[i].display | translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+            <clr-input-container class="additionalPadding">
+                <label class="questionLabels additionalPadding">{{ 'patientQuestionnairePage.postalCodeLabel' | translate }} </label>
+                <input clrInput placeholder="M6G" type="text" formControlName="postalCode" />
+            </clr-input-container>
+            <div class="clr-subtext-wrapper clr-error" *ngIf="!questionnaireResponseForm.valid && formDir.submitted">
+                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
+                <span class="clr-subtext">{{ 'patientQuestionnairePage.errorMsg' | translate }}</span>
+            </div>
+            <hr class="dividerMargin" />
+            <div class="dividerMargin">
+            </div>
+            <div>
+                <button class="btn btn-primary custom-btn" type="submit">{{ 'patientQuestionnairePage.submitBtn' | translate }}</button>
+                <button class="btn custom-btn" (click)="changeView()" type="reset">{{ 'patientQuestionnairePage.resetBtn' | translate }}</button>
+            </div>
+        </form>
+        <div *ngIf="resultString" class="dividerMargin">
+            <div [innerHTML]="resultString | translate"></div>
+        </div>
+    </div>
+    <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
+</div>

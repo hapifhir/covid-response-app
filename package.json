@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --aot --prod --base-href=/covid-response-app/ --deploy-url=/covid-response-app/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -19,6 +20,15 @@
     "@angular/platform-browser": "~9.0.6",
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
+    "@clr/angular": "^3.0.1",
+    "@clr/core": "3.0.1",
+    "@clr/icons": "3.0.1",
+    "@clr/ui": "3.0.1",
+    "@ng-select/ng-select": "^3.7.3",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^4.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "ngx-cookie-service": "^3.0.3",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

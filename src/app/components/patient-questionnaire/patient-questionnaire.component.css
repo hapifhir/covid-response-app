@@ -1,0 +1,11 @@
+.questionLabels {
+    font-weight: bolder;
+    font-size: 15px;
+    color: #767676;
+}
+
+.back-button {
+    margin-left: -10px;
+    color: #4c4c4c;
+    margin-top: 20px;
+}
