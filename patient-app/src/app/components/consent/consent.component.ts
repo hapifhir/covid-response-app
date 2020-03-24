@@ -14,7 +14,13 @@ export class ConsentComponent implements OnInit {
   }
 
   consentAgree() {
+    this.cookieService.set('consentPage', 'yes', 1);
     this.cookieService.set('consentGiven', 'yes', 1);
+  }
+
+  consentDecline() {
+    this.cookieService.set('consentPage', 'yes', 1);
+    this.cookieService.set('consentGiven', 'no', 1);
   }
 
 }

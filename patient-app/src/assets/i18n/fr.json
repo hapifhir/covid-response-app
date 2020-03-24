@@ -5,24 +5,26 @@
         "postalCodeLabel": "Veuillez saisir les trois premières lettres de votre code postal (facultatif)",
         "backBtn": "Retour",
         "submitBtn": "Soumettre",
-        "resetBtn": "Réinitialiser",
+        "resetBtn": "Modifier le consentement",
         "errorMsg": "Veuillez remplir les informations requises",
-        "signOfSymptoms": "Avez-vous de la fièvre ou une nouvelle toux ou des difficultés respiratoires (ou une combinaison de ces symptômes)?",
-        "contactWithVictimHavingTravelHistory": "Êtes-vous en contact étroit avec une personne malade souffrant de symptômes respiratoires (fièvre, toux ou difficulté à respirer) qui a récemment voyagé hors du pays?",
-        "recentTravel": "Avez-vous voyagé hors du pays au cours des 14 derniers jours avant de vous sentir mal?",
-        "contactWithVictim": "Êtes-vous un contact proche d'un cas de COVID-19 (par exemple, un membre de votre ménage)?",
-        "ageVerification": "Avez-vous 60 ans ou plus?",
-        "diabetesAndBpVerification": "Souffrez-vous de diabète ou d'hypertension artérielle?",
-        "chronicDiseaseVerification": "Avez-vous des problèmes de santé chroniques?",
+        "signOfSymptoms": "J'ai de la fièvre ou une nouvelle toux ou des difficultés à respirer (ou une combinaison de ces symptômes)?",
+        "contactWithVictimHavingTravelHistory": "Je suis en contact étroit avec une personne malade avec des symptômes respiratoires (fièvre, toux ou difficulté à respirer), qui a récemment voyagé hors du pays?",
+        "recentTravel": "J'ai voyagé hors du pays au cours des 14 derniers jours avant que vous ne vous sentiez mal?",
+        "contactWithVictim": "J'ai été en contact étroit avec un cas de COVID-19 (par exemple, quelqu'un dans votre ménage)?",
+        "ageVerification": "J'ai 60 ans ou plus?",
+        "diabetesAndBpVerification": "J'ai du diabète ou de l'hypertension?",
+        "chronicDiseaseVerification": "J'ai une condition médicale chronique?",
         "contactHealthCareProvider": "Il est très <b> peu probable que vous ayez le nouveau coronavirus (COVID-19) </b>. Si vous avez des préoccupations ou des questions sur votre santé, appelez votre fournisseur de soins primaires (p. Ex. Médecin de famille) ou Télésanté Ontario au <b> 1-866-797-0000 </b>.",
         "contactForReassessment": "Il est très <b> peu probable que vous ayez le nouveau coronavirus (COVID-19) </b>. Si vous avez des préoccupations ou des questions concernant votre santé, appelez votre fournisseur de soins primaires ou Télésanté Ontario au <b> 1-866-797-0000 </b>. Si vous commencez à vous sentir pire, vous devriez appeler votre fournisseur de soins primaires ou Télésanté Ontario au <b> 1-866-797-0000 </b> pour une réévaluation.",
         "clinicalAssessment": "Vous devez <b> demander une évaluation clinique et des tests pour COVID-19 </b>. Les options d'évaluation du COVID-19 varient selon la région et peuvent inclure: - <ul> <li> Votre fournisseur de soins primaires (p. Ex. Médecin de famille). Vous devriez appeler à l'avance pour voir s'ils proposent des tests et pour leur faire savoir que vous avez utilisé cet outil d'auto-évaluation. </li> <li> Un ou des centres locaux d'évaluation et de soins COVID-19. Une liste de ces centres peut être trouvée ici: XXX. </li> <li> Votre service d'urgence local. Vous devez appeler à l'avance avant de vous rendre aux urgences et leur faire savoir que vous avez utilisé cet outil d'auto-évaluation. Scénario futur: cas diagnostiqué sur la base de la présentation clinique, seul un sous-ensemble de cas est testé </li> </ul>",
-        "illnessAdvise": "Comment vous sentez-vous malade? <ul> <li> <b> Maladie légère </b>: Si vous souffrez d'une maladie bénigne, vous devez rester à la maison, vous isoler et surveiller vos symptômes. De plus amples renseignements sur l'auto-isolement et l'auto-surveillance de COVID-19 sont disponibles sur le site Web de Santé publique Ontario. Si vous commencez à vous sentir pire, vous devriez appeler votre fournisseur de soins primaires ou Télésanté Ontario au <b> 1-866-797-0000 </b> pour une réévaluation. </li> <li> Si vous êtes préoccupé par votre santé, vous devez appeler votre fournisseur de soins primaires et lui faire savoir que vous avez utilisé cet outil d'auto-évaluation et que vous êtes préoccupé par votre santé </li> <li> Vous pouvez visiter un centres locaux d'évaluation et de soins COVID-19. Une liste de ces centres peut être trouvée ici: XXX </li> <li> Si vous avez une maladie grave: Si vous avez une maladie grave ou êtes préoccupé par votre santé, vous devez vous rendre à l'urgence locale. Vous devez appeler à l'avance avant de vous rendre aux urgences et leur faire savoir que vous avez utilisé cet outil d'auto-évaluation. Si vous devez voyager en ambulance, <b> veuillez appeler le 911 </b> et leur faire savoir que vous avez utilisé cet outil d'auto-évaluation. </li> </ul>"
+        "illnessAdvise": "Comment vous sentez-vous malade? <ul> <li> <b> Maladie légère </b>: Si vous souffrez d'une maladie bénigne, vous devez rester à la maison, vous isoler et surveiller vos symptômes. De plus amples renseignements sur l'auto-isolement et l'auto-surveillance de COVID-19 sont disponibles sur le site Web de Santé publique Ontario. Si vous commencez à vous sentir pire, vous devriez appeler votre fournisseur de soins primaires ou Télésanté Ontario au <b> 1-866-797-0000 </b> pour une réévaluation. </li> <li> Si vous êtes préoccupé par votre santé, vous devez appeler votre fournisseur de soins primaires et lui faire savoir que vous avez utilisé cet outil d'auto-évaluation et que vous êtes préoccupé par votre santé </li> <li> Vous pouvez visiter un centres locaux d'évaluation et de soins COVID-19. Une liste de ces centres peut être trouvée ici: XXX </li> <li> Si vous avez une maladie grave: Si vous avez une maladie grave ou êtes préoccupé par votre santé, vous devez vous rendre à l'urgence locale. Vous devez appeler à l'avance avant de vous rendre aux urgences et leur faire savoir que vous avez utilisé cet outil d'auto-évaluation. Si vous devez voyager en ambulance, <b> veuillez appeler le 911 </b> et leur faire savoir que vous avez utilisé cet outil d'auto-évaluation. </li> </ul>",
+        "emptyForm": "Si vous avez volontairement rempli une évaluation vide, il est très <b> peu probable que vous ayez le nouveau coronavirus (COVID-19) </b>."
     },
     "consentPage": {
         "agreeBtn": "Se mettre d'accord",
         "declineBtn": "Déclin",
-        "consentText": "Vous partagerez des informations sur votre santé et vos symptômes en fonction des directives des responsables de la santé publique.Pour collecter des informations et les utiliser pour le dépistage et le test COVID-19, vous devrez signer des formulaires de consentement et d'autorisation."
+        "consentText": "Vous partagerez des informations sur votre santé et vos symptômes en fonction des directives des responsables de la santé publique.Pour collecter des informations et les utiliser pour le dépistage et le test COVID-19, vous devrez signer des formulaires de consentement et d'autorisation.",
+        "note": "Remarque: Si vous choisissez de refuser, vous pouvez toujours passer l'évaluation, mais l'évaluation ne sera pas utilisée pour les statistiques."
     },
     "navbarPage": {
         "title": "Réponse rapide COVID-19"

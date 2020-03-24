@@ -21,16 +21,12 @@
                 <label class="questionLabels additionalPadding">{{ 'patientQuestionnairePage.postalCodeLabel' | translate }} </label>
                 <input clrInput placeholder="M6G" type="text" formControlName="postalCode" />
             </clr-input-container>
-            <div class="clr-subtext-wrapper clr-error" *ngIf="!questionnaireResponseForm.valid && formDir.submitted">
-                <clr-icon class="clr-validate-icon" shape="exclamation-circle"></clr-icon>
-                <span class="clr-subtext">{{ 'patientQuestionnairePage.errorMsg' | translate }}</span>
-            </div>
             <hr class="dividerMargin" />
             <div class="dividerMargin">
             </div>
             <div>
                 <button class="btn btn-primary custom-btn" type="submit">{{ 'patientQuestionnairePage.submitBtn' | translate }}</button>
-                <button class="btn custom-btn" (click)="changeView()" type="reset">{{ 'patientQuestionnairePage.resetBtn' | translate }}</button>
+                <button class="btn custom-btn" (click)="goToConsent()">{{ 'patientQuestionnairePage.resetBtn' | translate }}</button>
             </div>
         </form>
         <div *ngIf="resultString" class="dividerMargin">

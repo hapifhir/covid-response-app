@@ -8,8 +8,9 @@ export class FhirOperationsService {
 
   constructor() { }
 
-  generateQuestionnaireResponse(answersSelected, identifier) {
+  generateQuestionnaireResponse(answersSelected, identifier, questionnaireRef) {
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
+    questionnaireResponse.questionnaire = questionnaireRef;
     questionnaireResponse.resourceType = 'QuestionnaireResponse'
     questionnaireResponse.status = 'completed';
     questionnaireResponse.authored = new Date();   
@@ -22,7 +23,7 @@ export class FhirOperationsService {
       const element = answersSelected[index];
       if(element.type === 'display') {
         const questionnaireResponseItemForOutcome = new FHIR.QuestionnaireResponseItem();
-        questionnaireResponseItemForOutcome.linkId = element.linkId;
+        questionnaireResponseItemForOutcome.linkId = 'clinical_outcome';
         questionnaireResponseItemForOutcome.text = element.text;
         questionnaireResponseItemForOutcome.answer = [];
         const outcomeAnswer = new FHIR.Answer();

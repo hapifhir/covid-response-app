@@ -22,14 +22,19 @@ export class PatientQuestionnaireComponent implements OnInit {
   ngOnInit(): void {
     this.fetchQuestionnaire();
     this.questionnaireResponseForm = new FormGroup({
-      answerSet: new FormArray([], this.customValidateArrayGroup()),
+      answerSet: new FormArray([]),
       postalCode: new FormControl('', Validators.maxLength(3))
     });
   }
 
   getConsent() {
-    const consentGiven = this.cookieService.get('consentGiven');
-    return consentGiven ? true : false;
+    const consentPage = this.cookieService.get('consentPage');
+    return consentPage ? true : false;
+  }
+
+  goToConsent() {
+    const consentPage = this.cookieService.set('consentPage', '', 1);
+    const consentGiven = this.cookieService.set('consentGiven', 'no', 1);
   }
 
   async fetchQuestionnaire() {
@@ -53,39 +58,38 @@ export class PatientQuestionnaireComponent implements OnInit {
   }
 
   async onSubmit() {
-    if (this.questionnaireResponseForm.valid) {
       const formValues = this.questionnaireResponseForm.value;
       const selectedIndexes = this.utilService.getAllIndexes(formValues.answerSet, true);
-      const answersSelected = selectedIndexes.map(i => this.questionSet[i]);
-      const outcome = this.getOutcome(answersSelected);
-      const responseItems = JSON.parse(JSON.stringify(this.questionSet));
-      for (let index = 0; index < responseItems.length; index++)  {
-        const element = responseItems[index];
-        if(selectedIndexes.includes(index)) {
-          element.isSelected = true;
+      if(selectedIndexes.length > 0) {
+        const answersSelected = selectedIndexes.map(i => this.questionSet[i]);
+        const outcome = this.getOutcome(answersSelected);
+        const responseItems = JSON.parse(JSON.stringify(this.questionSet));
+        for (let index = 0; index < responseItems.length; index++)  {
+          const element = responseItems[index];
+          if(selectedIndexes.includes(index)) {
+            element.isSelected = true;
+          }
         }
+        responseItems.push(outcome);
+        if(formValues.postalCode) {
+          responseItems.push(formValues.postalCode);
+        }
+        let currentIdentifier = this.cookieService.get('userIdentifier');
+        if(!currentIdentifier) {
+          const identifier = this.utilService.randomString(16);
+          currentIdentifier = identifier;
+          this.cookieService.set('userIdentifier', identifier, 1);
+        }
+        const getConsent = this.cookieService.get('consentGiven');
+        if(getConsent && getConsent === 'yes') {
+          const questionnaireResponse = this.fhirOperationsService.generateQuestionnaireResponse(responseItems, currentIdentifier, this.questionnaire.resourceType + '/' + this.questionnaire.id);
+          const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
+        }
+      } else {
+        this.resultString = 'patientQuestionnairePage.emptyForm'
       }
-      responseItems.push(outcome);
-      if(formValues.postalCode) {
-        responseItems.push(formValues.postalCode);
-      }
-      let currentIdentifier = this.cookieService.get('userIdentifier');
-      if(!currentIdentifier) {
-        const identifier = this.utilService.randomString(16);
-        currentIdentifier = identifier;
-        this.cookieService.set('userIdentifier', identifier, 1);
-      }
-      const questionnaireResponse = this.fhirOperationsService.generateQuestionnaireResponse(responseItems, currentIdentifier);
-      const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
+      
       this.questionnaireResponseForm.reset();
-    }
-  }
-
-  customValidateArrayGroup(): ValidatorFn {
-    return (formArray: FormArray): { [key: string]: any } | null => {
-      const isValid = formArray.controls.find(element => element.value === true);
-      return isValid ? null : { error: 'Please Select One' };
-    };
   }
 
   getOutcome(answersSelected) {

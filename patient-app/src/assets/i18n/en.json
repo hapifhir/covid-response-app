@@ -5,24 +5,26 @@
         "postalCodeLabel": "Please enter the first three letters of your postal code (optional)",
         "backBtn": "Back",
         "submitBtn": "Submit",
-        "resetBtn": "Reset",
+        "resetBtn": "Change Consent",
         "errorMsg": "Please fill in required information",
-        "signOfSymptoms": "Do you have a fever or a new cough or difficulty breathing (or a combination of these symptoms) ?",
-        "contactWithVictimHavingTravelHistory": "Are you a close contact of a person who is sick with respiratory symptoms (fever, cough or difficulty breathing) who recently travelled out of the country ?",
-        "recentTravel": "Have you travelled out of the country in the last 14 days before you started to feel unwell ?",
-        "contactWithVictim": "Are you a close contact of a case of COVID-19 (e.g. someone in your household) ?",
-        "ageVerification": "Are you 60 years of age or older ?",
-        "diabetesAndBpVerification": "Do you have diabetes or high blood pressure ?",
-        "chronicDiseaseVerification": "Do you have any chronic medical condition ?",
+        "signOfSymptoms": "I have fever or new cough or difficulty breathing (or a combination of these symptoms) ?",
+        "contactWithVictimHavingTravelHistory": "I am in close contact of a person who is sick with respiratory symptoms(fever, cough or difficulty breathing), who recently travelled out of the country ?",
+        "recentTravel": "I have travelled out of the country in the last 14 days before you started to feel unwell ?",
+        "contactWithVictim": "I have been in close contact of a case of COVID-19 (e.g. someone in your household) ?",
+        "ageVerification": "I am 60 years of age or older ?",
+        "diabetesAndBpVerification": "I have diabetes or high blood pressure ?",
+        "chronicDiseaseVerification": "I have any chronic medical condition ?",
         "contactHealthCareProvider": "It is very <b> unlikely that you have the new coronavirus (COVID-19) </b>. If you have concerns or questions about your health, call your primary care provider (e.g. family doctor) or Telehealth Ontario at <b> 1-866-797-0000 </b>.",
         "contactForReassessment": "It is very <b> unlikely that you have the new coronavirus (COVID-19) </b>. If you have concerns or questions about your health, call your primary care provider or Telehealth Ontario at <b> 1-866-797-0000 </b>. If you start to feel worse, you should call your primary care provider or Telehealth Ontario at <b> 1-866-797-0000 </b> for reassessment",
         "clinicalAssessment": "You should <b> seek clinical assessment and testing for COVID-19 </b>. COVID-19 assessment options vary by region and might include :- <ul> <li>Your primary care provider (e.g. family doctor). You should call ahead to see if they offer testing and to let them know that you have used this self-assessment tool.</li><li> A local COVID-19 Assessment & Care Centre(s). A list of these centres can be found here: XXX.</li><li> Your local emergency department. You should call ahead before you go to the emergency department and let them know you have used this self-assessment tool. Future scenario: case diagnosed based on clinical presentation, only a subset of cases are tested</li></ul>",
-        "illnessAdvise": "How sick do you feel ? <ul> <li> <b> Mild illness </b>: If you have mild illness you should stay home, self – isolate and monitor your symptoms.  More information about how to self isolate and self monitor for COVID-19 is available on Public Health Ontario's website. If you start to feel worse, you should call your primary care provider or Telehealth Ontario at <b> 1-866-797-0000 </b> for reassessment. </li><li> If you are concerned about your health you should call your primary care provider and let them know you have used this self-assessment tool and are concerned about your health </li><li> You can visit a local COVID-19 Assessment & Care Centres.  A list of these centres can be found here: XXX </li><li> If you have severe illness: If you have severe illness or are concerned about your health you should go to your local emergency department.  You should call ahead before you go to the emergency department and let them know you have used this self-assessment tool. If you need to travel by ambulance,<b> please call 911 </b> and let them know you have used this self-assessment tool.</li></ul>"
+        "illnessAdvise": "How sick do you feel ? <ul> <li> <b> Mild illness </b>: If you have mild illness you should stay home, self – isolate and monitor your symptoms.  More information about how to self isolate and self monitor for COVID-19 is available on Public Health Ontario's website. If you start to feel worse, you should call your primary care provider or Telehealth Ontario at <b> 1-866-797-0000 </b> for reassessment. </li><li> If you are concerned about your health you should call your primary care provider and let them know you have used this self-assessment tool and are concerned about your health </li><li> You can visit a local COVID-19 Assessment & Care Centres.  A list of these centres can be found here: XXX </li><li> If you have severe illness: If you have severe illness or are concerned about your health you should go to your local emergency department.  You should call ahead before you go to the emergency department and let them know you have used this self-assessment tool. If you need to travel by ambulance,<b> please call 911 </b> and let them know you have used this self-assessment tool.</li></ul>",
+        "emptyForm": "If you have willingly filled an empty assessment, it is very <b> unlikely that you have the new coronavirus (COVID-19) </b>."
     },
     "consentPage": {
         "agreeBtn": "Agree",
         "declineBtn": "Decline",
-        "consentText": "You'll share some information about your health and symptoms based on guidelines from public health officials.To collect information and use it for COVID-19 screening and testing, you’ll need to sign consent and authorization forms."
+        "consentText": "You'll share some information about your health and symptoms based on guidelines from public health officials. To collect information and use it for COVID-19 screening and testing, you’ll need to sign consent and authorization forms.",
+        "note": "Note : If you choose not to share your data, you can still take the assessment but the assessment won't be used for statistics."
     },
     "navbarPage": {
         "title": "COVID-19 Rapid Response"
