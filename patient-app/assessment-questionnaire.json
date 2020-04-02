@@ -1,0 +1,222 @@
+{
+  "resourceType": "Questionnaire",
+  "identifier": [
+    {
+      "value": "covid-questionnaire"
+    }
+  ],
+  "name": "COVID Questionnaire",
+  "title": "COVID Questionnaire",
+  "description": "COVID Questionnaire",
+  "item": [
+    {
+      "linkId": "sign_of_symptoms",
+      "code": [
+        {
+          "system": "http://localhost/fhir/Questionnaire",
+          "code": "sign-of-symptoms"
+        }
+      ],
+      "text": "patientQuestionnairePage.signOfSymptoms",
+      "type": "boolean"
+    },
+    {
+      "linkId": "contact_with_victim_having_travel_history",
+      "code": [
+        {
+          "system": "http://localhost/fhir/Questionnaire",
+          "code": "contact-with-victim-having-travel-history"
+        }
+      ],
+      "text": "patientQuestionnairePage.contactWithVictimHavingTravelHistory",
+      "type": "boolean"
+    },
+    {
+      "linkId": "recent_travel",
+      "code": [
+        {
+          "system": "http://localhost/fhir/Questionnaire",
+          "code": "recent-travel"
+        }
+      ],
+      "text": "patientQuestionnairePage.recentTravel",
+      "type": "boolean"
+    },
+    {
+      "linkId": "contact_with_victim",
+      "code": [
+        {
+          "system": "http://localhost/fhir/Questionnaire",
+          "code": "contact-with-victim"
+        }
+      ],
+      "text": "patientQuestionnairePage.contactWithVictim",
+      "type": "boolean"
+    },
+    {
+      "linkId": "age_verification",
+      "code": [
+        {
+          "system": "http://localhost/fhir/Questionnaire",
+          "code": "age-verfication"
+        }
+      ],
+      "text": "patientQuestionnairePage.ageVerification",
+      "type": "boolean"
+    },
+    {
+      "linkId": "diabetes_and_bp_verification",
+      "code": [
+        {
+          "system": "http://localhost/fhir/Questionnaire",
+          "code": "diabetes-and-bp-verification"
+        }
+      ],
+      "text": "patientQuestionnairePage.diabetesAndBpVerification",
+      "type": "boolean"
+    },
+    {
+      "linkId": "chronic_disease_verification",
+      "code": [
+        {
+          "system": "http://localhost/fhir/Questionnaire",
+          "code": "chronic-disease-verification"
+        }
+      ],
+      "text": "patientQuestionnairePage.chronicDiseaseVerification",
+      "type": "boolean"
+    },
+    {
+      "linkId": "contact_healthcare_provider",
+      "code": [
+        {
+          "system": "http://localhost/fhir/questionnaire",
+          "code": "contact-healthcare-provider"
+        }
+      ],
+      "text": "patientQuestionnairePage.contactHealthCareProvider",
+      "type": "display",
+      "enableWhen": [
+        {
+          "question": "sign_of_symptoms",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "enableBehavior": "any"
+    },
+    {
+      "linkId": "contact_healthcare_provider_for_reassessment",
+      "code": [
+        {
+          "system": "http://localhost/fhir/questionnaire",
+          "code": "contact-healthcare-provider-for-reassessment"
+        }
+      ],
+      "text": "patientQuestionnairePage.contactForReassessment",
+      "type": "display",
+      "enableWhen": [
+        {
+          "question": "contact_with_victim_having_travel_history",
+          "operator": "=",
+          "answerBoolean": false
+        },
+        {
+          "question": "recent_travel",
+          "operator": "=",
+          "answerBoolean": false
+        },
+        {
+          "question": "contact_with_victim",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "enableBehavior": "all"
+    },
+    {
+      "linkId": "seek_clinical_assessment",
+      "code": [
+        {
+          "system": "http://localhost/fhir/questionnaire",
+          "code": "seek-clinical-assessment"
+        }
+      ],
+      "text": "patientQuestionnairePage.clinicalAssessment",
+      "type": "display",
+      "enableWhen": [
+        {
+          "question": "contact_with_victim_having_travel_history",
+          "operator": "=",
+          "answerBoolean": true
+        },
+        {
+          "question": "recent_travel",
+          "operator": "=",
+          "answerBoolean": true
+        },
+        {
+          "question": "contact_with_victim",
+          "operator": "=",
+          "answerBoolean": true
+        },
+        {
+          "question": "age_verification",
+          "operator": "=",
+          "answerBoolean": true
+        },
+        {
+          "question": "diabetes_and_bp_verification",
+          "operator": "=",
+          "answerBoolean": true
+        },
+        {
+          "question": "chronic_disease_verification",
+          "operator": "=",
+          "answerBoolean": true
+        }
+      ],
+      "enableBehavior": "any"
+    },
+    {
+      "linkId": "illness_advise",
+      "code": [
+        {
+          "system": "http://localhost/fhir/questionnaire",
+          "code": "illness_advise"
+        }
+      ],
+      "text": "patientQuestionnairePage.illnessAdvise",
+      "type": "display",
+      "enableWhen": [
+        {
+          "question": "age_verification",
+          "operator": "=",
+          "answerBoolean": false
+        },
+        {
+          "question": "diabetes_and_bp_verification",
+          "operator": "=",
+          "answerBoolean": false
+        },
+        {
+          "question": "chronic_disease_verification",
+          "operator": "=",
+          "answerBoolean": false
+        }
+      ],
+      "enableBehavior": "all"
+    },
+    {
+      "linkId": "postal_code",
+      "code": [
+        {
+          "system": "http://localhost/fhir/questionnaire",
+          "code": "postal-code"
+        }
+      ],
+      "text": "patientQuestionnairePage.postalCodeLabel",
+      "type": "string"
+    }
+  ]
+}

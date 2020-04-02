@@ -1,27 +1,31 @@
 # CovidResponseApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
+Covid Response App is an open-source self-assessment COVID-19 tool. This repository includes code for the app to run on local machine.
 
-## Development server
+## App URL
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+* [COVID Patient App](https://covid19.smilecdr.com/covid-response-app/)
+ 
+## Prerequisites
 
-## Code scaffolding
+* [Node](https://nodejs.org/en/) 
+* NPM :- Packaged with Node
+* [Angular CLI](https://cli.angular.io/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Local Setup
 
-## Build
+* Clone the repo. `git clone https://github.com/hapifhir/covid-response-app.git`
+* Once you're in the root of cloned repo, change the directory to `patient-app`.
+* Install `node_modules` using command `npm install`.
+* Once `node_modules` are installed start the angular server by `npm start` and navigate to `http://localhost:4200` in your browser.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## FHIR Resources Used
 
-## Running unit tests
+* [Questionnaire](http://hl7.org/fhir/questionnaire.html)
+* [QuestionnaireResponse](http://hl7.org/fhir/questionnaireresponse.html)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Languages Supported 
 
-## Running end-to-end tests
+* English
+* French
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
