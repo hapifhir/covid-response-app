@@ -1,0 +1,76 @@
+{
+    "covidAssessmentToolHeader": "COVID-19 Self Assessment Tool",
+    "appendix1": {
+        "header": "Severe Acute Respiratory Infection (SARI) Case Report Form",
+        "healthCareProviderLabel": "Health Care Provider",
+        "phoneLabel": "Phone",
+        "faxLabel": "Fax",
+        "probableCaseNote": "Novel Coronaviruses (including COVID-19) are listed as Diseases of Public Health Significance under the Health Protection and Promotion Act. Clinicians must report probable cases (as per current case definition) and individuals who are being tested for COVID-19 to the Grey Bruce Health Unit.",
+        "patientDemographicsHeader": "Patient Demographics",
+        "firstNameLabel": "First Name",
+        "lastNameLabel": "Last Name",
+        "dobLabel": "Date of Birth",
+        "genderLabel": "Gender",
+        "addressLabel": "Address",
+        "cityLabel": "City",
+        "provinceLabel": "Province/State",
+        "postalCodeLabel": "Postal Code",
+        "stepperNextLabel": "Next",
+        "symptomsHeader": "Symptoms",
+        "feverLabel": "Fever (Over 38<sup>o</sup>C)",
+        "onsetDateLabel": "Onset Date",
+        "commentsLabel": "Comments",
+        "coughLabel": "Cough (or exacerbation of a chronic cough)",
+        "otherLabel": "Other, Specify",
+        "exposuresHeader": "Exposures",
+        "travelOusideCanadaLabel": "Travel outside of Canada in last 14 days prior to onset of illness",
+        "travelStartDateLabel": "Travel Start Date",
+        "travelEndDateLabel": "Travel End Date",
+        "areasVisitedLabel": "Areas Visited",
+        "closeContactWithProbableCaseLabel": "Close contact with a lab-confirmed or probable case of COVID-19 in the 14 days before symptom onset?",
+        "contactStartDateLabel": "Contact Start Date",
+        "contactEndDateLabel": "Contact End Date",
+        "closeContactWithARILabel": "Close contact with a person with acute respiratory illness who travelled outside of Canada within 14 days prior to onset of illness?",
+        "dateOfReturnOfContactLabel": "Date of return of contact (if travelled)",
+        "dateOfOnsetSymptomsOfContactLabel": "Date of symptom onset of contact",
+        "patientMeetsProbableCaseLabel": "Does the patient meet probable case definition?",
+        "patientWorkInHealthcareLabel": "Does the patient work in a health care setting?",
+        "pleaseSpecifyLabel": "Please Specify",
+        "testingConductedLabel": "Was testing conducted for this patient?",
+        "dateOfSpecimenCollection": "Date of specimen collection",
+        "additionalCommentLabel": "Additional Comments",
+        "completedByLabel": "Completed By",
+        "dateLabel": "Date",
+        "genderRadioLabels": [
+            {"value": "Male", "viewValue": "Male"},
+            {"value": "Female", "viewValue": "Female"},
+            {"value": "Other", "viewValue": "Other"}
+        ],
+        "yesNoRadioLabels": [
+            {"value": "yes", "viewValue": "Yes"},
+            {"value": "no", "viewValue": "No"}
+        ],
+        "patientAdvise": [
+            "Please advise patient to self-isolate for 14 days from onset of symptoms",
+            "Please advise patient to notify household and close contacts* to self-isolate for 14 days from last contact"
+        ],
+        "closeContactLabel": "*A <b><i>close contact</i></b> is defined as:",
+        "closeContact": [
+            "A person who provided care for the patient, including healthcare workers not wearing appropriate PPE, family members, or other care givers",
+            "A person who had other similar close physical contact",
+            "A person who lived with or otherwise had close, prolonged contact with probable or confirmed case while case was ill"
+        ],
+        "selfIsolateLabel": "Please advise patient to self-isolate until results are returned. Turnaround time is up to 6 days.",
+        "completionLabel": "SARI Form completed successfully. Please return back to start a new evaluation."
+    },
+    "navbarPage": {
+        "title": "COVID-19 Rapid Response"
+    },
+    "commonUse": {
+        "submitBtn": "Submit",
+        "resetBtn": "Reset",
+        "yesLabel": "Yes",
+        "noLabel": "No",
+        "backBtnLabel": "Back"
+    }
+}

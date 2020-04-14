@@ -8,16 +8,19 @@ export class FhirOperationsService {
 
   constructor() { }
 
-  generateQuestionnaireResponse(answersSelected, identifier, questionnaireRef) {
+  generateQuestionnaireResponse(answersSelected, extensionIdentifier, questionnaireRef) {
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
     questionnaireResponse.questionnaire = questionnaireRef;
+    const identifier = new FHIR.Identifier();
+    identifier.value = 'Person_Self_Assessment';
+    questionnaireResponse.identifier = identifier;
     questionnaireResponse.resourceType = 'QuestionnaireResponse'
     questionnaireResponse.status = 'completed';
     questionnaireResponse.authored = new Date();   
     questionnaireResponse.item = [];
     const extension= new FHIR.Extension();
     extension.url = 'https://smilecdr.com/extensions/user-cookie'
-    extension.valueString = identifier;
+    extension.valueString = extensionIdentifier;
     questionnaireResponse.extension = [extension];
     for (let index = 0; index < answersSelected.length; index++) {
       const element = answersSelected[index];

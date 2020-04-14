@@ -1,0 +1,91 @@
+{
+    "covidAssessmentToolHeader": "Outil d'auto-évaluation COVID-19",
+    "appendix1": {
+        "header": "Formulaire de rapport de cas d'infection respiratoire aiguë sévère (SARI)",
+        "healthCareProviderLabel": "Fournisseur de soins de santé",
+        "phoneLabel": "Téléphone",
+        "faxLabel": "Fax",
+        "probableCaseNote": "Les nouveaux coronavirus (y compris COVID-19) sont répertoriés comme maladies d'importance pour la santé publique en vertu de la Loi sur la protection et la promotion de la santé. Les cliniciens doivent signaler les cas probables (selon la définition de cas actuelle) et les personnes soumises à un test de dépistage du COVID-19 au Grey Bruce Health Unit.",
+        "patientDemographicsHeader": "Démographie des patients",
+        "firstNameLabel": "Prénom",
+        "lastNameLabel": "Nom de famille",
+        "dobLabel": "Date de naissance",
+        "genderLabel": "Le sexe",
+        "addressLabel": "Adresse",
+        "cityLabel": "Ville",
+        "provinceLabel": "Province / État",
+        "postalCodeLabel": "code postal",
+        "stepperNextLabel": "Suivant",
+        "symptomsHeader": "Symptômes",
+        "feverLabel": "Fièvre (plus de 38 <sup> o </sup> C)",
+        "onsetDateLabel": "Date de début",
+        "commentsLabel": "commentaires",
+        "coughLabel": "Toux (ou exacerbation d'une toux chronique)",
+        "otherLabel": "Autre précisez",
+        "exposuresHeader": "Expositions",
+        "travelOusideCanadaLabel": "Voyage à l'extérieur du Canada au cours des 14 derniers jours avant le début de la maladie",
+        "travelStartDateLabel": "Date de début du voyage",
+        "travelEndDateLabel": "Date de fin de voyage",
+        "areasVisitedLabel": "Zones visitées",
+        "closeContactWithProbableCaseLabel": "Contact étroit avec un cas confirmé ou probable de COVID-19 en laboratoire dans les 14 jours précédant l'apparition des symptômes?",
+        "contactStartDateLabel": "Date de début du contact",
+        "contactEndDateLabel": "Date de fin du contact",
+        "closeContactWithARILabel": "Un contact étroit avec une personne atteinte d'une maladie respiratoire aiguë qui a voyagé à l'extérieur du Canada dans les 14 jours avant le début de la maladie?",
+        "dateOfReturnOfContactLabel": "Date de retour du contact (si voyagé)",
+        "dateOfOnsetSymptomsOfContactLabel": "Date d'apparition des symptômes du contact",
+        "patientMeetsProbableCaseLabel": "Le patient répond-il à la définition de cas probable?",
+        "patientWorkInHealthcareLabel": "Le patient travaille-t-il dans un milieu de soins de santé?",
+        "pleaseSpecifyLabel": "Veuillez préciser",
+        "testingConductedLabel": "Des tests ont-ils été effectués pour ce patient?",
+        "dateOfSpecimenCollection": "Date de prélèvement de l'échantillon",
+        "additionalCommentLabel": "Commentaires supplémentaires",
+        "completedByLabel": "Terminé par",
+        "dateLabel": "Date",
+        "genderRadioLabels": [
+            {
+                "value": "Male",
+                "viewValue": "Mâle"
+            },
+            {
+                "value": "Female",
+                "viewValue": "Femelle"
+            },
+            {
+                "value": "Other",
+                "viewValue": "Autre"
+            }
+        ],
+        "yesNoRadioLabels": [
+            {
+                "value": "yes",
+                "viewValue": "Oui"
+            },
+            {
+                "value": "no",
+                "viewValue": "Non"
+            }
+        ],
+        "patientAdvise": [
+            "Veuillez conseiller au patient de s'auto-isoler pendant 14 jours à partir du début des symptômes",
+            "Veuillez conseiller au patient d'informer le ménage et les contacts proches * de s'isoler pendant 14 jours à compter du dernier contact"
+        ],
+        "closeContactLabel": "* Un <b> <i> contact étroit </i> </b> est défini comme:",
+        "closeContact": [
+            "Une personne qui a prodigué des soins au patient, y compris les agents de santé ne portant pas d'EPI approprié, les membres de la famille ou d'autres soignants",
+            "Une personne qui a eu d'autres contacts physiques étroits similaires",
+            "Une personne qui vivait avec ou avait eu des contacts étroits et prolongés avec un cas probable ou confirmé pendant que le cas était malade"
+        ],
+        "selfIsolateLabel": "Veuillez conseiller au patient de s'isoler jusqu'à ce que les résultats soient retournés. Le délai d'exécution peut aller jusqu'à 6 jours.",
+        "completionLabel": "Formulaire SARI rempli avec succès. Veuillez revenir pour commencer une nouvelle évaluation."
+    },
+    "navbarPage": {
+        "title": "Réponse rapide COVID-19"
+    },
+    "commonUse": {
+        "submitBtn": "Soumettre",
+        "resetBtn": "Réinitialiser",
+        "yesLabel": "Oui",
+        "noLabel": "Non",
+        "backBtnLabel": "retour"
+    }
+}

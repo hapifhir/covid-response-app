@@ -1,0 +1,34 @@
+.custom-header {
+    background-color: white;
+    box-shadow: 0 4px 8px -3px lightgray;
+    /* height: 50px; */
+    display: flex;
+    height: 3rem;
+    white-space: nowrap;
+}
+
+.title {
+    color: #02B2E3 !important;
+    font-weight: bolder !important;
+    font-size: 0.8rem;
+    letter-spacing: .01em;
+    line-height: 3rem;
+}
+
+.nav-text {
+    color: #767676 !important;
+}
+
+.header-actions {
+    margin-right: 50px;
+}
+
+.languageDropDown {
+    position: absolute;
+    font-size: 0.8rem;
+    letter-spacing: .01em;
+}
+
+.nav-text {
+    line-height: 3rem;
+}

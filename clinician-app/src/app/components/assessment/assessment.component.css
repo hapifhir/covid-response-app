@@ -1,0 +1,24 @@
+.questionLabels {
+    font-weight: bolder;
+    font-size: 15px;
+    color: #767676;
+}
+
+.back-button {
+    margin-left: -10px;
+    margin-top: 20px;
+}
+
+.customStepper {
+    border-bottom: 1px solid #cccccc;
+}
+
+.mainLabels {
+    font-size: 0.70rem;
+}
+
+hr{
+    height: 1px;
+    background-color: darkgray;
+    border: none;
+}

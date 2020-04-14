@@ -2,6 +2,7 @@
 html, body {
     font-family: 'Inter', sans-serif;
     overflow-x: hidden;
+    background-color: #f9f9f9;
 }
 
 
@@ -20,4 +21,8 @@ html, body {
 
 .btn-primary {
     background-color: #02B2E3 !important;
+}
+
+.btn-primary:disabled {
+    color: white !important;
 }
