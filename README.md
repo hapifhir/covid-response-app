@@ -14,7 +14,7 @@ Covid Response App is an open-source COVID-19 repository using [Hapi-FHIR](https
 
 ## Clinician App
 
-* This application is COVID-19 tool for clinicians and is in progress
+* This application is COVID-19 tool for clinicians and is still in progress.
 * Deployed Version can be found [here](https://covid19.smilecdr.com/clinician-app/).
 * Please check out [README](https://github.com/hapifhir/covid-response-app/tree/master/clinician-app) for getting started on this project.
 
