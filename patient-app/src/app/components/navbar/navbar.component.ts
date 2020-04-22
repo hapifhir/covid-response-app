@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   languageList = [
     {display: "EN", code: "en"},
     {display: "FR", code: "fr"},
+    {display: "ES", code: "es"},
   ]
   ngOnInit(): void {
     this.currentLanguage = this.languageList.find(x => x.code === this.translate.getDefaultLang()).display;
