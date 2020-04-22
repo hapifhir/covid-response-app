@@ -1,0 +1,32 @@
+{
+    "covidAssessmentToolHeader": "Herramienta de autoevaluación COVID-19 ",
+    "patientQuestionnairePage": {
+        "questionSetLabel": "Por favor, marque los que le correspondan",
+        "postalCodeLabel": "Por favor, entre los tres primeros numeros de su código postal (opcional)",
+        "backBtn": "Atrás",
+        "submitBtn": "Enviar",
+        "resetBtn": "Canviar consentimiento",
+        "errorMsg": "Por favor complete la información requerida",
+        "signOfSymptoms": "¿Tengo fiebre o tos nueva o dificultad para respirar (o una combinación de estos síntomas)?",
+        "contactWithVictimHavingTravelHistory": "Estoy en contacto cercano con una persona que está enferma con síntomas respiratorios (fiebre, tos o dificultad para respirar), ¿quién viajó recientemente fuera del país?",
+        "recentTravel": "¿He viajado fuera del país los últimos 14 dias antes de sentirme mal?",
+        "contactWithVictim": "¿He estado en contacto cercano con un caso de COVID-19 (por ejemplo, alguien en su hogar)?",
+        "ageVerification": "¿Tengo 60 años de edad o más?",
+        "diabetesAndBpVerification": "¿Tengo diabetes o alta la presión arterial?",
+        "chronicDiseaseVerification": "¿Tengo alguna enfermedad crónica?",
+        "contactHealthCareProvider": "Es muy poco probable que tenga el nuevo coronavirus (COVID-19) </b>. Si tiene inquietudes o preguntas sobre su salud, llame a su proveedor de atención primaria (por ejemplo, médico de familia) o Telehealth Ontario al <b> 1-866-797-0000</b>.",
+        "contactForReassessment": "Es muy poco probable que tenga el nuevo coronavirus (COVID-19) </b>. Si tiene dudas o preguntas sobre su salud, llame a su proveedor de atención primaria o Telehealth Ontario al <b> 1-866-797-0000 </b>. Si comienza a sentirse peor, debe llamar a su proveedor de atención primaria o Telehealth Ontario al <b> 1-866-797-0000 </b> para una nueva evaluación",
+        "clinicalAssessment": "Debe <b> buscar una evaluación clínica y pruebas para COVID-19 </b>. Las opciones de evaluación de COVID-19 varían según la región y pueden incluir: - <ul> <li> Su proveedor de atención primaria (por ejemplo, médico de familia). Debe llamar con anticipación para ver si ofrecen pruebas y para informarles que ha utilizado esta herramienta de autoevaluación. </li> <li> Un Centro (s) de Evaluación y Atención de COVID-19 local. Puede encontrar una lista de estos centros aquí: XXX. </li> <li> Su departamento de emergencias local. Debe llamar con anticipación antes de ir al departamento de emergencias e informarles que ha utilizado esta herramienta de autoevaluación. Escenario futuro: el caso se diagnostica en función de la presentación clínica, solo se analiza un subconjunto de casos </li> </ul>",
+        "illnessAdvise": "¿Qué tan enfermo te sientes? <ul> <li> <b> Enfermedad leve </b>: si tiene una enfermedad leve, debe quedarse en casa, aislarse y controlar sus síntomas. Más información sobre cómo autoaislar y autocontrolar COVID-19 está disponible en el sitio web de Public Health Ontario. Si comienza a sentirse peor, debe llamar a su proveedor de atención primaria o Telehealth Ontario al <b> 1-866-797-0000 </b> para una nueva evaluación. </li> <li> Si está preocupado por su salud, debe llamar a su proveedor de atención primaria e informarle que ha utilizado esta herramienta de autoevaluación y le preocupa su salud </li> <li> Puede visitar un Centros locales de evaluación y atención COVID-19. Puede encontrar una lista de estos centros aquí: XXX </li> <li> Si tiene una enfermedad grave: si tiene una enfermedad grave o está preocupado por su salud, debe ir a su departamento de emergencias local. Debe llamar con anticipación antes de ir al departamento de emergencias e informarles que ha utilizado esta herramienta de autoevaluación. Si necesita viajar en ambulancia, <b> llame al 911 </b> y dígales que ha utilizado esta herramienta de autoevaluación. </li> </ul>",
+        "emptyForm": "Si ha completado voluntariamente una evaluación vacía, es muy <b> improbable que tenga el nuevo coronavirus (COVID-19) </b>"
+    },
+    "consentPage": {
+        "agreeBtn": "De acuerdo",
+        "declineBtn": "Declinar",
+        "consentText": "Compartirá información sobre su salud y sus síntomas según las pautas de los funcionarios de salud pública. Para recopilar información y usarla para la detección y prueba de COVID-19, deberá firmar los formularios de consentimiento y autorización.",
+        "note": "Nota : Si elige no compartir sus datos, aún puede realizar la evaluación, pero la evaluación no se utilizará para las estadísticas."
+    },
+    "navbarPage": {
+        "title": "Respuesta rápida COVID-19"
+    }
+}

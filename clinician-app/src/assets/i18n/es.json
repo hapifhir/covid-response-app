@@ -1,0 +1,91 @@
+{
+    "covidAssessmentToolHeader": "Herramienta de autoevaluación COVID-19",
+    "appendix1": {
+        "header": "Formulario de registro en caso de infección respiratoria severa(SARI)",
+        "healthCareProviderLabel": "Proveedor atención médica",
+        "phoneLabel": "Telefóno",
+        "faxLabel": "Fax",
+        "probableCaseNote": "Los nuevos coronavirus (incluido COVID-19) se enumeran como enfermedades de importancia para la salud pública en virtud de la Ley de Protección y Promoción de la Salud. Los médicos deben informar los casos probables (según la definición de caso actual) y las personas que están siendo evaluadas para COVID-19 a la Unidad de Salud Gray Bruce.",
+        "patientDemographicsHeader": "Demográficos del paciente",
+        "firstNameLabel": "Nombre",
+        "lastNameLabel": "Apellidos",
+        "dobLabel": "Fecha de nacimiento",
+        "genderLabel": "Sexo",
+        "addressLabel": "Dirección",
+        "cityLabel": "Población",
+        "provinceLabel": "Provincia",
+        "postalCodeLabel": "Codigo postal",
+        "stepperNextLabel": "Siguiente",
+        "symptomsHeader": "Sintomas",
+        "feverLabel": "Fiebre (más de 38 <sup> o </sup> C)",
+        "onsetDateLabel": "Fecha de inicio",
+        "commentsLabel": "Comentarios",
+        "coughLabel": "Tos (o exacerbación de una tos crónica)",
+        "otherLabel": "Precisar otro:",
+        "exposuresHeader": "Exposicion",
+        "travelOusideCanadaLabel": "Viajó al exterior de Canada 14 dias antes del inicio de la enfermedad",
+        "travelStartDateLabel": "Fecha inicio del viaje",
+        "travelEndDateLabel": "Fecha fin del viaje",
+        "areasVisitedLabel": "Zonas visitadas",
+        "closeContactWithProbableCaseLabel": "¿Contacto cercano con un caso confirmado o probable de COVID-19 en el laboratorio dentro de los 14 días anteriores al inicio de los síntomas?",
+        "contactStartDateLabel": "Fecha inicio del contacto",
+        "contactEndDateLabel": "Fecha fin del contacto",
+        "closeContactWithARILabel": "¿Contacto cercano con alguien con una enfermedad respiratoria aguda que viajó fuera de Canadá dentro de los 14 días posteriores al inicio de la enfermedad?",
+        "dateOfReturnOfContactLabel": "Date retorno del contact (si viajó)",
+        "dateOfOnsetSymptomsOfContactLabel": "Fecha de aparición de los sintomas del contacto",
+        "patientMeetsProbableCaseLabel": "¿El paciente responde a la definicion de caso probable?",
+        "patientWorkInHealthcareLabel": "¿El paciente trabaja en un entorno de atención médica?",
+        "pleaseSpecifyLabel": "Por favor, especifique",
+        "testingConductedLabel": "¿Se han realizado pruebas para este paciente?",
+        "dateOfSpecimenCollection": "Fecha recogida de muestra",
+        "additionalCommentLabel": "Comentarios suplementarios",
+        "completedByLabel": "Finalizado por",
+        "dateLabel": "Fecha",
+        "genderRadioLabels": [
+            {
+                "value": "Male",
+                "viewValue": "Hombre"
+            },
+            {
+                "value": "Female",
+                "viewValue": "Mujer"
+            },
+            {
+                "value": "Other",
+                "viewValue": "Otro"
+            }
+        ],
+        "yesNoRadioLabels": [
+            {
+                "value": "yes",
+                "viewValue": "Si"
+            },
+            {
+                "value": "no",
+                "viewValue": "No"
+            }
+        ],
+        "patientAdvise": [
+            "Aconsejar al paciente que se aísle por 14 días desde el inicio de los síntomas.",
+            "Indique al paciente que informe al hogar y a los contactos cercanos * para aislarse durante 14 días desde el último contacto."
+        ],
+        "closeContactLabel": "* Un <b> <i> contacto cercano </i> </b> se define como:",
+        "closeContact": [
+            "Una persona que ha atendido al paciente, incluidos los trabajadores de la salud que no usan el EPP apropiado, los miembros de su familia u otros cuidadores",
+            "Una persona que ha tenido otro contacto físico cercano similar",
+            "Una persona que vivió o tuvo contacto cercano y prolongado con un caso probable o confirmado mientras el caso estaba enfermo"
+        ],
+        "selfIsolateLabel": "Indique al paciente que se aísle hasta que se devuelvan los resultados. El plazo de entrega puede ser de hasta 6 días.",
+        "completionLabel": "Formulario SARI completado con éxito. Regrese para comenzar una nueva evaluación."
+    },
+    "navbarPage": {
+        "title": "Respuesta rápida COVID-19"
+    },
+    "commonUse": {
+        "submitBtn": "Enviar",
+        "resetBtn": "Restablecer",
+        "yesLabel": "Sí",
+        "noLabel": "No",
+        "backBtnLabel": "Volver"
+    }
+}
