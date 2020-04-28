@@ -28,4 +28,5 @@ Covid Response App is an open-source self-assessment COVID-19 tool. This reposit
 
 * English
 * French
+* Spanish
 
