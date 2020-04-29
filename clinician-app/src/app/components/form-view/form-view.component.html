@@ -1,0 +1,65 @@
+<div class="content-container">
+    <div class="content-area">
+        <form clrStepper [formGroup]="form" clrForm clrLayout="horizontal">
+        <div *ngFor="let element of questions.item">
+            <clr-stepper-panel [formGroupName]="element.linkId">
+                <clr-step-title>{{element.text}}</clr-step-title>
+                <clr-step-description></clr-step-description>
+                <clr-step-content *clrIfExpanded>
+                    <div *ngFor="let elementson of element.item">
+                        <div *ngIf= "checkEnableWhen(element,elementson)">
+                            <div [ngSwitch]="elementson.type">
+                                <div *ngSwitchCase="'string'">
+                                    <clr-input-container>
+                                        <label class="clr-col-12 clr-col-md-4">{{elementson.text}}</label>
+                                        <input class="clr-col-12 clr-col-md-8" clrInput type="text" [formControlName]="elementson.linkId" [id]="elementson.linkId"  />
+                                        <clr-control-helper></clr-control-helper>
+                                        <clr-control-error>This field is required!</clr-control-error>
+                                    </clr-input-container>
+                                </div>
+                                <div *ngSwitchCase="'choice'">
+                                    <div class="clr-form-control">
+                                        <label class="clr-control-label clr-col-12 clr-col-md-4" >{{elementson.text}}</label>
+                                        <div class="clr-control-container clr-control-inline">
+                                            <div *ngFor="let option of elementson.answerOption">
+                                                <clr-radio-wrapper>
+                                                    <input type="radio" clrRadio [formControlName]="elementson.linkId"  [value]="option.valueCoding.code"   [id]="elementson.linkId + '' + option.valueCoding.code"/>
+                                                    <label>{{option.valueCoding.display}}</label>
+                                                </clr-radio-wrapper>
+                                            </div>
+                                            <div class="clr-error" *ngIf="this.form.get(element.linkId + '.' + elementson.linkId).invalid  && (this.form.get(element.linkId + '.' + elementson.linkId).dirty || this.form.get(element.linkId + '.' + elementson.linkId).touched)">
+                                                <clr-control-error>This field is required!</clr-control-error>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'boolean'">
+                                    <div class="clr-form-control">
+                                        <label class="clr-control-label clr-col-12 clr-col-md-4" >{{elementson.text}}</label>
+                                        <div class="clr-control-container clr-control-inline">
+                                            <clr-checkbox-wrapper>
+                                                <input type="checkbox" clrCheckbox [formControlName]="elementson.linkId"  [value]="elementson.value"   [id]="elementson.linkId"/>
+                                            </clr-checkbox-wrapper>  
+                                            <clr-control-helper></clr-control-helper>
+                                            <clr-control-error>This field is required!</clr-control-error>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div *ngSwitchCase="'date'">
+                                    <clr-date-container>
+                                        <label class="clr-col-12 clr-col-md-4">{{elementson.text}}</label>
+                                        <input class="clr-col-12 clr-col-md-8" clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId"  />
+                                        <clr-control-helper></clr-control-helper>
+                                        <clr-control-error>This field is required!</clr-control-error>
+                                    </clr-date-container>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button clrStepButton="next" name="{{element.linkId + '_button'}} ">next</button>
+                </clr-step-content>
+            </clr-stepper-panel>
+        </div> 
+        </form>
+    </div>
+</div>

@@ -23,4 +23,5 @@ export class NavbarComponent implements OnInit {
       this.translate.setDefaultLang(langCode);
       this.currentLanguage = this.languageList.find(x => x.code === langCode).display;
   }
+  
 }

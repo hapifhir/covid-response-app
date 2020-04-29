@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  queryURI: 'https://covid19.smilecdr.com/hapi-fhir-jpaserver/fhir'
+  queryURI: 'https://covid19.smilecdr.com/hapi-fhir-jpaserver/fhir',
+  questionnariRes: 'Questionnaire'
 };
 
 /*
