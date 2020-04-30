@@ -1,4 +1,4 @@
-import { Component, Input, OnInit  } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvscheme';
 
@@ -12,8 +12,8 @@ import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvsche
 export class FormviewComponent implements OnInit {
   form: FormGroup;
   @Input() questions: QvScheme;
-  consola = console;
-
+  @Output() submitEvent: EventEmitter<QvScheme> = new EventEmitter();
+  
 
   constructor() { }
 
@@ -61,6 +61,15 @@ export class FormviewComponent implements OnInit {
     }
     return valid;
 
+  }
+
+  submitForm()
+  {
+    if (!this.form.invalid) {
+      const formValues = this.form.value;
+      this.submitEvent.emit(formValues);
+    }
+  
   }
   
 
