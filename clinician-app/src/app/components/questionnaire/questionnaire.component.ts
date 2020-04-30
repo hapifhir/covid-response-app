@@ -3,6 +3,7 @@ import { HttpService } from '../../services/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { QvScheme } from '../../interfaces/qvscheme';
+import { FhirOperationsService } from './../../services/fhir-operations.service'; 
 
 
 @Component({
@@ -16,7 +17,7 @@ export class QuestionnaireComponent implements OnInit {
   loadData:boolean;
   
 
-  constructor( private httpService: HttpService, private route: ActivatedRoute) { }
+  constructor( private httpService: HttpService, private route: ActivatedRoute,private fhirOperations: FhirOperationsService) { }
 
   ngOnInit(): void {
     this.idresource = this.route.snapshot.paramMap.get('id');
@@ -36,6 +37,12 @@ export class QuestionnaireComponent implements OnInit {
     }).catch(error => {
       console.log (Promise.reject(error));
     });
+  }
+
+  async submitQuestionnaire(formQuestions:any)
+  {
+     const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions);
+     const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
   }
 
 

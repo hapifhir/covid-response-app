@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { Component, Input, OnInit } from '@angular/core';
+=======
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+>>>>>>> e180307102b3f42ff81b1dcf1230b8ff51821473
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvscheme';
 import {ChangeDetectorRef} from '@angular/core';
@@ -12,8 +16,8 @@ import {ChangeDetectorRef} from '@angular/core';
 export class FormviewComponent implements OnInit {
   form: FormGroup;
   @Input() questions: QvScheme;
-  consola = console;
-
+  @Output() submitEvent: EventEmitter<QvScheme> = new EventEmitter();
+  
 
   constructor(private cdref: ChangeDetectorRef) { }
 
@@ -70,5 +74,14 @@ export class FormviewComponent implements OnInit {
 
   }
 
+  submitForm()
+  {
+    if (!this.form.invalid) {
+      const formValues = this.form.value;
+      this.submitEvent.emit(formValues);
+    }
+  
+  }
+  
 
 }
