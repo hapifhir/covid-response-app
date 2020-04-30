@@ -21,6 +21,11 @@ export class QuestionnaireComponent implements OnInit {
   ngOnInit(): void {
     this.idresource = this.route.snapshot.paramMap.get('id');
     this.loadForm(this.idresource);
+    // this.httpService.getResourceByQueryParam(environment.questionnariRes, '?identifier=WHO_Module_1').then(res => {
+    //   const resource = res['entry'][0];
+    //   console.log(resource);
+    //   // WHO_MODULE_1 === Admit Patient 
+    // })
   }
   
   loadForm(id:string)
