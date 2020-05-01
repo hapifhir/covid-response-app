@@ -79,7 +79,8 @@
         "completionLabel": "Formulario SARI completado con éxito. Regrese para comenzar una nueva evaluación."
     },
     "navbarPage": {
-        "title": "Respuesta rápida COVID-19"
+        "title": "Respuesta rápida COVID-19",
+        "questview": "Cuestionario"
     },
     "commonUse": {
         "submitBtn": "Enviar",
