@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Component, Input, OnInit } from '@angular/core';
-=======
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
->>>>>>> e180307102b3f42ff81b1dcf1230b8ff51821473
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvscheme';
 import {ChangeDetectorRef} from '@angular/core';
