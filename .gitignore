@@ -49,3 +49,42 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Miscellaneous
+self_tracking_app/*.class
+self_tracking_app/*.log
+self_tracking_app/*.pyc
+self_tracking_app/*.swp
+self_tracking_app/.DS_Store
+self_tracking_app/.atom/
+self_tracking_app/.buildlog/
+self_tracking_app/.history
+self_tracking_app/.svn/
+
+# IntelliJ related
+self_tracking_app/*.iml
+self_tracking_app/*.ipr
+self_tracking_app/*.iws
+self_tracking_app/.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+self_tracking_app/**/doc/api/
+self_tracking_app/.dart_tool/
+self_tracking_app/.flutter-plugins
+self_tracking_app/.flutter-plugins-dependencies
+self_tracking_app/.packages
+self_tracking_app/.pub-cache/
+self_tracking_app/.pub/
+self_tracking_app//build/
+
+# Web related
+self_tracking_app/lib/generated_plugin_registrant.dart
+
+# Exceptions to above rules.
+self_tracking_app/!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+
