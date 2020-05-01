@@ -8,20 +8,28 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private translate: TranslateService) { }
   currentLanguage;
+  
   languageList = [
-    {display: "EN", code: "en"},
-    {display: "FR", code: "fr"},
-    {display: "ES", code: "es"},
-  ]
+    { display: "EN", code: "en" },
+    { display: "FR", code: "fr" },
+    { display: "ES", code: "es" },
+  ];
+
+  navLinks = [
+    { link: '/', iconShape: 'home', text: 'Home' },
+    { link: '/questionnaire/360', iconShape: 'form', text: 'Admit Patient' },
+    { link: '/assessment', iconShape: 'paperclip', text: 'Assessment' }
+  ];
+  
+  constructor(private translate: TranslateService) { }
+
   ngOnInit(): void {
     this.currentLanguage = this.languageList.find(x => x.code === this.translate.getDefaultLang()).display;
   }
 
   changeLanguage(langCode) {
-      this.translate.setDefaultLang(langCode);
-      this.currentLanguage = this.languageList.find(x => x.code === langCode).display;
+    this.translate.setDefaultLang(langCode);
+    this.currentLanguage = this.languageList.find(x => x.code === langCode).display;
   }
-  
 }

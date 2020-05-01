@@ -3,9 +3,9 @@
         <span class="title">{{'navbarPage.title' | translate}}</span>
     </div>    
     <div class="header-nav">
-        <a routerLink="/questionnaire/360" class="nav-link nav-icon-text">
-            <clr-icon shape="form" class="is-inverse"></clr-icon>
-            <span class="nav-text">Admit Patient</span>
+        <a *ngFor="let item of navLinks" routerLink="{{ item.link }}" [ngClass]="{ 'nav-link': true, 'nav-icon-text': true }" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <clr-icon *ngIf="item.iconShape && item.iconShape != null" [attr.shape]="item.iconShape" class="is-inverse"></clr-icon>
+            <span class="nav-text">{{ item.text }}</span>
         </a>
     </div>
     <div class="header-actions">
@@ -15,7 +15,7 @@
                 <clr-icon shape="caret down"></clr-icon>
             </button>
             <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                <div clrDropdownItem *ngFor="let language of languageList" (click)="changeLanguage(language.code)">
+                <div clrDropdownItem *ngFor="let language of languageList" (click)="changeLanguage(language.code)" [ngClass]="{ 'active': currentLanguage == language.display }">
                     <a>{{language.display}}</a>
                 </div>
             </clr-dropdown-menu>
