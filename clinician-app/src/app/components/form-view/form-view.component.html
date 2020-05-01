@@ -46,12 +46,14 @@
                                     </div>
                                 </div>
                                 <div *ngSwitchCase="'date'">
+                                    <div class="clr-form-control">
                                     <clr-date-container>
                                         <label class="clr-col-12 clr-col-md-4">{{elementson.text}}</label>
                                         <input class="clr-col-12 clr-col-md-8" clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId"  />
                                         <clr-control-helper></clr-control-helper>
                                         <clr-control-error>This field is required!</clr-control-error>
                                     </clr-date-container>
+                                </div>
                                 </div>
                             </div>
                         </div>
