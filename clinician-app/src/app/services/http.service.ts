@@ -8,9 +8,9 @@ import { environment } from '../../environments/environment';
 export class HttpService {
 
   constructor(private httpClient: HttpClient) { }
-  
+
   getResourceByQueryParam(baseResource: string, queryParams: string) {
-    return this.httpClient.get(environment.queryURI + '/' + baseResource +  queryParams).toPromise();
+    return this.httpClient.get(environment.queryURI + '/' + baseResource + queryParams).toPromise();
   }
 
   postResource(resource) {

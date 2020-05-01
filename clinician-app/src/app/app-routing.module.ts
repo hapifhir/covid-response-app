@@ -4,7 +4,7 @@ import { AssessmentComponent } from './components/assessment/assessment.componen
 
 
 const routes: Routes = [
-  {path: '', component: AssessmentComponent}
+  { path: '', component: AssessmentComponent }
 ];
 
 @NgModule({

@@ -18,29 +18,31 @@ export class FhirOperationsService {
     questionnaireResponse.status = 'completed';
     questionnaireResponse.authored = new Date();
     questionnaireResponse.item = [];
-    Object.keys(formValues).forEach(function(parentKey) {
-      Object.keys(formValues[parentKey]).forEach(function(childKey) {
+    Object.keys(formValues).forEach(function (parentKey) {
+      Object.keys(formValues[parentKey]).forEach(function (childKey) {
         const questionnaireResponseItem = scope.generateQuestionnaireResponseItem(parentKey + '_' + childKey, formValues[parentKey][childKey]);
-        if(questionnaireResponseItem !== null) {
+        if (questionnaireResponseItem !== null) {
           questionnaireResponse.item.push(questionnaireResponseItem);
         }
-      }) 
-  });
+      })
+    });
+
     return questionnaireResponse;
   }
 
   generateQuestionnaireResponseItem(linkId, childItem) {
     let returnItem = null;
-    if(childItem) {
+
+    if (childItem) {
       const questionnaireResponseItem = new FHIR.QuestionnaireResponseItem();
       const questionnaireAnswer = new FHIR.Answer();
       questionnaireResponseItem.answer = [];
-      if(linkId.includes("_bool")) {
+      if (linkId.includes("_bool")) {
         questionnaireAnswer.valueBoolean = childItem === "yes" ? true : false;
-      } else if(linkId.includes("_choice")) {
+      } else if (linkId.includes("_choice")) {
         questionnaireAnswer.valueCoding = new FHIR.Coding();
         questionnaireAnswer.valueCoding.code = childItem;
-      } else if(linkId.includes("_date")) {
+      } else if (linkId.includes("_date")) {
         questionnaireAnswer.valueDate = new Date(childItem);
       } else {
         questionnaireAnswer.valueString = childItem;
@@ -49,6 +51,7 @@ export class FhirOperationsService {
       questionnaireResponseItem.answer.push(questionnaireAnswer);
       returnItem = questionnaireResponseItem
     }
+
     return returnItem;
   }
 }
