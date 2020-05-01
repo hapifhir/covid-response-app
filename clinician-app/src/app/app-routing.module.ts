@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AssessmentComponent } from './components/assessment/assessment.component';
-import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
+import { AdmitpatientComponent } from './components/admit-patient/admit-patient.component';
 
 const routes: Routes = [
   {path: '', component: AssessmentComponent},
-  {path: 'questionnaire/:id', component:QuestionnaireComponent }
+  {path: 'admit-patient', component:AdmitpatientComponent }
 
 ];
 

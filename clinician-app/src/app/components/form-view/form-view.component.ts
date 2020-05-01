@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-import { Component, Input, OnInit } from '@angular/core';
-=======
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
->>>>>>> e180307102b3f42ff81b1dcf1230b8ff51821473
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvscheme';
 import {ChangeDetectorRef} from '@angular/core';
@@ -23,7 +19,7 @@ export class FormviewComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.questions.item.forEach(question => {
+      console.log (this.questions);
       let group: any = {};
       let controls: any = {};
       this.questions.item.forEach(question => {
@@ -37,7 +33,6 @@ export class FormviewComponent implements OnInit {
         group[question.linkId] = new FormGroup(controls);
       });
       this.form = new FormGroup(group);
-    });
 
   }
   checkEnableWhen(itemGroup: ItemGroupEntity, item: ItemEntity) {
@@ -46,7 +41,7 @@ export class FormviewComponent implements OnInit {
     var valid: boolean = false;
     //--no rules enablewhen
     if (item.enableWhen === undefined || item.enableWhen === null) {
-      valid = true;
+      return true;
     } else {
       item.enableWhen?.forEach(rule => {
         switch (rule.operator) {
@@ -56,20 +51,22 @@ export class FormviewComponent implements OnInit {
             valid = valid || (rule.answerBoolean?.valueOf === conditionvalue);
             break;
         }
-        //  console.log(this.form.get(itemGroup.linkId + '.' + item.enableWhen[0].question).value)
+       
       });
       
     }
 
-    if (!valid) {
-      console.log(valid)
-      this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
+ /*    if (!valid) {
+     // setTimeout(() => {
+      /* this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
       this.form.get(itemGroup.linkId + '.' + item.linkId).clearValidators();
-      this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity();
-    } else {
-      this.form.get(itemGroup.linkId + '.' + item.linkId).setValidators(Validators.required);
-    }
-    
+      this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity(); 
+    //});
+
+    }else {
+      if (item.required)
+        this.form.get(itemGroup.linkId + '.' + item.linkId).setValidators(Validators.required);
+    }  */
     return valid;
 
   }
