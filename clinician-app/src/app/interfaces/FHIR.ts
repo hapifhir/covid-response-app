@@ -238,6 +238,12 @@ export interface Serializable<T> {
     text: string;
     answer: Answer[];
   }
+  export class QuestionnaireResponseGroupItem extends BackboneElement {
+    linkId: string;
+    definition: string;
+    text: string;
+    item:  QuestionnaireResponseItem[];
+  }
   
   export class Resource {
     resourceType: string;
@@ -258,7 +264,7 @@ export interface Serializable<T> {
     authored: Date;
     author: Reference;
     source: Reference;
-    item: QuestionnaireResponseItem[];
+    item: BackboneElement[];
     subject: Reference;
   
     deserialize(jsonObject: any): QuestionnaireResponse {

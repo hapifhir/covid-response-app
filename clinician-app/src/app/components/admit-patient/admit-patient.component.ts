@@ -3,7 +3,7 @@ import { HttpService } from '../../services/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { QvScheme } from '../../interfaces/qvscheme';
-import { FhirOperationsService } from '../../services/fhir-operations.service'; 
+import { FhirOperationsService } from '../../services/fhir-operationsQuest.service'; 
 
 
 @Component({
@@ -36,8 +36,8 @@ export class AdmitpatientComponent implements OnInit {
 
   async submitQuestionnaire(formQuestions:any)
   {
-     const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions);
-     const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
+     const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions,this.questions);
+      const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
   }
 
 

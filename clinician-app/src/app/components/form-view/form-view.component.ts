@@ -25,9 +25,9 @@ export class FormviewComponent implements OnInit {
       this.questions.item.forEach(question => {
         controls = {};
         question.item.forEach(ctrl2 => {
-          if (ctrl2.required)
+         if (ctrl2.required)
             controls[ctrl2.linkId] = new FormControl(ctrl2.value, [Validators.required]);
-          else
+         else
             controls[ctrl2.linkId] = new FormControl(ctrl2.value);
         });
         group[question.linkId] = new FormGroup(controls);
