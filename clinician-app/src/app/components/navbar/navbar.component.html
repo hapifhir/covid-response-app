@@ -6,6 +6,9 @@
         <a *ngFor="let item of navLinks" routerLink="{{ item.link }}" [ngClass]="{ 'nav-link': true, 'nav-icon-text': true }" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <clr-icon *ngIf="item.iconShape && item.iconShape != null" [attr.shape]="item.iconShape" class="is-inverse"></clr-icon>
             <span class="nav-text">{{ item.text }}</span>
+        <a routerLink="/admit-patient" class="nav-link nav-icon-text">
+            <clr-icon shape="form" class="is-inverse"></clr-icon>
+            <span class="nav-text">Admit Patient</span>
         </a>
     </div>
     <div class="header-actions">

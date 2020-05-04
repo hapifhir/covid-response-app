@@ -14,8 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FhirOperationsService } from './services/fhir-operations.service';
 import { UtilService } from './services/util.service';
 import { HttpService } from './services/http.service';
-import { QuestionnaireComponent } from './components/questionnaire/questionnaire.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AdmitpatientComponent } from './components/admit-patient/admit-patient.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -27,8 +27,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AssessmentComponent,
     NavbarComponent,
     FormviewComponent,
-    QuestionnaireComponent,
-    DashboardComponent
+    DashboardComponent,
+    AdmitpatientComponent
   ],
   imports: [
     BrowserModule,

@@ -11,62 +11,14 @@ export class FHIRElement {
 export class BackboneElement extends FHIRElement {
   modifierExtension: any;
 }
-
 /* FHIR classes used in resources */
 export class Id {
   private id: string;
-
-  constructor(input?: string) {
-    const re = new RegExp('[A-Za-z0-9\\-\\.]{1,64}');
-
-    if (re.test(input)) {
-      this.id = input;
-    } else {
-      throw new RangeError('Not a valid Id string - must match reg exp [A-Za-z0-9\\-\\.]{1,64} Was provided: ' + input);
-    }
-  }
 }
 
 export class Code extends FHIRElement {
   private codeString: string;
   private codeRE = new RegExp('[^\\s]+([\\s]?[^\\s]+)*');
-
-  constructor(input?: string) {
-    super();
-    this.setCode(input);
-  }
-
-  private setCode(input: string) {
-    if (this.codeRE.test(input)) {
-      this.codeString = input;
-    } else {
-      throw new RangeError('Not a valid Id string - must match reg exp [^\\s]+([\\s]?[^\\s]+)* Was provided: ' + input);
-    }
-  }
-
-  get code(): string {
-    return this.codeString;
-  }
-
-  set code(input: string) {
-    this.setCode(input);
-  }
-
-  public toString(): string {
-    return this.codeString;
-  }
-
-  deserialize(jsonObject: any): Code {
-    const that = this;
-    Object.entries(jsonObject).forEach((value) => {
-      if (!(typeof value[1] === 'object')) {
-        that[value[0]] = value[1];
-      } else {
-        (that[value[0]].deserialize(value[1]));
-      }
-    });
-    return this;
-  }
 }
 
 export class Coding extends FHIRElement {
@@ -75,18 +27,6 @@ export class Coding extends FHIRElement {
   code: string;
   display: string;
   userSelected?: boolean;
-
-  deserialize(jsonObject: any): Coding {
-    const that = this;
-    Object.entries(jsonObject).forEach((value) => {
-      if (!(typeof value[1] === 'object')) {
-        that[value[0]] = value[1];
-      } else {
-        (that[value[0]].deserialize(value[1]));
-      }
-    });
-    return this;
-  }
 }
 
 export class HumanName extends FHIRElement {
@@ -97,18 +37,6 @@ export class HumanName extends FHIRElement {
   prefix: string[];
   suffix: string[];
   period: Period;
-
-  deserialize(jsonObject: any): HumanName {
-    const that = this;
-    Object.entries(jsonObject).forEach((value) => {
-      if (!(typeof value[1] === 'object')) {
-        that[value[0]] = value[1];
-      } else {
-        (that[value[0]].deserialize(value[1]));
-      }
-    });
-    return this;
-  }
 }
 
 export class Extension {
@@ -144,18 +72,6 @@ export class Meta extends FHIRElement {
   profile: string;
   security: Coding;
   tag: Coding;
-
-  deserialize(jsonObject: any): Meta {
-    const that = this;
-    Object.entries(jsonObject).forEach((value) => {
-      if (!(typeof value[1] === 'object')) {
-        that[value[0]] = value[1];
-      } else {
-        (that[value[0]].deserialize(value[1]));
-      }
-    });
-    return this;
-  }
 }
 
 export class CodeableConcept extends FHIRElement {
@@ -180,7 +96,6 @@ export class Attachment extends FHIRElement {
 
   // should be of type code
   contentType: string;
-
   // should be of type code
   language: string;
   data: string;
@@ -228,6 +143,13 @@ export class QuestionnaireResponseItem extends BackboneElement {
   answer: Answer[];
 }
 
+export class QuestionnaireResponseGroupItem extends BackboneElement {
+  linkId: string;
+  definition: string;
+  text: string;
+  item: QuestionnaireResponseItem[];
+}
+
 export class Resource {
   resourceType: string;
   id: string;
@@ -237,7 +159,7 @@ export class Resource {
   extension: Extension[]
 }
 
-export class QuestionnaireResponse extends Resource implements Serializable<QuestionnaireResponse> {
+export class QuestionnaireResponse extends Resource {
   identifier: Identifier;
   basedOn: Reference[];
   parent: Reference[];
@@ -247,18 +169,115 @@ export class QuestionnaireResponse extends Resource implements Serializable<Ques
   authored: Date;
   author: Reference;
   source: Reference;
-  item: QuestionnaireResponseItem[];
+  item: BackboneElement[];
   subject: Reference;
+}
 
-  deserialize(jsonObject: any): QuestionnaireResponse {
-    const that = this;
-    Object.entries(jsonObject).forEach((value) => {
-      if (!(typeof value[1] === 'object')) {
-        that[value[0]] = value[1];
-      } else {
-        (that[value[0]].deserialize(value[1]));
-      }
-    });
-    return this;
-  }
+export class Patient extends Resource {
+  identifier: Identifier[];
+  active: boolean;
+  name: HumanName[];
+  telecom: ContactPoint[];
+  gender: Code;
+  birthDate: string;
+  address: Address[];
+  maritalStatus: CodeableConcept;
+  contact: Contact[];
+  communication: PatientCommunication[];
+  generalPractitioner: Reference[];
+  managingOrganization: Reference;
+  link: Link[];
+}
+
+export class Contact extends BackboneElement {
+  relationship: CodeableConcept[];
+  name: HumanName;
+  telecom: ContactPoint[];
+  address: Address;
+  gender: Code;
+  organization: Reference;
+  period: Period;
+}
+
+export class ContactPoint extends FHIRElement {
+  system: string;
+  value: string;
+  use: string;
+  rank: number;
+  period: Period;
+}
+
+export class PatientCommunication extends BackboneElement {
+  language: CodeableConcept;
+  preferred: boolean;
+}
+
+export class Link extends BackboneElement {
+  other: Reference;
+  type: Code;
+}
+
+export class Range extends FHIRElement {
+  low: number;
+  high: number;
+} 
+
+export class ServiceRequest extends Resource {
+  identifier?: Identifier[];
+  instantiatesCanonical?: string[];
+  instantiatesUri?: string[];
+  basedOn?: Reference[];
+  replaces?: Reference[];
+  requisition?: Identifier;
+  status: Code;
+  intent: Code;
+  category?: CodeableConcept[];
+  priority: Code;
+  doNotPerform?: boolean;
+  code?: CodeableConcept;
+  orderDetail?: CodeableConcept[];
+  quantity?: Quantity | Ratio | Range;
+  subject?: Reference;
+  encounter?: Reference;
+  occurence?: Period | Timing | Date;
+  asNeeded?: boolean | CodeableConcept;
+  authoredOn?: Date;
+  requester?: Reference;
+  performerType?: CodeableConcept;
+  performer?: Reference[];
+  locationCode?: CodeableConcept[];
+  locationReference?: Reference[];
+  reasonCode?: CodeableConcept[];
+  reasonReference?: Reference[];
+  insurance?: Reference[];
+  supportingInfo?: Reference[];
+  specimen?: Reference[];
+  bodySite?: CodeableConcept[];
+  note?: Annotation[];
+  patientInstuction?: string;
+  relevantHistory?: Reference[];
+}
+
+export class Annotation extends FHIRElement {
+  authorReference: Reference;
+  authorString: string;
+  time: Date;
+  text: string;
+}
+export class Timing extends FHIRElement {
+  event: Date;
+  // TODO work on a Timing object
+  repeat: string;
+  location: Reference;
+  performer: Reference[];
+  productCodeableConcept: CodeableConcept;
+  productReference: Reference;
+  dailyAmount: string;
+  quantity: string;
+  description: string;
+}
+
+export class Ratio extends FHIRElement {
+  numerator: Quantity;
+  denominator: Quantity;
 }
