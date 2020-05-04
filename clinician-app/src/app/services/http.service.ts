@@ -10,7 +10,6 @@ export class HttpService {
   constructor(private httpClient: HttpClient) { }
   
   getResourceByQueryParam(baseResource: string, queryParams: string) {
-    console.log('ruta ' + environment.queryURI + '/' + baseResource +  queryParams);
     return this.httpClient.get(environment.queryURI + '/' + baseResource +  queryParams).toPromise();
   }
 

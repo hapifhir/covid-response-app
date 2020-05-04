@@ -18,8 +18,6 @@ export class FormviewComponent implements OnInit {
   constructor(private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-
-      console.log (this.questions);
       let group: any = {};
       let controls: any = {};
       this.questions.item.forEach(question => {
@@ -33,8 +31,8 @@ export class FormviewComponent implements OnInit {
         group[question.linkId] = new FormGroup(controls);
       });
       this.form = new FormGroup(group);
-
   }
+
   checkEnableWhen(itemGroup: ItemGroupEntity, item: ItemEntity) {
 
     var conditionvalue;
