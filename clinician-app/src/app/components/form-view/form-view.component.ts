@@ -35,7 +35,11 @@ export class FormviewComponent implements OnInit {
       this.form = new FormGroup(group);
 
   }
-  checkEnableWhen(itemGroup: ItemGroupEntity, item: ItemEntity) {
+  checkEnableWhen(item: ItemEntity)
+  {
+    return  !(item.enableWhen === undefined || item.enableWhen === null);
+  }
+  isEnableWhen(itemGroup: ItemGroupEntity, item: ItemEntity) {
 
     var conditionvalue;
     var valid: boolean = false;
