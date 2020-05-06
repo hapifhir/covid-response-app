@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvscheme';
+import { Questionnaire, QuestionnaireItem, QuestionnaireItemGroup } from './../../interfaces/FHIR';
 import { ChangeDetectorRef } from '@angular/core';
 import testData from '../../../assets/test_data/admit_patient_test_values.json';
+
 
 @Component({
   selector: 'app-form-view',
@@ -11,8 +12,8 @@ import testData from '../../../assets/test_data/admit_patient_test_values.json';
 })
 export class FormviewComponent implements OnInit {
   form: FormGroup;
-  @Input() questions: QvScheme;
-  @Output() submitEvent: EventEmitter<QvScheme> = new EventEmitter();
+  @Input() questions: Questionnaire;
+  @Output() submitEvent: EventEmitter<Questionnaire> = new EventEmitter();
 
   constructor(private cdref: ChangeDetectorRef) { }
 
@@ -36,10 +37,16 @@ export class FormviewComponent implements OnInit {
     this.form.setValue(testData); // set default values for testing purposes, comment it out for prod
   }
 
-  checkEnableWhen(itemGroup: ItemGroupEntity, item: ItemEntity) {
+  checkEnableWhen(item: QuestionnaireItem) {
+    return !(item.enableWhen === undefined || item.enableWhen === null);
+  }
+
+  isEnableWhen(itemGroup: QuestionnaireItemGroup, item: QuestionnaireItem) {
     var conditionvalue;
+    var value:string;
     var valid: boolean = false;
     //--no rules enablewhen
+    
     if (item.enableWhen === undefined || item.enableWhen === null) {
       return true;
     } else {
@@ -50,10 +57,16 @@ export class FormviewComponent implements OnInit {
             valid = valid || (rule.answerCoding?.code === conditionvalue);
             valid = valid || (rule.answerBoolean?.valueOf === conditionvalue);
             break;
+          case "exists":
+            value =  this.form.get(itemGroup.linkId + '.' + rule.question).value || "";
+            conditionvalue = (value != undefined && value != null && value !='')
+            
+            
+            valid = valid || (rule.answerBoolean === conditionvalue);
+            console.log ("y" + valid);
+          break;
         }
-
       });
-
     }
 
     if (!valid) {

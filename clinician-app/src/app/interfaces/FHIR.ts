@@ -108,12 +108,12 @@ export class Reference extends FHIRElement {
 }
 
 export class Identifier extends FHIRElement {
-  use: string;
-  type: CodeableConcept;
-  system: string;
-  value: string;
-  period: Period;
-  assigner: Reference;
+  use?: string;
+  type?: CodeableConcept;
+  system?: string;
+  value?: string;
+  period?: Period;
+  assigner?: Reference;
 }
 
 export class Answer extends BackboneElement {
@@ -275,4 +275,40 @@ export class Timing extends FHIRElement {
 export class Ratio extends FHIRElement {
   numerator: Quantity;
   denominator: Quantity;
+}
+
+
+export class Questionnaire extends Resource{
+  identifier?: (Identifier)[] | null;
+  name: string;
+  title: string;
+  description: string;
+  item?: (QuestionnaireItemGroup)[] | null;
+}
+export class QuestionnaireItem {
+  linkId: string;
+  text: string;
+  type: string;
+  required?: boolean | null;
+  answerOption?: (AnswerOption)[] | null;
+  enableWhen?: (EnableWhen)[] | null;
+  value: string=""; //nota - add questionnari json values
+  
+}
+
+export class QuestionnaireItemGroup {
+  linkId: string;
+  text: string;
+  type: string;
+  item: (QuestionnaireItem)[] | null;
+  
+}
+export class AnswerOption {
+  valueCoding: Coding;
+}
+export class EnableWhen {
+  question: string;
+  operator: string;
+  answerBoolean?: boolean | null;
+  answerCoding?: Coding | null;
 }
