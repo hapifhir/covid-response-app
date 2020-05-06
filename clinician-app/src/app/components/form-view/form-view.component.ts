@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvscheme';
-import {ChangeDetectorRef} from '@angular/core';
-
+import { ChangeDetectorRef } from '@angular/core';
+import testData from '../../../assets/test_data/admit_patient_test_values.json';
 
 @Component({
   selector: 'app-form-view',
@@ -13,28 +13,30 @@ export class FormviewComponent implements OnInit {
   form: FormGroup;
   @Input() questions: QvScheme;
   @Output() submitEvent: EventEmitter<QvScheme> = new EventEmitter();
-  
 
   constructor(private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-      let group: any = {};
-      let controls: any = {};
-      this.questions.item.forEach(question => {
-        controls = {};
-        question.item.forEach(ctrl2 => {
-         if (ctrl2.required)
-            controls[ctrl2.linkId] = new FormControl(ctrl2.value, [Validators.required]);
-         else
-            controls[ctrl2.linkId] = new FormControl(ctrl2.value);
-        });
-        group[question.linkId] = new FormGroup(controls);
+    console.log('testData', testData);
+    let group: any = {};
+    let controls: any = {};
+
+    this.questions.item.forEach(question => {
+      controls = {};
+      question.item.forEach(ctrl2 => {
+        if (ctrl2.required)
+          controls[ctrl2.linkId] = new FormControl(ctrl2.value, [Validators.required]);
+        else
+          controls[ctrl2.linkId] = new FormControl(ctrl2.value);
       });
-      this.form = new FormGroup(group);
+      group[question.linkId] = new FormGroup(controls);
+    });
+    
+    this.form = new FormGroup(group);
+    this.form.setValue(testData); // set default values for testing purposes, comment it out for prod
   }
 
   checkEnableWhen(itemGroup: ItemGroupEntity, item: ItemEntity) {
-
     var conditionvalue;
     var valid: boolean = false;
     //--no rules enablewhen
@@ -49,34 +51,29 @@ export class FormviewComponent implements OnInit {
             valid = valid || (rule.answerBoolean?.valueOf === conditionvalue);
             break;
         }
-       
+
       });
-      
+
     }
 
- /*    if (!valid) {
-     // setTimeout(() => {
-      /* this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
+    if (!valid) {
+      this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
       this.form.get(itemGroup.linkId + '.' + item.linkId).clearValidators();
-      this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity(); 
-    //});
-
-    }else {
-      if (item.required)
+      this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity();
+    } else {
+      if (item.required) {
         this.form.get(itemGroup.linkId + '.' + item.linkId).setValidators(Validators.required);
-    }  */
-    return valid;
+      }
+    }
 
+    return valid;
   }
 
-  submitForm()
-  {
+  submitForm() {
     if (!this.form.invalid) {
       const formValues = this.form.value;
+      console.log('formValues', formValues);
       this.submitEvent.emit(formValues);
     }
-  
   }
-  
-
 }

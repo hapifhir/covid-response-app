@@ -11,10 +11,6 @@ export class FHIRElement {
 export class BackboneElement extends FHIRElement {
   modifierExtension: any;
 }
-/* FHIR classes used in resources */
-export class Id {
-  private id: string;
-}
 
 export class Code extends FHIRElement {
   private codeString: string;
@@ -63,11 +59,10 @@ export class Address extends FHIRElement {
   postalCode: string;
   country: string;
   period: Period;
-
 }
 
 export class Meta extends FHIRElement {
-  versionId: Id;
+  versionId: string;
   lastUpdated: Date;
   profile: string;
   security: Coding;
@@ -169,7 +164,7 @@ export class QuestionnaireResponse extends Resource {
   authored: Date;
   author: Reference;
   source: Reference;
-  item: BackboneElement[];
+  item: QuestionnaireResponseGroupItem[];
   subject: Reference;
 }
 

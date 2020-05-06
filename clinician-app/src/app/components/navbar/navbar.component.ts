@@ -19,7 +19,6 @@ export class NavbarComponent implements OnInit {
   navLinks = [
     { link: '/', iconShape: 'home', text: 'Home' },
     { link: '/admit-patient', iconShape: 'form', text: 'Admit Patient' },
-    { link: '/assessment', iconShape: 'paperclip', text: 'Assessment' }
   ];
   
   constructor(private translate: TranslateService) { }

@@ -23,7 +23,7 @@ export class AdmitpatientComponent implements OnInit {
   }
 
   loadForm() {
-    this.httpService.getResourceByQueryParam(environment.questionnariRes, '?identifier=WHO_Module_1').then(res => {
+    this.httpService.getResourceByQueryParam('Questionnaire', '?identifier=WHO_Module_1').then(res => {
       const resource = res['entry'][0].resource;
       this.questions = resource;
       this.loadData = true;
@@ -33,8 +33,12 @@ export class AdmitpatientComponent implements OnInit {
   }
 
   async submitQuestionnaire(formQuestions: any) {
+    console.log('formQuestions', formQuestions);
     const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions);
     const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
+    // start by collecting and submitting patient data to server
+    // create service request
+    // create patient resource
   }
 
 }
