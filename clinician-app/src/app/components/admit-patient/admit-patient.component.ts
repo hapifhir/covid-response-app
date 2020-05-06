@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { QvScheme } from '../../interfaces/qvscheme';
 import { FhirOperationsService } from '../../services/fhir-operations.service'; 
 
 

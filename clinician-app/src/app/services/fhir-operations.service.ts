@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as FHIR from './../interfaces/FHIR';
-import * as Qvscheme from '../interfaces/qvscheme';
+
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +51,7 @@ export class FhirOperationsService {
       const questionnaireResponseItem = new FHIR.QuestionnaireResponseItem();
       const questionnaireAnswer = new FHIR.Answer();
       questionnaireResponseItem.answer = [];
-      var answer:Qvscheme.AnswerOptionEntity;
+      var answer:FHIR.AnswerOption;
       
       if(elementItem.type=="boolean") {
         questionnaireAnswer.valueBoolean = childItem === "yes" ? true : false;

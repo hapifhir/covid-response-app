@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { QvScheme, ItemEntity, ItemGroupEntity } from './../../interfaces/qvscheme';
+import { Questionnaire, QuestionnaireItem, QuestionnaireItemGroup } from './../../interfaces/FHIR';
 import {ChangeDetectorRef} from '@angular/core';
 
 
@@ -11,8 +11,8 @@ import {ChangeDetectorRef} from '@angular/core';
 })
 export class FormviewComponent implements OnInit {
   form: FormGroup;
-  @Input() questions: QvScheme;
-  @Output() submitEvent: EventEmitter<QvScheme> = new EventEmitter();
+  @Input() questions: Questionnaire;
+  @Output() submitEvent: EventEmitter<Questionnaire> = new EventEmitter();
   
 
   constructor(private cdref: ChangeDetectorRef) { }
@@ -24,7 +24,9 @@ export class FormviewComponent implements OnInit {
         controls = {};
         question.item.forEach(ctrl2 => {
          if (ctrl2.required)
+          {
             controls[ctrl2.linkId] = new FormControl(ctrl2.value, [Validators.required]);
+          }
          else
             controls[ctrl2.linkId] = new FormControl(ctrl2.value);
         });
@@ -32,13 +34,14 @@ export class FormviewComponent implements OnInit {
       });
       this.form = new FormGroup(group);
   }
-  checkEnableWhen(item: ItemEntity)
+  checkEnableWhen(item: QuestionnaireItem)
   {
     return  !(item.enableWhen === undefined || item.enableWhen === null);
   }
-  isEnableWhen(itemGroup: ItemGroupEntity, item: ItemEntity) {
+  isEnableWhen(itemGroup: QuestionnaireItemGroup, item: QuestionnaireItem) {
 
     var conditionvalue;
+    var value:string;
     var valid: boolean = false;
     //--no rules enablewhen
     if (item.enableWhen === undefined || item.enableWhen === null) {
@@ -51,6 +54,15 @@ export class FormviewComponent implements OnInit {
             valid = valid || (rule.answerCoding?.code === conditionvalue);
             valid = valid || (rule.answerBoolean?.valueOf === conditionvalue);
             break;
+          case "exists":
+            value =  this.form.get(itemGroup.linkId + '.' + rule.question).value || "";
+            conditionvalue = (value != undefined && value != null && value !='')
+            
+            
+            valid = valid || (rule.answerBoolean === conditionvalue);
+            console.log ("y" + valid);
+          break;
+
         }
        
       });
