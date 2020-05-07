@@ -1,9 +1,9 @@
-<ng-template #drawCtrl let-formgroup="formgroup" let-elementson="elementson" let-element="element" let-disabled="disabled">
+<ng-template #drawCtrl let-formgroup="formgroup" let-elementson="elementson" let-element="element">
 <div [ngSwitch]="elementson.type" [formGroup]="formgroup">
     <div *ngSwitchCase="'string'">
         <clr-input-container>
             <label>{{elementson.text}}</label>
-            <input clrInput type="text" [formControlName]="elementson.linkId" [id]="elementson.linkId" [attr.disabled]="disabled?'false': null" />
+            <input clrInput type="text" [formControlName]="elementson.linkId" [id]="elementson.linkId" />
             <clr-control-helper></clr-control-helper>
             <clr-control-error>This field is required!</clr-control-error>
         </clr-input-container>
@@ -14,11 +14,12 @@
             <div class="clr-control-container">
                 <div *ngFor="let option of elementson.answerOption">
                     <clr-radio-wrapper>
-                        <input type="radio" clrRadio [formControlName]="elementson.linkId"  [value]="option.valueCoding.code"   [id]="elementson.linkId + '' + option.valueCoding.code" [attr.disabled]="disabled?'false': null"/>
+                        <input type="radio" clrRadio [formControlName]="elementson.linkId"  [value]="option.valueCoding.code"   [id]="elementson.linkId + '' + option.valueCoding.code"/>
                         <label>{{option.valueCoding.display}}</label>
                     </clr-radio-wrapper>
                 </div>
-                <div class="clr-error" *ngIf="this.form.get(element.linkId + '.' + elementson.linkId).invalid  && (this.form.get(element.linkId + '.' + elementson.linkId).dirty || this.form.get(element.linkId + '.' + elementson.linkId).touched)">
+                <div>{{elementson.linkId}}  {{formgroup.get(elementson.linkId).invalid}}</div>
+                <div class="clr-error" *ngIf="formgroup.get(elementson.linkId).invalid  && ((formgroup.get(elementson.linkId).dirty || formgroup.get(elementson.linkId).touched))">
                     <clr-control-error>This field is required!</clr-control-error>
                 </div>
             </div>
@@ -29,7 +30,7 @@
             <label>{{elementson.text}}</label>
             <div class="clr-control-container">
                 <clr-checkbox-wrapper>
-                    <input type="checkbox" clrCheckbox [formControlName]="elementson.linkId"  [value]="elementson.value"   [id]="elementson.linkId" [attr.disabled]="disabled?'false': null"/>
+                    <input type="checkbox" clrCheckbox [formControlName]="elementson.linkId"  [value]="elementson.value"   [id]="elementson.linkId" />
                 </clr-checkbox-wrapper>  
                 <clr-control-helper></clr-control-helper>
                 <clr-control-error>This field is required!</clr-control-error>
@@ -40,7 +41,7 @@
         <div class="clr-form-control">
         <clr-date-container>
             <label>{{elementson.text}}</label>
-            <input clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId"  [attr.disabled]="disabled?'false': null"/>
+            <input clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId"/>
             <clr-control-helper></clr-control-helper>
             <clr-control-error>This field is required!</clr-control-error>
         </clr-date-container>
