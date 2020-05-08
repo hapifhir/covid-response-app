@@ -292,8 +292,7 @@ export class QuestionnaireItem {
   required?: boolean | null;
   answerOption?: (AnswerOption)[] | null;
   enableWhen?: (EnableWhen)[] | null;
-  value: string=""; //nota - add questionnari json values
-  
+  value: ''; //nota - add questionnari json values
 }
 
 export class QuestionnaireItemGroup {

@@ -41,10 +41,6 @@ export class FormviewComponent implements OnInit {
     this.form.setValue(this.testData); // set default values for testing purposes, comment it out for prod
   }
 
-  checkEnableWhen(item: QuestionnaireItem) {
-    return !(item.enableWhen === undefined || item.enableWhen === null);
-  }
-
   isEnableWhen(itemGroup: QuestionnaireItemGroup, item: QuestionnaireItem) {
     var conditionvalue;
     var value:string;
@@ -52,33 +48,28 @@ export class FormviewComponent implements OnInit {
     //--no rules enablewhen
     
     if (item.enableWhen === undefined || item.enableWhen === null) {
-      return true;
+      valid = true;
     } else {
       item.enableWhen?.forEach(rule => {
         switch (rule.operator) {
-          case "=":
+          case '=':
             conditionvalue = this.form.get(itemGroup.linkId + '.' + rule.question).value || false;
             valid = valid || (rule.answerCoding?.code === conditionvalue);
             valid = valid || (rule.answerBoolean?.valueOf === conditionvalue);
             break;
-          case "exists":
-            value =  this.form.get(itemGroup.linkId + '.' + rule.question).value || "";
-            conditionvalue = (value != undefined && value != null && value !='')
-            
-            
+          case 'exists':
+            value = this.form.get(itemGroup.linkId + '.' + rule.question).value || '';
+            conditionvalue = (value !== undefined && value != null && value !== '');
             valid = valid || (rule.answerBoolean === conditionvalue);
-            // console.log ("y" + valid);
-          break;
+            break;
         }
       });
-    }
 
-    if (!valid) {
-      this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
-      this.form.get(itemGroup.linkId + '.' + item.linkId).clearValidators();
-      this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity();
-    } else {
-      if (item.required) {
+      if (!valid) {
+        this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
+        this.form.get(itemGroup.linkId + '.' + item.linkId).clearValidators();
+        this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity();
+      } else {
         this.form.get(itemGroup.linkId + '.' + item.linkId).setValidators(Validators.required);
       }
     }
@@ -89,7 +80,7 @@ export class FormviewComponent implements OnInit {
   submitForm() {
     if (!this.form.invalid) {
       const formValues = this.form.value;
-      console.log('formValues', formValues);
+      // console.log('formValues', formValues);
       this.submitEvent.emit(formValues);
     }
   }
