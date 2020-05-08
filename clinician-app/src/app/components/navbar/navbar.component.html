@@ -1,9 +1,14 @@
-<div class="clr-row custom-header">
-    <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
-    <div class="clr-col-9 clr-col-sm-7 clr-col-md-7 clr-col-lg-8">
+<header class="header-4">
+    <div class="branding">
         <span class="title">{{'navbarPage.title' | translate}}</span>
+    </div>    
+    <div class="header-nav">
+        <a routerLink="/admit-patient" class="nav-link nav-icon-text">
+            <clr-icon shape="form" class="is-inverse"></clr-icon>
+            <span class="nav-text">Admit Patient</span>
+        </a>
     </div>
-    <div class="clr-col-2 clr-col-sm-2 clr-col-md-2 clr-col-lg-2">
+    <div class="header-actions">
         <clr-dropdown class="languageDropDown">
             <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
                 {{currentLanguage}}
@@ -16,4 +21,4 @@
             </clr-dropdown-menu>
         </clr-dropdown>
     </div>
-</div>
+</header>

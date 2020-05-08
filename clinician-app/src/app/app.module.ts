@@ -9,10 +9,12 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AssessmentComponent } from './components/assessment/assessment.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { FormviewComponent } from './components/form-view/form-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FhirOperationsService } from './services/fhir-operations.service';
 import { UtilService } from './services/util.service';
 import { HttpService } from './services/http.service';
+import { AdmitpatientComponent } from './components/admit-patient/admit-patient.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -22,7 +24,9 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     AssessmentComponent,
-    NavbarComponent
+    NavbarComponent,
+    FormviewComponent,
+    AdmitpatientComponent
   ],
   imports: [
     BrowserModule,

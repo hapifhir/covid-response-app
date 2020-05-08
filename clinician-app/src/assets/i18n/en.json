@@ -64,7 +64,8 @@
         "completionLabel": "SARI Form completed successfully. Please return back to start a new evaluation."
     },
     "navbarPage": {
-        "title": "COVID-19 Rapid Response"
+        "title": "COVID-19 Rapid Response",
+        "questview": "Admit patient"
     },
     "commonUse": {
         "submitBtn": "Submit",

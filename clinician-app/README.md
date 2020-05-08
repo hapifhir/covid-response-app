@@ -1,30 +1,27 @@
-# Clinician App
+# ClinicianApp
 
-Clinician App is an open-source COVID-19 tool for clinicians. This repository includes code for the app to run on local machine. This app is still in progress.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
 
-## App URL
+## Development server
 
-* [COVID Patient App](https://covid19.smilecdr.com/clinician-app/)
- 
-## Prerequisites
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-* [Node](https://nodejs.org/en/) 
-* NPM :- Packaged with Node
-* [Angular CLI](https://cli.angular.io/)
+## Code scaffolding
 
-## Local Setup
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-* Clone the repo. `git clone https://github.com/hapifhir/covid-response-app.git`
-* Once you're in the root of cloned repo, change the directory to `clincian-app`.
-* Install `node_modules` using command `npm install`.
-* Once `node_modules` are installed start the angular server by `npm start` and navigate to `http://localhost:4200` in your browser.
+## Build
 
-## FHIR Resources Used
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-* [QuestionnaireResponse](http://hl7.org/fhir/questionnaireresponse.html)
+## Running unit tests
 
-## Languages Supported 
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-* English
-* French
+## Running end-to-end tests
 
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
