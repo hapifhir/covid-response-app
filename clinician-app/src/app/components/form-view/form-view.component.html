@@ -18,7 +18,6 @@
                         <label>{{option.valueCoding.display}}</label>
                     </clr-radio-wrapper>
                 </div>
-                <div>{{elementson.linkId}}  {{formgroup.get(elementson.linkId).invalid}}</div>
                 <div class="clr-error" *ngIf="formgroup.get(elementson.linkId).invalid  && ((formgroup.get(elementson.linkId).dirty || formgroup.get(elementson.linkId).touched))">
                     <clr-control-error>This field is required!</clr-control-error>
                 </div>

@@ -34,7 +34,7 @@ export class AdmitpatientComponent implements OnInit {
   async submitQuestionnaire(formQuestions:any)
   {
      const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions,this.questions);
-      const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
+     const postQuestionnaireResponse = await this.httpService.postResource(questionnaireResponse);
   }
 
 }
