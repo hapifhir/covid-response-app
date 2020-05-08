@@ -40,7 +40,7 @@
         <div class="clr-form-control">
         <clr-date-container>
             <label>{{elementson.text}}</label>
-            <input clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId"  [attr.disabled]="disabled?'false': null"/>
+            <input type="date" clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId"  [attr.disabled]="disabled?'false': null"/>
             <clr-control-helper></clr-control-helper>
             <clr-control-error>This field is required!</clr-control-error>
         </clr-date-container>

@@ -12,10 +12,10 @@ export class BackboneElement extends FHIRElement {
   modifierExtension: any;
 }
 
-export class Code extends FHIRElement {
-  private codeString: string;
-  private codeRE = new RegExp('[^\\s]+([\\s]?[^\\s]+)*');
-}
+// export class Code extends FHIRElement {
+//   private codeString: string;
+//   private codeRE = new RegExp('[^\\s]+([\\s]?[^\\s]+)*');
+// }
 
 export class Coding extends FHIRElement {
   system: string;
@@ -26,7 +26,7 @@ export class Coding extends FHIRElement {
 }
 
 export class HumanName extends FHIRElement {
-  use: Code;
+  use: string;
   text: string;
   family: string;
   given: string[];
@@ -49,8 +49,8 @@ export class Extension {
 }
 
 export class Address extends FHIRElement {
-  use: Code;
-  type: Code;
+  use: string;
+  type: string;
   text: string;
   line: string[];
   city: string;
@@ -81,10 +81,10 @@ export class Period extends FHIRElement {
 
 export class Quantity extends FHIRElement {
   value: number;
-  comparator: Code;
+  comparator: string;
   unit: string;
   system: string;
-  code: Code;
+  code: string;
 }
 
 export class Attachment extends FHIRElement {
@@ -150,7 +150,7 @@ export class Resource {
   id: string;
   meta: Meta;
   implicitRules: string;
-  language: Code;
+  language: string;
   extension: Extension[]
 }
 
@@ -173,7 +173,7 @@ export class Patient extends Resource {
   active: boolean;
   name: HumanName[];
   telecom: ContactPoint[];
-  gender: Code;
+  gender: string;
   birthDate: string;
   address: Address[];
   maritalStatus: CodeableConcept;
@@ -189,7 +189,7 @@ export class Contact extends BackboneElement {
   name: HumanName;
   telecom: ContactPoint[];
   address: Address;
-  gender: Code;
+  gender: string;
   organization: Reference;
   period: Period;
 }
@@ -209,7 +209,7 @@ export class PatientCommunication extends BackboneElement {
 
 export class Link extends BackboneElement {
   other: Reference;
-  type: Code;
+  type: string;
 }
 
 export class Range extends FHIRElement {
@@ -224,10 +224,10 @@ export class ServiceRequest extends Resource {
   basedOn?: Reference[];
   replaces?: Reference[];
   requisition?: Identifier;
-  status: Code;
-  intent: Code;
+  status: string;
+  intent: string;
   category?: CodeableConcept[];
-  priority: Code;
+  priority: string;
   doNotPerform?: boolean;
   code?: CodeableConcept;
   orderDetail?: CodeableConcept[];
@@ -311,4 +311,63 @@ export class EnableWhen {
   operator: string;
   answerBoolean?: boolean | null;
   answerCoding?: Coding | null;
+}
+
+export class Bundle extends Resource implements Serializable<Bundle> {
+  identifier: Identifier;
+  type: string;
+  timestamp: string;
+  total: number;
+  link: BundleLink[];
+  entry: Entry[];
+  signature: Signature;
+
+  deserialize(jsonObject: any): Bundle {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+export class BundleLink extends BackboneElement {
+  relation: string;
+  url: string;
+}
+
+export class Entry extends BackboneElement {
+  link: BundleLink[];
+  fullUrl: string;
+  resource: Resource;
+  search: Search;
+  request: Request;
+  response: Response;
+}
+
+export class Signature extends FHIRElement {
+  type: Coding[];
+  when: string;
+  who: Reference;
+  targetFormat: string;
+  sigFormat: string;
+  data: string;
+}
+
+export class Search extends BackboneElement {
+  mode: string;
+  score: number;
+}
+
+export class Request extends BackboneElement {
+  method: string;
+  url: string;
+  ifNoneMatch: string;
+  ifModifiedSince: number;
+  ifMatch: number;
+  ifNoneExist: number;
 }

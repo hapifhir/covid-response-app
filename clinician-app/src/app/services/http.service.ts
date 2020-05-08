@@ -16,4 +16,8 @@ export class HttpService {
   postResource(resource) {
     return this.httpClient.post(environment.queryURI + '/' + resource.resourceType, resource).toPromise();
   }
+
+  postTransaction(resource) {
+    return this.httpClient.post(environment.queryURI, resource).toPromise();
+  }
 }

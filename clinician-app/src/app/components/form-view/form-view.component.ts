@@ -2,7 +2,7 @@ import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Questionnaire, QuestionnaireItem, QuestionnaireItemGroup } from './../../interfaces/FHIR';
 import { ChangeDetectorRef } from '@angular/core';
-import testData from '../../../assets/test_data/admit_patient_test_values.json';
+import * as testData from '../../../assets/test_data/admit_patient_test_values.json';
 
 
 @Component({
@@ -15,10 +15,13 @@ export class FormviewComponent implements OnInit {
   @Input() questions: Questionnaire;
   @Output() submitEvent: EventEmitter<Questionnaire> = new EventEmitter();
 
+  testData = (testData as any).default;
+
   constructor(private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    console.log('testData', testData);
+    // console.log('testData', this.testData);
+
     let group: any = {};
     let controls: any = {};
 
@@ -34,7 +37,8 @@ export class FormviewComponent implements OnInit {
     });
     
     this.form = new FormGroup(group);
-    this.form.setValue(testData); // set default values for testing purposes, comment it out for prod
+    
+    this.form.setValue(this.testData); // set default values for testing purposes, comment it out for prod
   }
 
   checkEnableWhen(item: QuestionnaireItem) {
@@ -63,7 +67,7 @@ export class FormviewComponent implements OnInit {
             
             
             valid = valid || (rule.answerBoolean === conditionvalue);
-            console.log ("y" + valid);
+            // console.log ("y" + valid);
           break;
         }
       });

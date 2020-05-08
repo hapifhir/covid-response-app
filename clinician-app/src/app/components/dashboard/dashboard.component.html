@@ -11,6 +11,7 @@
               <th>Date of Birth (YYYY-MM-DD)</th>
               <th>Age</th>
               <th>Ward</th>
+              <th>Condition</th>
               <th></th>
             </tr>
           </thead>
@@ -21,6 +22,7 @@
               <td class="clr-align-middle">{{ patient.date_of_birth }}</td>
               <td class="clr-align-middle">{{ patient.date_of_birth ? calculateAge(patient.date_of_birth) : ''}}</td>
               <td class="clr-align-middle">12</td>
+              <td class="clr-align-middle">Great</td>
               <td>
                 <button class="btn btn-primary">Details</button>
               </td>
