@@ -609,7 +609,6 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
             (e) => e == null ? null : Link.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
-    ..resourceType = json['resourceType'] as String
     ..id = json['id'] as String
     ..meta = json['meta'] == null
         ? null
@@ -617,7 +616,22 @@ Patient _$PatientFromJson(Map<String, dynamic> json) {
     ..implicitRules = json['implicitRules'] as String
     ..language = json['language'] == null
         ? null
-        : Code.fromJson(json['language'] as Map<String, dynamic>);
+        : Code.fromJson(json['language'] as Map<String, dynamic>)
+    ..text = json['text'] == null
+        ? null
+        : Narrative.fromJson(json['text'] as Map<String, dynamic>)
+    ..contained = (json['contained'] as List)
+        ?.map((e) =>
+            e == null ? null : Resource.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..extension = (json['extension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..modifierExtension = (json['modifierExtension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$PatientToJson(Patient instance) {
@@ -629,11 +643,14 @@ Map<String, dynamic> _$PatientToJson(Patient instance) {
     }
   }
 
-  writeNotNull('resourceType', instance.resourceType);
   writeNotNull('id', instance.id);
   writeNotNull('meta', instance.meta);
   writeNotNull('implicitRules', instance.implicitRules);
   writeNotNull('language', instance.language);
+  writeNotNull('text', instance.text);
+  writeNotNull('contained', instance.contained);
+  writeNotNull('extension', instance.extension);
+  writeNotNull('modifierExtension', instance.modifierExtension);
   writeNotNull('identifier', instance.identifier);
   writeNotNull('active', instance.active);
   writeNotNull('name', instance.name);
@@ -868,7 +885,6 @@ Questionnaire _$QuestionnaireFromJson(Map<String, dynamic> json) {
             (e) => e == null ? null : Item.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
-    ..resourceType = json['resourceType'] as String
     ..id = json['id'] as String
     ..meta = json['meta'] == null
         ? null
@@ -876,7 +892,22 @@ Questionnaire _$QuestionnaireFromJson(Map<String, dynamic> json) {
     ..implicitRules = json['implicitRules'] as String
     ..language = json['language'] == null
         ? null
-        : Code.fromJson(json['language'] as Map<String, dynamic>);
+        : Code.fromJson(json['language'] as Map<String, dynamic>)
+    ..text = json['text'] == null
+        ? null
+        : Narrative.fromJson(json['text'] as Map<String, dynamic>)
+    ..contained = (json['contained'] as List)
+        ?.map((e) =>
+            e == null ? null : Resource.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..extension = (json['extension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..modifierExtension = (json['modifierExtension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$QuestionnaireToJson(Questionnaire instance) {
@@ -888,11 +919,14 @@ Map<String, dynamic> _$QuestionnaireToJson(Questionnaire instance) {
     }
   }
 
-  writeNotNull('resourceType', instance.resourceType);
   writeNotNull('id', instance.id);
   writeNotNull('meta', instance.meta);
   writeNotNull('implicitRules', instance.implicitRules);
   writeNotNull('language', instance.language);
+  writeNotNull('text', instance.text);
+  writeNotNull('contained', instance.contained);
+  writeNotNull('extension', instance.extension);
+  writeNotNull('modifierExtension', instance.modifierExtension);
   writeNotNull('url', instance.url);
   writeNotNull('identifier', instance.identifier);
   writeNotNull('version', instance.version);
@@ -954,7 +988,6 @@ QuestionnaireResponse _$QuestionnaireResponseFromJson(
         ? null
         : Reference.fromJson(json['subject'] as Map<String, dynamic>),
   )
-    ..resourceType = json['resourceType'] as String
     ..id = json['id'] as String
     ..meta = json['meta'] == null
         ? null
@@ -962,7 +995,22 @@ QuestionnaireResponse _$QuestionnaireResponseFromJson(
     ..implicitRules = json['implicitRules'] as String
     ..language = json['language'] == null
         ? null
-        : Code.fromJson(json['language'] as Map<String, dynamic>);
+        : Code.fromJson(json['language'] as Map<String, dynamic>)
+    ..text = json['text'] == null
+        ? null
+        : Narrative.fromJson(json['text'] as Map<String, dynamic>)
+    ..contained = (json['contained'] as List)
+        ?.map((e) =>
+            e == null ? null : Resource.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..extension = (json['extension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..modifierExtension = (json['modifierExtension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$QuestionnaireResponseToJson(
@@ -975,11 +1023,14 @@ Map<String, dynamic> _$QuestionnaireResponseToJson(
     }
   }
 
-  writeNotNull('resourceType', instance.resourceType);
   writeNotNull('id', instance.id);
   writeNotNull('meta', instance.meta);
   writeNotNull('implicitRules', instance.implicitRules);
   writeNotNull('language', instance.language);
+  writeNotNull('text', instance.text);
+  writeNotNull('contained', instance.contained);
+  writeNotNull('extension', instance.extension);
+  writeNotNull('modifierExtension', instance.modifierExtension);
   writeNotNull('identifier', instance.identifier);
   writeNotNull('basedOn', instance.basedOn);
   writeNotNull('parent', instance.parent);
@@ -1719,7 +1770,9 @@ AnswerOption _$AnswerOptionFromJson(Map<String, dynamic> json) {
     valueReference: json['valueReference'] == null
         ? null
         : Reference.fromJson(json['valueReference'] as Map<String, dynamic>),
-  );
+  )
+    ..id = json['id'] as String
+    ..modifierExtension = json['modifierExtension'];
 }
 
 Map<String, dynamic> _$AnswerOptionToJson(AnswerOption instance) {
@@ -1731,10 +1784,364 @@ Map<String, dynamic> _$AnswerOptionToJson(AnswerOption instance) {
     }
   }
 
+  writeNotNull('id', instance.id);
+  writeNotNull('modifierExtension', instance.modifierExtension);
   writeNotNull('valueDate', instance.valueDate?.toIso8601String());
   writeNotNull('valueTime', instance.valueTime);
   writeNotNull('valueString', instance.valueString);
   writeNotNull('valueCoding', instance.valueCoding);
   writeNotNull('valueReference', instance.valueReference);
+  return val;
+}
+
+Bundle _$BundleFromJson(Map<String, dynamic> json) {
+  return Bundle(
+    identifier: json['identifier'] == null
+        ? null
+        : Identifier.fromJson(json['identifier'] as Map<String, dynamic>),
+    type: json['type'] == null
+        ? null
+        : Code.fromJson(json['type'] as Map<String, dynamic>),
+    timestamp: json['timestamp'] == null
+        ? null
+        : DateTime.parse(json['timestamp'] as String),
+    total: json['total'] as int,
+    link: (json['link'] as List)
+        ?.map((e) =>
+            e == null ? null : BundleLink.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    entry: (json['entry'] as List)
+        ?.map((e) =>
+            e == null ? null : BundleEntry.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    signature: json['signature'] == null
+        ? null
+        : Signature.fromJson(json['signature'] as Map<String, dynamic>),
+  )
+    ..id = json['id'] as String
+    ..meta = json['meta'] == null
+        ? null
+        : Meta.fromJson(json['meta'] as Map<String, dynamic>)
+    ..implicitRules = json['implicitRules'] as String
+    ..language = json['language'] == null
+        ? null
+        : Code.fromJson(json['language'] as Map<String, dynamic>);
+}
+
+Map<String, dynamic> _$BundleToJson(Bundle instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('meta', instance.meta);
+  writeNotNull('implicitRules', instance.implicitRules);
+  writeNotNull('language', instance.language);
+  writeNotNull('identifier', instance.identifier);
+  writeNotNull('type', instance.type);
+  writeNotNull('timestamp', instance.timestamp?.toIso8601String());
+  writeNotNull('total', instance.total);
+  writeNotNull('link', instance.link);
+  writeNotNull('entry', instance.entry);
+  writeNotNull('signature', instance.signature);
+  return val;
+}
+
+BundleLink _$BundleLinkFromJson(Map<String, dynamic> json) {
+  return BundleLink(
+    relation: json['relation'] as String,
+    url: json['url'] as String,
+  )
+    ..id = json['id'] as String
+    ..modifierExtension = json['modifierExtension'];
+}
+
+Map<String, dynamic> _$BundleLinkToJson(BundleLink instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('modifierExtension', instance.modifierExtension);
+  writeNotNull('relation', instance.relation);
+  writeNotNull('url', instance.url);
+  return val;
+}
+
+BundleEntry _$BundleEntryFromJson(Map<String, dynamic> json) {
+  return BundleEntry(
+    link: json['link'] == null
+        ? null
+        : BundleLink.fromJson(json['link'] as Map<String, dynamic>),
+    fullUrl: json['fullUrl'] as String,
+    resource: json['resource'] == null
+        ? null
+        : Resource.fromJson(json['resource'] as Map<String, dynamic>),
+  )
+    ..id = json['id'] as String
+    ..modifierExtension = json['modifierExtension'];
+}
+
+Map<String, dynamic> _$BundleEntryToJson(BundleEntry instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('modifierExtension', instance.modifierExtension);
+  writeNotNull('link', instance.link);
+  writeNotNull('fullUrl', instance.fullUrl);
+  writeNotNull('resource', instance.resource);
+  return val;
+}
+
+BundleSearch _$BundleSearchFromJson(Map<String, dynamic> json) {
+  return BundleSearch(
+    mode: json['mode'] == null
+        ? null
+        : Code.fromJson(json['mode'] as Map<String, dynamic>),
+    score: (json['score'] as num)?.toDouble(),
+  )
+    ..id = json['id'] as String
+    ..modifierExtension = json['modifierExtension'];
+}
+
+Map<String, dynamic> _$BundleSearchToJson(BundleSearch instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('modifierExtension', instance.modifierExtension);
+  writeNotNull('mode', instance.mode);
+  writeNotNull('score', instance.score);
+  return val;
+}
+
+BundleRequest _$BundleRequestFromJson(Map<String, dynamic> json) {
+  return BundleRequest(
+    request: json['request'] == null
+        ? null
+        : Code.fromJson(json['request'] as Map<String, dynamic>),
+    url: json['url'] as String,
+    ifNoneMatch: json['ifNoneMatch'] as String,
+    ifModifiedSince: json['ifModifiedSince'] == null
+        ? null
+        : DateTime.parse(json['ifModifiedSince'] as String),
+    ifMatch: json['ifMatch'] as String,
+    ifNoneExist: json['ifNoneExist'] as String,
+  )
+    ..id = json['id'] as String
+    ..modifierExtension = json['modifierExtension'];
+}
+
+Map<String, dynamic> _$BundleRequestToJson(BundleRequest instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('modifierExtension', instance.modifierExtension);
+  writeNotNull('request', instance.request);
+  writeNotNull('url', instance.url);
+  writeNotNull('ifNoneMatch', instance.ifNoneMatch);
+  writeNotNull('ifModifiedSince', instance.ifModifiedSince?.toIso8601String());
+  writeNotNull('ifMatch', instance.ifMatch);
+  writeNotNull('ifNoneExist', instance.ifNoneExist);
+  return val;
+}
+
+BundleResponse _$BundleResponseFromJson(Map<String, dynamic> json) {
+  return BundleResponse(
+    status: json['status'] as String,
+    location: json['location'] as String,
+    etag: json['etag'] as String,
+    lastModified: json['lastModified'] == null
+        ? null
+        : DateTime.parse(json['lastModified'] as String),
+    outcome: json['outcome'] == null
+        ? null
+        : Resource.fromJson(json['outcome'] as Map<String, dynamic>),
+  )
+    ..id = json['id'] as String
+    ..modifierExtension = json['modifierExtension'];
+}
+
+Map<String, dynamic> _$BundleResponseToJson(BundleResponse instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('modifierExtension', instance.modifierExtension);
+  writeNotNull('status', instance.status);
+  writeNotNull('location', instance.location);
+  writeNotNull('etag', instance.etag);
+  writeNotNull('lastModified', instance.lastModified?.toIso8601String());
+  writeNotNull('outcome', instance.outcome);
+  return val;
+}
+
+Signature _$SignatureFromJson(Map<String, dynamic> json) {
+  return Signature(
+    type: (json['type'] as List)
+        ?.map((e) =>
+            e == null ? null : Coding.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    when: json['when'] == null ? null : DateTime.parse(json['when'] as String),
+    who: json['who'] == null
+        ? null
+        : Reference.fromJson(json['who'] as Map<String, dynamic>),
+    onBehalfOf: json['onBehalfOf'] == null
+        ? null
+        : Reference.fromJson(json['onBehalfOf'] as Map<String, dynamic>),
+    targetFormat: json['targetFormat'] == null
+        ? null
+        : Code.fromJson(json['targetFormat'] as Map<String, dynamic>),
+    sigFormat: json['sigFormat'] == null
+        ? null
+        : Code.fromJson(json['sigFormat'] as Map<String, dynamic>),
+    data: json['data'] as String,
+  )..id = json['id'] as String;
+}
+
+Map<String, dynamic> _$SignatureToJson(Signature instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('type', instance.type);
+  writeNotNull('when', instance.when?.toIso8601String());
+  writeNotNull('who', instance.who);
+  writeNotNull('onBehalfOf', instance.onBehalfOf);
+  writeNotNull('targetFormat', instance.targetFormat);
+  writeNotNull('sigFormat', instance.sigFormat);
+  writeNotNull('data', instance.data);
+  return val;
+}
+
+OperationOutcome _$OperationOutcomeFromJson(Map<String, dynamic> json) {
+  return OperationOutcome(
+    issue: (json['issue'] as List)
+        ?.map((e) => e == null
+            ? null
+            : OperationOutcomeIssue.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+  )
+    ..resourceType = json['resourceType'] as String
+    ..id = json['id'] as String
+    ..meta = json['meta'] == null
+        ? null
+        : Meta.fromJson(json['meta'] as Map<String, dynamic>)
+    ..implicitRules = json['implicitRules'] as String
+    ..language = json['language'] == null
+        ? null
+        : Code.fromJson(json['language'] as Map<String, dynamic>)
+    ..text = json['text'] == null
+        ? null
+        : Narrative.fromJson(json['text'] as Map<String, dynamic>)
+    ..contained = (json['contained'] as List)
+        ?.map((e) =>
+            e == null ? null : Resource.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..extension = (json['extension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList()
+    ..modifierExtension = (json['modifierExtension'] as List)
+        ?.map((e) =>
+            e == null ? null : Extension.fromJson(e as Map<String, dynamic>))
+        ?.toList();
+}
+
+Map<String, dynamic> _$OperationOutcomeToJson(OperationOutcome instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('resourceType', instance.resourceType);
+  writeNotNull('id', instance.id);
+  writeNotNull('meta', instance.meta);
+  writeNotNull('implicitRules', instance.implicitRules);
+  writeNotNull('language', instance.language);
+  writeNotNull('text', instance.text);
+  writeNotNull('contained', instance.contained);
+  writeNotNull('extension', instance.extension);
+  writeNotNull('modifierExtension', instance.modifierExtension);
+  writeNotNull('issue', instance.issue);
+  return val;
+}
+
+OperationOutcomeIssue _$OperationOutcomeIssueFromJson(
+    Map<String, dynamic> json) {
+  return OperationOutcomeIssue(
+    severity: json['severity'] == null
+        ? null
+        : Code.fromJson(json['severity'] as Map<String, dynamic>),
+    code: json['code'] == null
+        ? null
+        : Code.fromJson(json['code'] as Map<String, dynamic>),
+    details: json['details'] == null
+        ? null
+        : CodeableConcept.fromJson(json['details'] as Map<String, dynamic>),
+    diagnostics: json['diagnostics'] as String,
+    location: (json['location'] as List)?.map((e) => e as String)?.toList(),
+    expression: (json['expression'] as List)?.map((e) => e as String)?.toList(),
+  )
+    ..id = json['id'] as String
+    ..modifierExtension = json['modifierExtension'];
+}
+
+Map<String, dynamic> _$OperationOutcomeIssueToJson(
+    OperationOutcomeIssue instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('id', instance.id);
+  writeNotNull('modifierExtension', instance.modifierExtension);
+  writeNotNull('severity', instance.severity);
+  writeNotNull('code', instance.code);
+  writeNotNull('details', instance.details);
+  writeNotNull('diagnostics', instance.diagnostics);
+  writeNotNull('location', instance.location);
+  writeNotNull('expression', instance.expression);
   return val;
 }

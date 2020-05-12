@@ -17,6 +17,8 @@ class JsonSerializer implements ISerializer {
       'ValueSet': ValueSetSerializer(),
       'Questionnaire': QuestionnaireSerializer(),
       'QuestionnaireResponse': QuestionnaireResponseSerializer(),
+      'Bundle': BundleSerializer(),
+      'OperationOutcome': OperationOutcomeSerializer(),
     };
   }
 
@@ -88,5 +90,29 @@ class QuestionnaireSerializer extends IResourceSerializer {
   @override
   String toJson(IResource resource) {
     return jsonEncode((resource as Questionnaire).toJson());
+  }
+}
+
+class BundleSerializer extends IResourceSerializer {
+  @override
+  Bundle fromJson(String json) {
+    return Bundle.fromJson(jsonDecode(json));
+  }
+
+  @override
+  String toJson(IResource resource) {
+    return jsonEncode((resource as Bundle).toJson());
+  }
+}
+
+class OperationOutcomeSerializer extends IResourceSerializer {
+  @override
+  OperationOutcome fromJson(String json) {
+    return OperationOutcome.fromJson(jsonDecode(json));
+  }
+
+  @override
+  String toJson(IResource resource) {
+    return jsonEncode((resource as OperationOutcome).toJson());
   }
 }

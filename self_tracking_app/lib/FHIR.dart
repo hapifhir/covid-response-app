@@ -19,6 +19,8 @@ abstract class IResource {
   Meta meta;
   String implicitRules;
   Code language;
+
+  Map<String, dynamic> toJson();
 }
 
 @JsonSerializable(includeIfNull: false)
@@ -342,7 +344,9 @@ class Link extends BackboneElement {
 }
 
 @JsonSerializable(includeIfNull: false)
-class Patient extends Resource {
+class Patient extends DomainResource {
+  final String resourceType = 'Patient';
+
   List<Identifier> identifier;
   bool active;
   List<HumanName> name;
@@ -476,7 +480,9 @@ class Quantity extends FHIRElement {
 }
 
 @JsonSerializable(includeIfNull: false)
-class Questionnaire extends Resource {
+class Questionnaire extends DomainResource {
+  final String resourceType = 'Questionnaire';
+
   String url;
   List<Identifier> identifier;
   String version;
@@ -529,7 +535,9 @@ class Questionnaire extends Resource {
 }
 
 @JsonSerializable(includeIfNull: false)
-class QuestionnaireResponse extends Resource {
+class QuestionnaireResponse extends DomainResource {
+  final String resourceType = 'QuestionnaireResponse';
+
   Identifier identifier;
   List<Reference> basedOn;
   List<Reference> parent;
@@ -937,7 +945,7 @@ class Parameter extends BackboneElement {
 }
 
 @JsonSerializable(includeIfNull: false)
-class AnswerOption {
+class AnswerOption extends BackboneElement {
   DateTime valueDate;
   String valueTime;
   String valueString;
@@ -954,4 +962,174 @@ class AnswerOption {
 
   factory AnswerOption.fromJson(Map<String, dynamic> json) => _$AnswerOptionFromJson(json);
   Map<String, dynamic> toJson() => _$AnswerOptionToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class Bundle extends Resource {
+  final String resourceType = 'Bundle';
+
+  Identifier identifier;
+  Code type;
+  DateTime timestamp;
+  int total;
+  List<BundleLink> link;
+  List<BundleEntry> entry;
+  Signature signature;
+
+  Bundle({
+    this.identifier,
+    this.type,
+    this.timestamp,
+    this.total,
+    this.link,
+    this.entry,
+    this.signature,
+  });
+
+  factory Bundle.fromJson(Map<String, dynamic> json) => _$BundleFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class BundleLink extends BackboneElement {
+  String relation;
+  String url;
+
+  BundleLink({
+    this.relation,
+    this.url,
+  });
+
+  factory BundleLink.fromJson(Map<String, dynamic> json) => _$BundleLinkFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleLinkToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class BundleEntry extends BackboneElement {
+  BundleLink link;
+  String fullUrl;
+  Resource resource;
+
+  BundleEntry({
+    this.link,
+    this.fullUrl,
+    this.resource,
+  });
+
+  factory BundleEntry.fromJson(Map<String, dynamic> json) => _$BundleEntryFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleEntryToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class BundleSearch extends BackboneElement {
+  Code mode;
+  double score;
+
+  BundleSearch({
+    this.mode,
+    this.score,
+  });
+
+  factory BundleSearch.fromJson(Map<String, dynamic> json) => _$BundleSearchFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleSearchToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class BundleRequest extends BackboneElement {
+  Code request;
+  String url;
+  String ifNoneMatch;
+  DateTime ifModifiedSince;
+  String ifMatch;
+  String ifNoneExist;
+
+  BundleRequest({
+    this.request,
+    this.url,
+    this.ifNoneMatch,
+    this.ifModifiedSince,
+    this.ifMatch,
+    this.ifNoneExist,
+  });
+
+  factory BundleRequest.fromJson(Map<String, dynamic> json) => _$BundleRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleRequestToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class BundleResponse extends BackboneElement {
+  String status;
+  String location;
+  String etag;
+  DateTime lastModified;
+  Resource outcome;
+
+  BundleResponse({
+    this.status,
+    this.location,
+    this.etag,
+    this.lastModified,
+    this.outcome,
+  });
+
+  factory BundleResponse.fromJson(Map<String, dynamic> json) => _$BundleResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$BundleResponseToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class Signature extends FHIRElement {
+  List<Coding> type;
+  DateTime when;
+  Reference who;
+  Reference onBehalfOf;
+  Code targetFormat;
+  Code sigFormat;
+  String data;
+
+  Signature({
+    this.type,
+    this.when,
+    this.who,
+    this.onBehalfOf,
+    this.targetFormat,
+    this.sigFormat,
+    this.data,
+  });
+
+  factory Signature.fromJson(Map<String, dynamic> json) => _$SignatureFromJson(json);
+  Map<String, dynamic> toJson() => _$SignatureToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class OperationOutcome extends DomainResource {
+  List<OperationOutcomeIssue> issue;
+
+  OperationOutcome({
+    this.issue,
+  });
+
+  factory OperationOutcome.fromJson(Map<String, dynamic> json) => _$OperationOutcomeFromJson(json);
+  Map<String, dynamic> toJson() => _$OperationOutcomeToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false)
+class OperationOutcomeIssue extends BackboneElement {
+  Code severity;
+  Code code;
+  CodeableConcept details;
+  String diagnostics;
+  List<String> location;
+  List<String> expression;
+
+  OperationOutcomeIssue({
+    this.severity,
+    this.code,
+    this.details,
+    this.diagnostics,
+    this.location,
+    this.expression,
+  });
+
+  factory OperationOutcomeIssue.fromJson(Map<String, dynamic> json) => _$OperationOutcomeIssueFromJson(json);
+  Map<String, dynamic> toJson() => _$OperationOutcomeIssueToJson(this);
 }
