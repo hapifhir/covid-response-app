@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 import 'FHIR.dart';
 import 'FHIRClient.dart';
 import 'IFHIRClient.dart';
-import 'IFHIRClient.dart';
-import 'JsonSerializer.dart';
-import 'JsonSerializer.dart';
-import 'JsonSerializer.dart';
 import 'JsonSerializer.dart';
 
 class TestScreen extends StatefulWidget {
@@ -16,14 +12,10 @@ class TestScreen extends StatefulWidget {
     FHIRClient client = FHIRClient('http://hapi.fhir.org/baseR4');
     client.onBeforeRequest.add((f) {
       print('On before request');
-      print(f.url);
       return f;
     });
     client.onAfterResponse.add((f) {
       print('On after response');
-      print(f.body);
-      print(JsonSerializer().deserialize(f.body));
-      print('done');
       return f;
     });
     return _TestScreenState(client);

@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'JsonSerializer.dart';
-import 'JsonSerializer.dart';
 
 class FHIRClient extends IFHIRClient {
   String _baseUrl;

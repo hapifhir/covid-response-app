@@ -1,13 +1,5 @@
 import 'dart:convert';
 
-
-import 'FHIR.dart';
-import 'FHIR.dart';
-import 'FHIR.dart';
-import 'FHIR.dart';
-import 'FHIR.dart';
-import 'FHIR.dart';
-import 'FHIR.dart';
 import 'FHIR.dart';
 import 'ISerializer.dart';
 
@@ -63,7 +55,6 @@ class PatientSerializer extends IResourceSerializer<Patient> {
 
   @override
   String toJson(Patient resource) {
-    print(resource.toJson());
     return jsonEncode(resource.toJson());
   }
 }
