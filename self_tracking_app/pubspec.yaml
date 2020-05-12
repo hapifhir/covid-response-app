@@ -26,6 +26,7 @@ dependencies:
   flag: ^2.0.3
   json_annotation: ^3.0.0
   http: ^0.12.1
+  intl: ^0.16.1
 
 dev_dependencies:
   build_runner: ^1.0.0

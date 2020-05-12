@@ -2,23 +2,30 @@ import 'dart:convert';
 
 
 import 'FHIR.dart';
+import 'FHIR.dart';
+import 'FHIR.dart';
+import 'FHIR.dart';
+import 'FHIR.dart';
+import 'FHIR.dart';
+import 'FHIR.dart';
+import 'FHIR.dart';
 import 'ISerializer.dart';
 
-abstract class IResourceSerializer {
-  IResource fromJson(String json);
-  String toJson(IResource resource);
+abstract class IResourceSerializer<T extends IResource> {
+  T fromJson(String json);
+  String toJson(T resource);
 }
 
 class JsonSerializer implements ISerializer {
 
   static Map<String, IResourceSerializer> _generateSerializerList() {
     return {
-      'Patient': PatientSerializer(),
-      'ValueSet': ValueSetSerializer(),
-      'Questionnaire': QuestionnaireSerializer(),
-      'QuestionnaireResponse': QuestionnaireResponseSerializer(),
-      'Bundle': BundleSerializer(),
-      'OperationOutcome': OperationOutcomeSerializer(),
+      'Bundle':                 BundleSerializer(),
+      'OperationOutcome':       OperationOutcomeSerializer(),
+      'Patient':                PatientSerializer(),
+      'Questionnaire':          QuestionnaireSerializer(),
+      'QuestionnaireResponse':  QuestionnaireResponseSerializer(),
+      'ValueSet':               ValueSetSerializer(),
     };
   }
 
@@ -31,88 +38,92 @@ class JsonSerializer implements ISerializer {
     if (resourceType == null)
       throw StateError('No serializer for ResourceType $resourceType');
 
-    return map[resourceType].fromJson(json);
+    T result = map[resourceType].fromJson(json);
+    return result;
   }
 
   String serialize<T extends IResource>(T resource, {bool pretty}) {
-    String json = map[resource.resourceType].toJson(resource);
+    Map<String, dynamic> json = jsonDecode(map[resource.resourceType].toJson(resource));
+    JsonEncoder encoder;
 
-    if (pretty) {
-      json = JsonEncoder.withIndent('  ').convert(json);
-    }
+    if (pretty)
+      encoder = JsonEncoder.withIndent('  ');
+    else
+      encoder = JsonEncoder();
 
-    return json;
+    return encoder.convert(json);
   }
 }
 
-class PatientSerializer extends IResourceSerializer {
+class PatientSerializer extends IResourceSerializer<Patient> {
   @override
   Patient fromJson(String json) {
     return Patient.fromJson(jsonDecode(json));
   }
 
   @override
-  String toJson(IResource resource) {
-    return jsonEncode((resource as Patient).toJson());
+  String toJson(Patient resource) {
+    print(resource.toJson());
+    return jsonEncode(resource.toJson());
   }
 }
 
-class ValueSetSerializer extends IResourceSerializer {
+class ValueSetSerializer extends IResourceSerializer<ValueSet> {
   @override
   ValueSet fromJson(String json) {
     return ValueSet.fromJson(jsonDecode(json));
   }
 
   @override
-  String toJson(IResource resource) {
-    return jsonEncode((resource as ValueSet).toJson());
+  String toJson(ValueSet resource) {
+    return jsonEncode(resource.toJson());
   }
 }
 
-class QuestionnaireResponseSerializer extends IResourceSerializer {
+class QuestionnaireResponseSerializer extends IResourceSerializer<QuestionnaireResponse> {
   @override
   QuestionnaireResponse fromJson(String json) {
     return QuestionnaireResponse.fromJson(jsonDecode(json));
   }
 
   @override
-  String toJson(IResource resource) {
-    return jsonEncode((resource as QuestionnaireResponse).toJson());
+  String toJson(QuestionnaireResponse resource) {
+    return jsonEncode(resource.toJson());
   }
 }
 
-class QuestionnaireSerializer extends IResourceSerializer {
+class QuestionnaireSerializer extends IResourceSerializer<Questionnaire> {
   @override
   Questionnaire fromJson(String json) {
     return Questionnaire.fromJson(jsonDecode(json));
   }
 
   @override
-  String toJson(IResource resource) {
-    return jsonEncode((resource as Questionnaire).toJson());
+  String toJson(Questionnaire resource) {
+    return jsonEncode(resource.toJson());
   }
 }
 
-class BundleSerializer extends IResourceSerializer {
+class BundleSerializer extends IResourceSerializer<Bundle> {
   @override
   Bundle fromJson(String json) {
     return Bundle.fromJson(jsonDecode(json));
   }
 
   @override
-  String toJson(IResource resource) {
-    return jsonEncode((resource as Bundle).toJson());
+  String toJson(Bundle resource) {
+    return jsonEncode(resource.toJson());
   }
 }
 
-class OperationOutcomeSerializer extends IResourceSerializer {
+class OperationOutcomeSerializer extends IResourceSerializer<OperationOutcome> {
   @override
   OperationOutcome fromJson(String json) {
     return OperationOutcome.fromJson(jsonDecode(json));
   }
 
   @override
-  String toJson(IResource resource) {
-    return jsonEncode((resource as OperationOutcome).toJson());
+  String toJson(OperationOutcome resource) {
+    return jsonEncode(resource.toJson());
   }
 }

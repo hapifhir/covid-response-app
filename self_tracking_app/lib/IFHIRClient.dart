@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'FHIR.dart';
 import 'package:http/http.dart' as http;
 
@@ -7,10 +5,12 @@ typedef RequestFunc = FHIRRequest Function(FHIRRequest);
 typedef ResponseFunc = http.Response Function(http.Response);
 
 abstract class IFHIRClient {
-  List<RequestFunc> onBeforeRequest;
-  List<Function> onAfterRequest;
+  List<RequestFunc> onBeforeRequest = [];
+  List<ResponseFunc> onAfterResponse = [];
 
   FHIRRequest processOnBeforeRequest(FHIRRequest request) {
+    if (onBeforeRequest == null)
+      return request;
     for (RequestFunc f in onBeforeRequest) {
       request = f(request);
     }
@@ -18,7 +18,9 @@ abstract class IFHIRClient {
   }
 
   http.Response processOnAfterResponse(http.Response response) {
-    for (ResponseFunc f in onAfterRequest) {
+    if (onAfterResponse == null)
+      return response;
+    for (ResponseFunc f in onAfterResponse) {
       response = f(response);
     }
     return response;

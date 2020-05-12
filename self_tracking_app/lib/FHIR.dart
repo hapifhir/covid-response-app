@@ -1,7 +1,45 @@
+import 'dart:convert';
+
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'JsonSerializer.dart';
 part 'FHIR.g.dart';
 
-@JsonSerializable(includeIfNull: false)
+abstract class IResource {
+  String resourceType;
+  String id;
+  Meta meta;
+  String implicitRules;
+  String language;
+
+  Map<String, dynamic> toJson();
+  factory IResource.fromJson(Map<String, dynamic> json) {
+    JsonSerializer serializer = JsonSerializer();
+    return serializer.deserialize(jsonEncode(json));
+  }
+}
+
+class FHIRDateTimeConverter implements JsonConverter<DateTime, String> {
+  const FHIRDateTimeConverter();
+  static final RegExp isYear = RegExp('([0-9]{4})\$');
+  static final DateFormat yearFormat = DateFormat.y();
+
+  @override
+  DateTime fromJson(String json) {
+    if (json == null)
+      return null;
+    if (isYear.hasMatch(json)) {
+      return yearFormat.parse(json);
+    }
+    return DateTime.parse(json);
+  }
+
+  @override
+  String toJson(DateTime json) => json?.toIso8601String();
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class FHIRElement {
   String id;
 
@@ -13,17 +51,8 @@ class FHIRElement {
   Map<String, dynamic> toJson() => _$FHIRElementToJson(this);
 }
 
-abstract class IResource {
-  String resourceType;
-  String id;
-  Meta meta;
-  String implicitRules;
-  Code language;
-
-  Map<String, dynamic> toJson();
-}
-
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class BackboneElement extends FHIRElement {
   var modifierExtension;
 
@@ -35,7 +64,8 @@ class BackboneElement extends FHIRElement {
   Map<String, dynamic> toJson() => _$BackboneElementToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Code extends FHIRElement {
   String codeString;
 
@@ -47,11 +77,12 @@ class Code extends FHIRElement {
   Map<String, dynamic> toJson() => _$CodeToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Coding extends FHIRElement {
   String system;
   String version;
-  Code code;
+  String code;
   String display;
   bool userSelected;
 
@@ -67,9 +98,10 @@ class Coding extends FHIRElement {
   Map<String, dynamic> toJson() => _$CodingToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class HumanName extends FHIRElement {
-  Code use;
+  String use;
   String text;
   String family;
   List<String> given;
@@ -91,7 +123,8 @@ class HumanName extends FHIRElement {
   Map<String, dynamic> toJson() => _$HumanNameToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Extension {
   String url;
   String valueString;
@@ -100,7 +133,7 @@ class Extension {
   bool valueBoolean;
   HumanName valueHumanName;
   Reference valueReference;
-  DateTime valueDate;
+  String valueDate;
   String valueIdentifier;
   double valueDecimal;
 
@@ -121,10 +154,11 @@ class Extension {
   Map<String, dynamic> toJson() => _$ExtensionToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Address extends FHIRElement {
-  Code use;
-  Code type;
+  String use;
+  String type;
   String text;
   List<String> line;
   String city;
@@ -151,10 +185,11 @@ class Address extends FHIRElement {
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Meta extends FHIRElement {
   String versionId;
-  DateTime lastUpdated;
+  String lastUpdated;
   String profile;
   Coding security;
   Coding tag;
@@ -171,7 +206,8 @@ class Meta extends FHIRElement {
   Map<String, dynamic> toJson() => _$MetaToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class CodeableConcept extends FHIRElement {
   List<Coding> coding;
   String text;
@@ -185,10 +221,11 @@ class CodeableConcept extends FHIRElement {
   Map<String, dynamic> toJson() => _$CodeableConceptToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Period extends FHIRElement {
-  DateTime start;
-  DateTime end;
+  String start;
+  String end;
 
   Period({
     this.start,
@@ -199,13 +236,14 @@ class Period extends FHIRElement {
   Map<String, dynamic> toJson() => _$PeriodToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Contact extends BackboneElement {
   List<CodeableConcept> relationship;
   HumanName name;
   List<ContactPoint> telecom;
   Address address;
-  Code gender;
+  String gender;
   Reference organization;
   Period period;
 
@@ -223,7 +261,8 @@ class Contact extends BackboneElement {
   Map<String, dynamic> toJson() => _$ContactToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class ContactPoint extends FHIRElement {
   String system;
   String value;
@@ -243,7 +282,8 @@ class ContactPoint extends FHIRElement {
   Map<String, dynamic> toJson() => _$ContactPointToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class ContactDetail extends FHIRElement {
   String name;
   ContactPoint telecom;
@@ -257,7 +297,8 @@ class ContactDetail extends FHIRElement {
   Map<String, dynamic> toJson() => _$ContactDetailToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Reference extends FHIRElement {
   String reference;
   Identifier identifier;
@@ -273,7 +314,8 @@ class Reference extends FHIRElement {
   Map<String, dynamic> toJson() => _$ReferenceToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Identifier extends FHIRElement {
   String use;
   CodeableConcept type;
@@ -295,13 +337,14 @@ class Identifier extends FHIRElement {
   Map<String, dynamic> toJson() => _$IdentifierToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
-class Resource extends IResource {
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class Resource implements IResource {
   String resourceType;
   String id;
   Meta meta;
   String implicitRules;
-  Code language;
+  String language;
 
   Resource({
     this.resourceType,
@@ -315,7 +358,8 @@ class Resource extends IResource {
   Map<String, dynamic> toJson() => _$ResourceToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class PatientCommunication extends BackboneElement {
   CodeableConcept language;
   bool preferred;
@@ -329,10 +373,11 @@ class PatientCommunication extends BackboneElement {
   Map<String, dynamic> toJson() => _$PatientCommunicationToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Link extends BackboneElement {
   Reference other;
-  Code type;
+  String type;
 
   Link({
     this.other,
@@ -343,7 +388,8 @@ class Link extends BackboneElement {
   Map<String, dynamic> toJson() => _$LinkToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Patient extends DomainResource {
   final String resourceType = 'Patient';
 
@@ -351,8 +397,8 @@ class Patient extends DomainResource {
   bool active;
   List<HumanName> name;
   List<ContactPoint> telecom;
-  Code gender;
-  DateTime birthDate;
+  String gender;
+  String birthDate;
   List<Address> address;
   CodeableConcept maritalStatus;
   List<Contact> contact;
@@ -381,7 +427,8 @@ class Patient extends DomainResource {
   Map<String, dynamic> toJson() => _$PatientToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class QuestionnaireResponseItem extends BackboneElement {
   String linkId;
   String definition;
@@ -399,14 +446,15 @@ class QuestionnaireResponseItem extends BackboneElement {
   Map<String, dynamic> toJson() => _$QuestionnaireResponseItemToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Answer extends BackboneElement {
   bool valueBoolean;
   double valueDecimal;
   int valueInteger;
-  DateTime valueDate;
-  DateTime valueDateTime;
-  DateTime valueTime;
+  String valueDate;
+  String valueDateTime;
+  String valueTime;
   String valueString;
   String valueUri;
   Attachment valueAttachment;
@@ -433,10 +481,11 @@ class Answer extends BackboneElement {
   Map<String, dynamic> toJson() => _$AnswerToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Attachment extends FHIRElement {
-  Code contentType;
-  Code language;
+  String contentType;
+  String language;
   String data;
   String url;
   double size;
@@ -459,13 +508,14 @@ class Attachment extends FHIRElement {
   Map<String, dynamic> toJson() => _$AttachmentToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Quantity extends FHIRElement {
   double value;
-  Code comparator;
+  String comparator;
   String unit;
   String system;
-  Code code;
+  String code;
 
   Quantity({
     this.value,
@@ -479,7 +529,8 @@ class Quantity extends FHIRElement {
   Map<String, dynamic> toJson() => _$QuantityToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Questionnaire extends DomainResource {
   final String resourceType = 'Questionnaire';
 
@@ -489,10 +540,10 @@ class Questionnaire extends DomainResource {
   String name;
   String title;
 //  derivedFrom: Questionnaire;
-  Code status;
+  String status;
   bool experimental;
   List<Code> subjectType;
-  DateTime date;
+  String date;
   String publisher;
   List<ContactDetail> contact;
   String description;
@@ -500,8 +551,8 @@ class Questionnaire extends DomainResource {
   List<CodeableConcept> jurisdiction;
   String purpose;
   String copyright;
-  DateTime approvalDate;
-  DateTime lastReviewDate;
+  String approvalDate;
+  String lastReviewDate;
   Period effectivePeriod;
   List<Code> code;
   List<Item> item;
@@ -534,7 +585,8 @@ class Questionnaire extends DomainResource {
   Map<String, dynamic> toJson() => _$QuestionnaireToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class QuestionnaireResponse extends DomainResource {
   final String resourceType = 'QuestionnaireResponse';
 
@@ -544,7 +596,7 @@ class QuestionnaireResponse extends DomainResource {
   String questionnaire;
   String status;
   Reference context;
-  DateTime authored;
+  String authored;
   Reference author;
   Reference source;
   List<QuestionnaireResponseItem> item;
@@ -568,16 +620,17 @@ class QuestionnaireResponse extends DomainResource {
   Map<String, dynamic> toJson() => _$QuestionnaireResponseToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Item extends BackboneElement {
   String linkId;
   String definition;
   List<Coding> code;
   String prefix;
   String text;
-  Code type;
+  String type;
   List<EnableWhen> enableWhen;
-  Code enableBehavior;
+  String enableBehavior;
   bool required;
   bool repeats;
   bool readOnly;
@@ -610,14 +663,15 @@ class Item extends BackboneElement {
   Map<String, dynamic> toJson() => _$ItemToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Initial extends BackboneElement {
   bool valueBoolean;
   double valueDecimal;
   int valueInteger;
-  DateTime valueDate;
-  DateTime valueDateTime;
-  DateTime valueTime;
+  String valueDate;
+  String valueDateTime;
+  String valueTime;
   String valueString;
   String valueUri;
   Attachment valueAttachment;
@@ -644,16 +698,17 @@ class Initial extends BackboneElement {
   Map<String, dynamic> toJson() => _$InitialToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class EnableWhen extends BackboneElement {
   String question;
   String operator;
   bool answerBoolean;
   double answerDecimal;
   int answerInteger;
-  DateTime answerDate;
-  DateTime answerDateTime;
-  DateTime answerTime;
+  String answerDate;
+  String answerDateTime;
+  String answerTime;
   String answerString;
   Coding answerCoding;
   Quantity answerQuantity;
@@ -678,16 +733,17 @@ class EnableWhen extends BackboneElement {
   Map<String, dynamic> toJson() => _$EnableWhenToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class ValueSet extends DomainResource {
   String url;
   List<Identifier> identifier;
   String version;
   String name;
   String title;
-  Code status;
+  String status;
   bool experimental;
-  DateTime date;
+  String date;
   String publisher;
   List<ContactDetail> contact;
   String description;
@@ -724,7 +780,8 @@ class ValueSet extends DomainResource {
   Map<String, dynamic> toJson() => _$ValueSetToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class DomainResource extends Resource {
   Narrative text;
   List<Resource> contained;
@@ -742,9 +799,10 @@ class DomainResource extends Resource {
   Map<String, dynamic> toJson() => _$DomainResourceToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Narrative {
-  Code status;
+  String status;
   String div;
 
   Narrative({
@@ -756,9 +814,10 @@ class Narrative {
   Map<String, dynamic> toJson() => _$NarrativeToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Compose extends BackboneElement {
-  DateTime lockedDate;
+  String lockedDate;
   bool inactive;
   List<Include> include;
 
@@ -772,10 +831,11 @@ class Compose extends BackboneElement {
   Map<String, dynamic> toJson() => _$ComposeToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Expansion extends BackboneElement {
   Identifier identifier;
-  DateTime timestamp;
+  String timestamp;
   int total;
   int offset;
   Parameter parameter;
@@ -794,10 +854,11 @@ class Expansion extends BackboneElement {
   Map<String, dynamic> toJson() => _$ExpansionToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Filter extends BackboneElement {
-  Code property;
-  Code op;
+  String property;
+  String op;
   String value;
 
   Filter({
@@ -810,7 +871,8 @@ class Filter extends BackboneElement {
   Map<String, dynamic> toJson() => _$FilterToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Include extends BackboneElement {
   String system;
   String version;
@@ -828,9 +890,10 @@ class Include extends BackboneElement {
   Map<String, dynamic> toJson() => _$IncludeToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Designation extends BackboneElement {
-  Code language;
+  String language;
   Coding use;
   String value;
 
@@ -844,9 +907,10 @@ class Designation extends BackboneElement {
   Map<String, dynamic> toJson() => _$DesignationToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Concept extends BackboneElement {
-  Code code;
+  String code;
   String display;
   List<Designation> designation;
 
@@ -860,13 +924,14 @@ class Concept extends BackboneElement {
   Map<String, dynamic> toJson() => _$ConceptToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Contains extends BackboneElement {
   String system;
   bool abstract;
   bool inactive;
   String version;
-  Code code;
+  String code;
   String display;
   List<Designation> designation;
   List<Contains> contains;
@@ -886,7 +951,8 @@ class Contains extends BackboneElement {
   Map<String, dynamic> toJson() => _$ContainsToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class FHIRRange extends FHIRElement {
   int low;
   int high;
@@ -900,7 +966,8 @@ class FHIRRange extends FHIRElement {
   Map<String, dynamic> toJson() => _$FHIRRangeToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class UsageContext extends FHIRElement {
   Coding code;
   CodeableConcept valueCodeableConcept;
@@ -918,7 +985,8 @@ class UsageContext extends FHIRElement {
   Map<String, dynamic> toJson() => _$UsageContextToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Parameter extends BackboneElement {
   String name;
   String valueString;
@@ -926,8 +994,8 @@ class Parameter extends BackboneElement {
   int valueInteger;
   double valueDecimal;
   String valueUri;
-  Code valueCode;
-  DateTime valueDateTime;
+  String valueCode;
+  String valueDateTime;
 
   Parameter({
     this.name,
@@ -944,9 +1012,10 @@ class Parameter extends BackboneElement {
   Map<String, dynamic> toJson() => _$ParameterToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class AnswerOption extends BackboneElement {
-  DateTime valueDate;
+  String valueDate;
   String valueTime;
   String valueString;
   Coding valueCoding;
@@ -964,13 +1033,14 @@ class AnswerOption extends BackboneElement {
   Map<String, dynamic> toJson() => _$AnswerOptionToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Bundle extends Resource {
   final String resourceType = 'Bundle';
 
   Identifier identifier;
-  Code type;
-  DateTime timestamp;
+  String type;
+  String timestamp;
   int total;
   List<BundleLink> link;
   List<BundleEntry> entry;
@@ -990,7 +1060,8 @@ class Bundle extends Resource {
   Map<String, dynamic> toJson() => _$BundleToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class BundleLink extends BackboneElement {
   String relation;
   String url;
@@ -1004,11 +1075,12 @@ class BundleLink extends BackboneElement {
   Map<String, dynamic> toJson() => _$BundleLinkToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class BundleEntry extends BackboneElement {
   BundleLink link;
   String fullUrl;
-  Resource resource;
+  IResource resource;
 
   BundleEntry({
     this.link,
@@ -1020,9 +1092,10 @@ class BundleEntry extends BackboneElement {
   Map<String, dynamic> toJson() => _$BundleEntryToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class BundleSearch extends BackboneElement {
-  Code mode;
+  String mode;
   double score;
 
   BundleSearch({
@@ -1034,12 +1107,13 @@ class BundleSearch extends BackboneElement {
   Map<String, dynamic> toJson() => _$BundleSearchToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class BundleRequest extends BackboneElement {
-  Code request;
+  String request;
   String url;
   String ifNoneMatch;
-  DateTime ifModifiedSince;
+  String ifModifiedSince;
   String ifMatch;
   String ifNoneExist;
 
@@ -1056,13 +1130,14 @@ class BundleRequest extends BackboneElement {
   Map<String, dynamic> toJson() => _$BundleRequestToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class BundleResponse extends BackboneElement {
   String status;
   String location;
   String etag;
-  DateTime lastModified;
-  Resource outcome;
+  String lastModified;
+  IResource outcome;
 
   BundleResponse({
     this.status,
@@ -1076,14 +1151,15 @@ class BundleResponse extends BackboneElement {
   Map<String, dynamic> toJson() => _$BundleResponseToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class Signature extends FHIRElement {
   List<Coding> type;
-  DateTime when;
+  String when;
   Reference who;
   Reference onBehalfOf;
-  Code targetFormat;
-  Code sigFormat;
+  String targetFormat;
+  String sigFormat;
   String data;
 
   Signature({
@@ -1100,7 +1176,8 @@ class Signature extends FHIRElement {
   Map<String, dynamic> toJson() => _$SignatureToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class OperationOutcome extends DomainResource {
   List<OperationOutcomeIssue> issue;
 
@@ -1112,10 +1189,11 @@ class OperationOutcome extends DomainResource {
   Map<String, dynamic> toJson() => _$OperationOutcomeToJson(this);
 }
 
-@JsonSerializable(includeIfNull: false)
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
 class OperationOutcomeIssue extends BackboneElement {
-  Code severity;
-  Code code;
+  String severity;
+  String code;
   CodeableConcept details;
   String diagnostics;
   List<String> location;
