@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../../services/http.service';
 import * as moment from 'moment';
 
 @Component({
@@ -8,15 +9,50 @@ import * as moment from 'moment';
 })
 export class DashboardComponent implements OnInit {
 
-  // date format from fhir YYYY-MM-DD
-  patients = [
-    { first_name: 'Mohammad', last_name: 'Farooqi', date_of_birth: '1970-03-31', },
-    { first_name: 'Aditya', last_name: 'Dave', date_of_birth: '1980-07-20', }
-  ];
+  patients = [];
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit(): void {
+    this.loadPatients();
+  }
+
+  loadPatients() {
+    this.httpService.getResourceByQueryParam('Patient', '?_revinclude=EpisodeOfCare:patient').then(res => {
+      const resources = res['entry'].map(item => item.resource);
+      
+      this.patients = resources.filter(item => item.resourceType == 'Patient').map(item => {
+        const obj = {};
+
+        if (item.name && item.name[0] && item.name[0].given) {
+          obj['first_name'] = item.name[0].given.join(' ');
+        }
+
+        if (item.name && item.name[0] && item.name[0].family) {
+          obj['last_name'] = item.name[0].family;
+        }
+
+        if (item.birthDate) {
+          // date format from fhir YYYY-MM-DD
+          obj['date_of_birth'] = item.birthDate;
+        }
+
+        const eoc = resources.filter(i => i.resourceType == 'EpisodeOfCare' && i.patient && i.patient.reference == (item.resourceType + '/' + item.id));
+
+        if (eoc && Array.isArray(eoc) && eoc.length > 0) {
+          // console.log(eoc);
+          obj['episodeOfCareId'] = eoc[0].resourceType + '/' + eoc[0].id;
+        }
+
+        return obj;
+      });
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+
+  routeTo(path) {
+    alert(path);
   }
 
   calculateAge(dob) {

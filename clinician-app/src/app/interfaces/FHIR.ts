@@ -215,7 +215,7 @@ export class Link extends BackboneElement {
 export class Range extends FHIRElement {
   low: number;
   high: number;
-} 
+}
 
 export class ServiceRequest extends Resource {
   identifier?: Identifier[];
@@ -278,7 +278,7 @@ export class Ratio extends FHIRElement {
 }
 
 
-export class Questionnaire extends Resource{
+export class Questionnaire extends Resource {
   identifier?: (Identifier)[] | null;
   name: string;
   title: string;
@@ -300,7 +300,7 @@ export class QuestionnaireItemGroup {
   text: string;
   type: string;
   item: (QuestionnaireItem)[] | null;
-  
+
 }
 export class AnswerOption {
   valueCoding: Coding;
@@ -369,4 +369,104 @@ export class Request extends BackboneElement {
   ifModifiedSince: number;
   ifMatch: number;
   ifNoneExist: number;
+}
+
+export class EpisodeOfCare extends Resource implements Serializable<EpisodeOfCare> {
+  identifier: Identifier[];
+  status: string;
+  statusHistory: BackboneElement[];
+  type: CodeableConcept[];
+  diagnosis: BackboneElement[];
+  patient: Reference;
+  mangingOrganization: Reference;
+  period: Period;
+  referralRequest: Reference;
+  careManager: Reference;
+  team: Reference[];
+  account: Reference[];
+  
+  deserialize(jsonObject: any): EpisodeOfCare {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+
+export class Encounter extends Resource implements Serializable<Encounter> {
+  identifier: Identifier[];
+  status: string;
+  statusHistory: BackboneElement[];
+  class: Coding;
+  classHistory: BackboneElement[];
+  type: CodeableConcept[];
+  serviceType: CodeableConcept;
+  priority: CodeableConcept;
+  subject: Reference;
+  episodeOfCare: Reference[];
+  basedOn: Reference[];
+  participant: Participant[];
+
+  // more props to add from hl7
+
+  deserialize(jsonObject: any): Encounter {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+export class Participant extends BackboneElement {
+  type: CodeableConcept[];
+  actor: Reference;
+  required: string;
+  status: string;
+  period: Period;
+}
+
+export class CareTeam extends Resource implements Serializable<CareTeam> {
+  identifier: Identifier[];
+  status: string;
+  category: CodeableConcept[];
+  name: string;
+  subject: Reference;
+  encounter: Reference;
+  period: Period;
+  participant: CareTeamParticipant[];
+  reasonCode: CodeableConcept[];
+  reasonReference: Reference[];
+  managingOrganization: Reference[];
+  telecom: ContactPoint[];
+  note: Annotation[];
+  
+  deserialize(jsonObject: any): CareTeam {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+export class CareTeamParticipant extends BackboneElement {
+  role: CodeableConcept;
+  member: Reference;
+  onBehalfOf: Reference;
+  period: Period;
 }

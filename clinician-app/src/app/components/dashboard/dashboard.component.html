@@ -24,7 +24,7 @@
               <td class="clr-align-middle">12</td>
               <td class="clr-align-middle">Great</td>
               <td>
-                <button class="btn btn-primary">Details</button>
+                <button class="btn btn-primary" (click)="routeTo(patient.episodeOfCareId)" [disabled]="!(patient && patient.episodeOfCareId)">Details</button>
               </td>
             </tr>
           </tbody>

@@ -9,13 +9,15 @@ export class FhirOperationsService {
 
   constructor() { }
 
-  generateQuestionnaireResponse(formValues, quest: any, serviceRequestUUID) {
+  generateQuestionnaireResponse(formValues, quest: any, serviceRequestUUID?) {
     const scope = this;
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
     const identifier = new FHIR.Identifier();
 
-    const basedOnRef = serviceRequestUUID;
-    questionnaireResponse.basedOn = [basedOnRef];
+    if (serviceRequestUUID) {
+      const basedOnRef = serviceRequestUUID;
+      questionnaireResponse.basedOn = [basedOnRef];
+    }
 
     // questionnaire id
     const questionnaireId = quest.resourceType + '/' + quest.id;
@@ -150,6 +152,7 @@ export class FhirOperationsService {
     return patient;
   }
 
+  // not being use currently
   generateServiceRequest(subject) {
     // {
     //   "resourceType": "ServiceRequest",
@@ -175,5 +178,46 @@ export class FhirOperationsService {
     // sr.authoredOn = 
 
     return sr;
+  }
+
+  generateEpisodeOfCare(patientId, careteamId) {
+    const eoc = new FHIR.EpisodeOfCare();
+    eoc.resourceType = 'EpisodeOfCare';
+    eoc.status = 'waitlist';
+
+    // add team ref to care team
+    const _ct = new FHIR.Reference();
+    _ct.reference = careteamId;
+    eoc.team = [_ct];
+
+    const _patient = new FHIR.Reference();
+    _patient.reference = patientId;
+    eoc.patient = _patient;
+
+    return eoc;
+  }
+
+  generateEncounter(eocId) {
+    const encounter = new FHIR.Encounter();
+    encounter.resourceType = 'Encounter';
+    encounter.status = 'planned';
+
+    const _eoc = new FHIR.Reference();
+    _eoc.reference = eocId;
+    encounter.episodeOfCare = [_eoc];
+
+    return encounter;
+  }
+
+  generateCareTeam(patientId) {
+    const ct = new FHIR.CareTeam();
+    ct.resourceType = 'CareTeam';
+    ct.status = 'proposed';
+
+    const _subject = new FHIR.Reference();
+    _subject.reference = patientId;
+    ct.subject = _subject;
+
+    return ct;
   }
 }
