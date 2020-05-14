@@ -27,13 +27,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     NavbarComponent,
     FormviewComponent,
-<<<<<<< HEAD
-    AdmitpatientComponent,
-    LoginComponent
-=======
+    LoginComponent,
     DashboardComponent,
     AdmitpatientComponent
->>>>>>> 5489a6979c93f522346c857b1515e43390f5029c
   ],
   imports: [
     BrowserModule,

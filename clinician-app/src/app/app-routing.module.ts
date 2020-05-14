@@ -5,8 +5,8 @@ import { AdmitpatientComponent } from './components/admit-patient/admit-patient.
 import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'admit-patient', component:AdmitpatientComponent }
+  {path: '', component: DashboardComponent},
+  {path: 'admit-patient', component: AdmitpatientComponent }
 ];
 
 @NgModule({

@@ -11,15 +11,15 @@
     "clinical_suspicion_ari": "no"
   },
   "patient_demographics": {
-    "first_name": "Mohammad",
-    "last_name": "Farooqi",
+    "first_name": "John",
+    "last_name": "Doe",
     "address_line_1": "18 Abc Drive",
     "address_city": "Caledon",
     "address_province": "ON",
     "address_postal_code": "L7C3P6",
     "address_country": "Canada",
     "sex_at_birth": "male",
-    "date_of_birth": "05/01/1995",
+    "date_of_birth": "05/01/1998",
     "age": null,
     "healthcare_worker": "no",
     "laboratory_worker": "unknown",
