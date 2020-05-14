@@ -7,14 +7,15 @@ import { AppComponent } from './app.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AssessmentComponent } from './components/assessment/assessment.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormviewComponent } from './components/form-view/form-view.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FhirOperationsService } from './services/fhir-operations.service';
 import { UtilService } from './services/util.service';
 import { HttpService } from './services/http.service';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdmitpatientComponent } from './components/admit-patient/admit-patient.component';
+import { MomentModule } from 'ngx-moment';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -23,9 +24,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [
     AppComponent,
-    AssessmentComponent,
     NavbarComponent,
     FormviewComponent,
+    DashboardComponent,
     AdmitpatientComponent
   ],
   imports: [
@@ -42,7 +43,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })
+    }),
+    MomentModule
   ],
   providers: [FhirOperationsService, UtilService, HttpService],
   bootstrap: [AppComponent]
