@@ -1,0 +1,35 @@
+<div class="content-container">
+  <div class="content-area">
+    <div class="clr-row">
+      <div class="clr-col-sm-12 clr-col-md-12">
+        <h2>Admitted Patients</h2>
+        <table class="table table-compact">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Date of Birth (YYYY-MM-DD)</th>
+              <th>Age</th>
+              <th>Ward</th>
+              <th>Condition</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let patient of patients">
+              <td class="clr-align-middle">{{ patient.first_name }}</td>
+              <td class="clr-align-middle">{{ patient.last_name }}</td>
+              <td class="clr-align-middle">{{ patient.date_of_birth }}</td>
+              <td class="clr-align-middle">{{ patient.date_of_birth ? calculateAge(patient.date_of_birth) : ''}}</td>
+              <td class="clr-align-middle">12</td>
+              <td class="clr-align-middle">Great</td>
+              <td>
+                <button class="btn btn-primary" (click)="routeTo(patient.episodeOfCareId)" [disabled]="!(patient && patient.episodeOfCareId)">Details</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

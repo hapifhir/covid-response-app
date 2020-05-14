@@ -11,16 +11,11 @@ export class FHIRElement {
 export class BackboneElement extends FHIRElement {
   modifierExtension: any;
 }
-/* FHIR classes used in resources */
-export class Id {
-  private id: string;
-}
 
-
-export class Code extends FHIRElement {
-  private codeString: string;
-  private codeRE = new RegExp('[^\\s]+([\\s]?[^\\s]+)*');
-}
+// export class Code extends FHIRElement {
+//   private codeString: string;
+//   private codeRE = new RegExp('[^\\s]+([\\s]?[^\\s]+)*');
+// }
 
 export class Coding extends FHIRElement {
   system: string;
@@ -31,7 +26,7 @@ export class Coding extends FHIRElement {
 }
 
 export class HumanName extends FHIRElement {
-  use: Code;
+  use: string;
   text: string;
   family: string;
   given: string[];
@@ -54,8 +49,8 @@ export class Extension {
 }
 
 export class Address extends FHIRElement {
-  use: Code;
-  type: Code;
+  use: string;
+  type: string;
   text: string;
   line: string[];
   city: string;
@@ -64,11 +59,10 @@ export class Address extends FHIRElement {
   postalCode: string;
   country: string;
   period: Period;
-
 }
 
 export class Meta extends FHIRElement {
-  versionId: Id;
+  versionId: string;
   lastUpdated: Date;
   profile: string;
   security: Coding;
@@ -87,10 +81,10 @@ export class Period extends FHIRElement {
 
 export class Quantity extends FHIRElement {
   value: number;
-  comparator: Code;
+  comparator: string;
   unit: string;
   system: string;
-  code: Code;
+  code: string;
 }
 
 export class Attachment extends FHIRElement {
@@ -107,9 +101,6 @@ export class Attachment extends FHIRElement {
   creation: string;
 }
 
-
-
-
 export class Reference extends FHIRElement {
   reference: string;
   identifier: Identifier;
@@ -124,8 +115,6 @@ export class Identifier extends FHIRElement {
   period?: Period;
   assigner?: Reference;
 }
-
-
 
 export class Answer extends BackboneElement {
   valueBoolean?: boolean;
@@ -161,7 +150,7 @@ export class Resource {
   id: string;
   meta: Meta;
   implicitRules: string;
-  language: Code;
+  language: string;
   extension: Extension[]
 }
 
@@ -175,7 +164,7 @@ export class QuestionnaireResponse extends Resource {
   authored: Date;
   author: Reference;
   source: Reference;
-  item: BackboneElement[];
+  item: QuestionnaireResponseGroupItem[];
   subject: Reference;
 }
 
@@ -184,7 +173,7 @@ export class Patient extends Resource {
   active: boolean;
   name: HumanName[];
   telecom: ContactPoint[];
-  gender: Code;
+  gender: string;
   birthDate: string;
   address: Address[];
   maritalStatus: CodeableConcept;
@@ -200,7 +189,7 @@ export class Contact extends BackboneElement {
   name: HumanName;
   telecom: ContactPoint[];
   address: Address;
-  gender: Code;
+  gender: string;
   organization: Reference;
   period: Period;
 }
@@ -220,13 +209,13 @@ export class PatientCommunication extends BackboneElement {
 
 export class Link extends BackboneElement {
   other: Reference;
-  type: Code;
+  type: string;
 }
 
 export class Range extends FHIRElement {
   low: number;
   high: number;
-} 
+}
 
 export class ServiceRequest extends Resource {
   identifier?: Identifier[];
@@ -235,10 +224,10 @@ export class ServiceRequest extends Resource {
   basedOn?: Reference[];
   replaces?: Reference[];
   requisition?: Identifier;
-  status: Code;
-  intent: Code;
+  status: string;
+  intent: string;
   category?: CodeableConcept[];
-  priority: Code;
+  priority: string;
   doNotPerform?: boolean;
   code?: CodeableConcept;
   orderDetail?: CodeableConcept[];
@@ -289,7 +278,7 @@ export class Ratio extends FHIRElement {
 }
 
 
-export class Questionnaire extends Resource{
+export class Questionnaire extends Resource {
   identifier?: (Identifier)[] | null;
   name: string;
   title: string;
@@ -311,7 +300,7 @@ export class QuestionnaireItemGroup {
   text: string;
   type: string;
   item: (QuestionnaireItem)[] | null;
-  
+
 }
 export class AnswerOption {
   valueCoding: Coding;
@@ -321,4 +310,163 @@ export class EnableWhen {
   operator: string;
   answerBoolean?: boolean | null;
   answerCoding?: Coding | null;
+}
+
+export class Bundle extends Resource implements Serializable<Bundle> {
+  identifier: Identifier;
+  type: string;
+  timestamp: string;
+  total: number;
+  link: BundleLink[];
+  entry: Entry[];
+  signature: Signature;
+
+  deserialize(jsonObject: any): Bundle {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+export class BundleLink extends BackboneElement {
+  relation: string;
+  url: string;
+}
+
+export class Entry extends BackboneElement {
+  link: BundleLink[];
+  fullUrl: string;
+  resource: Resource;
+  search: Search;
+  request: Request;
+  response: Response;
+}
+
+export class Signature extends FHIRElement {
+  type: Coding[];
+  when: string;
+  who: Reference;
+  targetFormat: string;
+  sigFormat: string;
+  data: string;
+}
+
+export class Search extends BackboneElement {
+  mode: string;
+  score: number;
+}
+
+export class Request extends BackboneElement {
+  method: string;
+  url: string;
+  ifNoneMatch: string;
+  ifModifiedSince: number;
+  ifMatch: number;
+  ifNoneExist: number;
+}
+
+export class EpisodeOfCare extends Resource implements Serializable<EpisodeOfCare> {
+  identifier: Identifier[];
+  status: string;
+  statusHistory: BackboneElement[];
+  type: CodeableConcept[];
+  diagnosis: BackboneElement[];
+  patient: Reference;
+  mangingOrganization: Reference;
+  period: Period;
+  referralRequest: Reference;
+  careManager: Reference;
+  team: Reference[];
+  account: Reference[];
+  
+  deserialize(jsonObject: any): EpisodeOfCare {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+
+export class Encounter extends Resource implements Serializable<Encounter> {
+  identifier: Identifier[];
+  status: string;
+  statusHistory: BackboneElement[];
+  class: Coding;
+  classHistory: BackboneElement[];
+  type: CodeableConcept[];
+  serviceType: CodeableConcept;
+  priority: CodeableConcept;
+  subject: Reference;
+  episodeOfCare: Reference[];
+  basedOn: Reference[];
+  participant: Participant[];
+
+  // more props to add from hl7
+
+  deserialize(jsonObject: any): Encounter {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+export class Participant extends BackboneElement {
+  type: CodeableConcept[];
+  actor: Reference;
+  required: string;
+  status: string;
+  period: Period;
+}
+
+export class CareTeam extends Resource implements Serializable<CareTeam> {
+  identifier: Identifier[];
+  status: string;
+  category: CodeableConcept[];
+  name: string;
+  subject: Reference;
+  encounter: Reference;
+  period: Period;
+  participant: CareTeamParticipant[];
+  reasonCode: CodeableConcept[];
+  reasonReference: Reference[];
+  managingOrganization: Reference[];
+  telecom: ContactPoint[];
+  note: Annotation[];
+  
+  deserialize(jsonObject: any): CareTeam {
+    const that = this;
+    Object.entries(jsonObject).forEach((value) => {
+      if (!(typeof value[1] === 'object')) {
+        that[value[0]] = value[1];
+      } else {
+        (that[value[0]].deserialize(value[1]));
+      }
+    });
+    return this;
+  }
+}
+
+export class CareTeamParticipant extends BackboneElement {
+  role: CodeableConcept;
+  member: Reference;
+  onBehalfOf: Reference;
+  period: Period;
 }
