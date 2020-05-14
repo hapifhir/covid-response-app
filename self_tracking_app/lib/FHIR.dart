@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'JsonSerializer.dart';
+
 part 'FHIR.g.dart';
 
 abstract class IResource {
@@ -13,6 +14,7 @@ abstract class IResource {
   String language;
 
   Map<String, dynamic> toJson();
+
   factory IResource.fromJson(Map<String, dynamic> json) {
     JsonSerializer serializer = JsonSerializer();
     return serializer.deserialize(jsonEncode(json));
@@ -21,13 +23,13 @@ abstract class IResource {
 
 class FHIRDateTimeConverter implements JsonConverter<DateTime, String> {
   const FHIRDateTimeConverter();
+
   static final RegExp isYear = RegExp('([0-9]{4})\$');
   static final DateFormat yearFormat = DateFormat.y();
 
   @override
   DateTime fromJson(String json) {
-    if (json == null)
-      return null;
+    if (json == null) return null;
     if (isYear.hasMatch(json)) {
       return yearFormat.parse(json);
     }
@@ -47,7 +49,9 @@ class FHIRElement {
     this.id,
   });
 
-  factory FHIRElement.fromJson(Map<String, dynamic> json) => _$FHIRElementFromJson(json);
+  factory FHIRElement.fromJson(Map<String, dynamic> json) =>
+      _$FHIRElementFromJson(json);
+
   Map<String, dynamic> toJson() => _$FHIRElementToJson(this);
 }
 
@@ -60,7 +64,9 @@ class BackboneElement extends FHIRElement {
     this.modifierExtension,
   });
 
-  factory BackboneElement.fromJson(Map<String, dynamic> json) => _$BackboneElementFromJson(json);
+  factory BackboneElement.fromJson(Map<String, dynamic> json) =>
+      _$BackboneElementFromJson(json);
+
   Map<String, dynamic> toJson() => _$BackboneElementToJson(this);
 }
 
@@ -74,6 +80,7 @@ class Code extends FHIRElement {
   });
 
   factory Code.fromJson(Map<String, dynamic> json) => _$CodeFromJson(json);
+
   Map<String, dynamic> toJson() => _$CodeToJson(this);
 }
 
@@ -95,6 +102,7 @@ class Coding extends FHIRElement {
   });
 
   factory Coding.fromJson(Map<String, dynamic> json) => _$CodingFromJson(json);
+
   Map<String, dynamic> toJson() => _$CodingToJson(this);
 }
 
@@ -119,7 +127,9 @@ class HumanName extends FHIRElement {
     this.period,
   });
 
-  factory HumanName.fromJson(Map<String, dynamic> json) => _$HumanNameFromJson(json);
+  factory HumanName.fromJson(Map<String, dynamic> json) =>
+      _$HumanNameFromJson(json);
+
   Map<String, dynamic> toJson() => _$HumanNameToJson(this);
 }
 
@@ -150,7 +160,9 @@ class Extension {
     this.valueDecimal,
   });
 
-  factory Extension.fromJson(Map<String, dynamic> json) => _$ExtensionFromJson(json);
+  factory Extension.fromJson(Map<String, dynamic> json) =>
+      _$ExtensionFromJson(json);
+
   Map<String, dynamic> toJson() => _$ExtensionToJson(this);
 }
 
@@ -181,7 +193,9 @@ class Address extends FHIRElement {
     this.period,
   });
 
-  factory Address.fromJson(Map<String, dynamic> json) => _$AddressFromJson(json);
+  factory Address.fromJson(Map<String, dynamic> json) =>
+      _$AddressFromJson(json);
+
   Map<String, dynamic> toJson() => _$AddressToJson(this);
 }
 
@@ -203,6 +217,7 @@ class Meta extends FHIRElement {
   });
 
   factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
+
   Map<String, dynamic> toJson() => _$MetaToJson(this);
 }
 
@@ -217,7 +232,9 @@ class CodeableConcept extends FHIRElement {
     this.text,
   });
 
-  factory CodeableConcept.fromJson(Map<String, dynamic> json) => _$CodeableConceptFromJson(json);
+  factory CodeableConcept.fromJson(Map<String, dynamic> json) =>
+      _$CodeableConceptFromJson(json);
+
   Map<String, dynamic> toJson() => _$CodeableConceptToJson(this);
 }
 
@@ -233,6 +250,7 @@ class Period extends FHIRElement {
   });
 
   factory Period.fromJson(Map<String, dynamic> json) => _$PeriodFromJson(json);
+
   Map<String, dynamic> toJson() => _$PeriodToJson(this);
 }
 
@@ -257,7 +275,9 @@ class Contact extends BackboneElement {
     this.period,
   });
 
-  factory Contact.fromJson(Map<String, dynamic> json) => _$ContactFromJson(json);
+  factory Contact.fromJson(Map<String, dynamic> json) =>
+      _$ContactFromJson(json);
+
   Map<String, dynamic> toJson() => _$ContactToJson(this);
 }
 
@@ -278,7 +298,9 @@ class ContactPoint extends FHIRElement {
     this.period,
   });
 
-  factory ContactPoint.fromJson(Map<String, dynamic> json) => _$ContactPointFromJson(json);
+  factory ContactPoint.fromJson(Map<String, dynamic> json) =>
+      _$ContactPointFromJson(json);
+
   Map<String, dynamic> toJson() => _$ContactPointToJson(this);
 }
 
@@ -293,7 +315,9 @@ class ContactDetail extends FHIRElement {
     this.telecom,
   });
 
-  factory ContactDetail.fromJson(Map<String, dynamic> json) => _$ContactDetailFromJson(json);
+  factory ContactDetail.fromJson(Map<String, dynamic> json) =>
+      _$ContactDetailFromJson(json);
+
   Map<String, dynamic> toJson() => _$ContactDetailToJson(this);
 }
 
@@ -310,7 +334,9 @@ class Reference extends FHIRElement {
     this.display,
   });
 
-  factory Reference.fromJson(Map<String, dynamic> json) => _$ReferenceFromJson(json);
+  factory Reference.fromJson(Map<String, dynamic> json) =>
+      _$ReferenceFromJson(json);
+
   Map<String, dynamic> toJson() => _$ReferenceToJson(this);
 }
 
@@ -333,7 +359,9 @@ class Identifier extends FHIRElement {
     this.assigner,
   });
 
-  factory Identifier.fromJson(Map<String, dynamic> json) => _$IdentifierFromJson(json);
+  factory Identifier.fromJson(Map<String, dynamic> json) =>
+      _$IdentifierFromJson(json);
+
   Map<String, dynamic> toJson() => _$IdentifierToJson(this);
 }
 
@@ -354,7 +382,9 @@ class Resource implements IResource {
     this.language,
   });
 
-  factory Resource.fromJson(Map<String, dynamic> json) => _$ResourceFromJson(json);
+  factory Resource.fromJson(Map<String, dynamic> json) =>
+      _$ResourceFromJson(json);
+
   Map<String, dynamic> toJson() => _$ResourceToJson(this);
 }
 
@@ -369,7 +399,9 @@ class PatientCommunication extends BackboneElement {
     this.preferred,
   });
 
-  factory PatientCommunication.fromJson(Map<String, dynamic> json) => _$PatientCommunicationFromJson(json);
+  factory PatientCommunication.fromJson(Map<String, dynamic> json) =>
+      _$PatientCommunicationFromJson(json);
+
   Map<String, dynamic> toJson() => _$PatientCommunicationToJson(this);
 }
 
@@ -385,6 +417,7 @@ class Link extends BackboneElement {
   });
 
   factory Link.fromJson(Map<String, dynamic> json) => _$LinkFromJson(json);
+
   Map<String, dynamic> toJson() => _$LinkToJson(this);
 }
 
@@ -423,7 +456,9 @@ class Patient extends DomainResource {
     this.link,
   });
 
-  factory Patient.fromJson(Map<String, dynamic> json) => _$PatientFromJson(json);
+  factory Patient.fromJson(Map<String, dynamic> json) =>
+      _$PatientFromJson(json);
+
   Map<String, dynamic> toJson() => _$PatientToJson(this);
 }
 
@@ -442,7 +477,9 @@ class QuestionnaireResponseItem extends BackboneElement {
     this.answer,
   });
 
-  factory QuestionnaireResponseItem.fromJson(Map<String, dynamic> json) => _$QuestionnaireResponseItemFromJson(json);
+  factory QuestionnaireResponseItem.fromJson(Map<String, dynamic> json) =>
+      _$QuestionnaireResponseItemFromJson(json);
+
   Map<String, dynamic> toJson() => _$QuestionnaireResponseItemToJson(this);
 }
 
@@ -478,6 +515,7 @@ class Answer extends BackboneElement {
   });
 
   factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
+
   Map<String, dynamic> toJson() => _$AnswerToJson(this);
 }
 
@@ -504,7 +542,9 @@ class Attachment extends FHIRElement {
     this.creation,
   });
 
-  factory Attachment.fromJson(Map<String, dynamic> json) => _$AttachmentFromJson(json);
+  factory Attachment.fromJson(Map<String, dynamic> json) =>
+      _$AttachmentFromJson(json);
+
   Map<String, dynamic> toJson() => _$AttachmentToJson(this);
 }
 
@@ -525,7 +565,9 @@ class Quantity extends FHIRElement {
     this.code,
   });
 
-  factory Quantity.fromJson(Map<String, dynamic> json) => _$QuantityFromJson(json);
+  factory Quantity.fromJson(Map<String, dynamic> json) =>
+      _$QuantityFromJson(json);
+
   Map<String, dynamic> toJson() => _$QuantityToJson(this);
 }
 
@@ -539,6 +581,7 @@ class Questionnaire extends DomainResource {
   String version;
   String name;
   String title;
+
 //  derivedFrom: Questionnaire;
   String status;
   bool experimental;
@@ -581,7 +624,9 @@ class Questionnaire extends DomainResource {
     this.item,
   });
 
-  factory Questionnaire.fromJson(Map<String, dynamic> json) => _$QuestionnaireFromJson(json);
+  factory Questionnaire.fromJson(Map<String, dynamic> json) =>
+      _$QuestionnaireFromJson(json);
+
   Map<String, dynamic> toJson() => _$QuestionnaireToJson(this);
 }
 
@@ -616,7 +661,9 @@ class QuestionnaireResponse extends DomainResource {
     this.subject,
   });
 
-  factory QuestionnaireResponse.fromJson(Map<String, dynamic> json) => _$QuestionnaireResponseFromJson(json);
+  factory QuestionnaireResponse.fromJson(Map<String, dynamic> json) =>
+      _$QuestionnaireResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$QuestionnaireResponseToJson(this);
 }
 
@@ -660,6 +707,7 @@ class Item extends BackboneElement {
   });
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+
   Map<String, dynamic> toJson() => _$ItemToJson(this);
 }
 
@@ -694,7 +742,9 @@ class Initial extends BackboneElement {
     this.valueReference,
   });
 
-  factory Initial.fromJson(Map<String, dynamic> json) => _$InitialFromJson(json);
+  factory Initial.fromJson(Map<String, dynamic> json) =>
+      _$InitialFromJson(json);
+
   Map<String, dynamic> toJson() => _$InitialToJson(this);
 }
 
@@ -729,7 +779,9 @@ class EnableWhen extends BackboneElement {
     this.answerReference,
   });
 
-  factory EnableWhen.fromJson(Map<String, dynamic> json) => _$EnableWhenFromJson(json);
+  factory EnableWhen.fromJson(Map<String, dynamic> json) =>
+      _$EnableWhenFromJson(json);
+
   Map<String, dynamic> toJson() => _$EnableWhenToJson(this);
 }
 
@@ -776,7 +828,9 @@ class ValueSet extends DomainResource {
     this.expansion,
   });
 
-  factory ValueSet.fromJson(Map<String, dynamic> json) => _$ValueSetFromJson(json);
+  factory ValueSet.fromJson(Map<String, dynamic> json) =>
+      _$ValueSetFromJson(json);
+
   Map<String, dynamic> toJson() => _$ValueSetToJson(this);
 }
 
@@ -795,7 +849,9 @@ class DomainResource extends Resource {
     this.modifierExtension,
   });
 
-  factory DomainResource.fromJson(Map<String, dynamic> json) => _$DomainResourceFromJson(json);
+  factory DomainResource.fromJson(Map<String, dynamic> json) =>
+      _$DomainResourceFromJson(json);
+
   Map<String, dynamic> toJson() => _$DomainResourceToJson(this);
 }
 
@@ -810,7 +866,9 @@ class Narrative {
     this.div,
   });
 
-  factory Narrative.fromJson(Map<String, dynamic> json) => _$NarrativeFromJson(json);
+  factory Narrative.fromJson(Map<String, dynamic> json) =>
+      _$NarrativeFromJson(json);
+
   Map<String, dynamic> toJson() => _$NarrativeToJson(this);
 }
 
@@ -827,7 +885,9 @@ class Compose extends BackboneElement {
     this.include,
   });
 
-  factory Compose.fromJson(Map<String, dynamic> json) => _$ComposeFromJson(json);
+  factory Compose.fromJson(Map<String, dynamic> json) =>
+      _$ComposeFromJson(json);
+
   Map<String, dynamic> toJson() => _$ComposeToJson(this);
 }
 
@@ -850,7 +910,9 @@ class Expansion extends BackboneElement {
     this.contains,
   });
 
-  factory Expansion.fromJson(Map<String, dynamic> json) => _$ExpansionFromJson(json);
+  factory Expansion.fromJson(Map<String, dynamic> json) =>
+      _$ExpansionFromJson(json);
+
   Map<String, dynamic> toJson() => _$ExpansionToJson(this);
 }
 
@@ -868,6 +930,7 @@ class Filter extends BackboneElement {
   });
 
   factory Filter.fromJson(Map<String, dynamic> json) => _$FilterFromJson(json);
+
   Map<String, dynamic> toJson() => _$FilterToJson(this);
 }
 
@@ -886,7 +949,9 @@ class Include extends BackboneElement {
     this.filter,
   });
 
-  factory Include.fromJson(Map<String, dynamic> json) => _$IncludeFromJson(json);
+  factory Include.fromJson(Map<String, dynamic> json) =>
+      _$IncludeFromJson(json);
+
   Map<String, dynamic> toJson() => _$IncludeToJson(this);
 }
 
@@ -903,7 +968,9 @@ class Designation extends BackboneElement {
     this.value,
   });
 
-  factory Designation.fromJson(Map<String, dynamic> json) => _$DesignationFromJson(json);
+  factory Designation.fromJson(Map<String, dynamic> json) =>
+      _$DesignationFromJson(json);
+
   Map<String, dynamic> toJson() => _$DesignationToJson(this);
 }
 
@@ -920,7 +987,9 @@ class Concept extends BackboneElement {
     this.designation,
   });
 
-  factory Concept.fromJson(Map<String, dynamic> json) => _$ConceptFromJson(json);
+  factory Concept.fromJson(Map<String, dynamic> json) =>
+      _$ConceptFromJson(json);
+
   Map<String, dynamic> toJson() => _$ConceptToJson(this);
 }
 
@@ -947,7 +1016,9 @@ class Contains extends BackboneElement {
     this.contains,
   });
 
-  factory Contains.fromJson(Map<String, dynamic> json) => _$ContainsFromJson(json);
+  factory Contains.fromJson(Map<String, dynamic> json) =>
+      _$ContainsFromJson(json);
+
   Map<String, dynamic> toJson() => _$ContainsToJson(this);
 }
 
@@ -962,7 +1033,9 @@ class FHIRRange extends FHIRElement {
     this.high,
   });
 
-  factory FHIRRange.fromJson(Map<String, dynamic> json) => _$FHIRRangeFromJson(json);
+  factory FHIRRange.fromJson(Map<String, dynamic> json) =>
+      _$FHIRRangeFromJson(json);
+
   Map<String, dynamic> toJson() => _$FHIRRangeToJson(this);
 }
 
@@ -981,7 +1054,9 @@ class UsageContext extends FHIRElement {
     this.valueRange,
   });
 
-  factory UsageContext.fromJson(Map<String, dynamic> json) => _$UsageContextFromJson(json);
+  factory UsageContext.fromJson(Map<String, dynamic> json) =>
+      _$UsageContextFromJson(json);
+
   Map<String, dynamic> toJson() => _$UsageContextToJson(this);
 }
 
@@ -1008,7 +1083,9 @@ class Parameter extends BackboneElement {
     this.valueDateTime,
   });
 
-  factory Parameter.fromJson(Map<String, dynamic> json) => _$ParameterFromJson(json);
+  factory Parameter.fromJson(Map<String, dynamic> json) =>
+      _$ParameterFromJson(json);
+
   Map<String, dynamic> toJson() => _$ParameterToJson(this);
 }
 
@@ -1029,7 +1106,9 @@ class AnswerOption extends BackboneElement {
     this.valueReference,
   });
 
-  factory AnswerOption.fromJson(Map<String, dynamic> json) => _$AnswerOptionFromJson(json);
+  factory AnswerOption.fromJson(Map<String, dynamic> json) =>
+      _$AnswerOptionFromJson(json);
+
   Map<String, dynamic> toJson() => _$AnswerOptionToJson(this);
 }
 
@@ -1057,6 +1136,7 @@ class Bundle extends Resource {
   });
 
   factory Bundle.fromJson(Map<String, dynamic> json) => _$BundleFromJson(json);
+
   Map<String, dynamic> toJson() => _$BundleToJson(this);
 }
 
@@ -1071,7 +1151,9 @@ class BundleLink extends BackboneElement {
     this.url,
   });
 
-  factory BundleLink.fromJson(Map<String, dynamic> json) => _$BundleLinkFromJson(json);
+  factory BundleLink.fromJson(Map<String, dynamic> json) =>
+      _$BundleLinkFromJson(json);
+
   Map<String, dynamic> toJson() => _$BundleLinkToJson(this);
 }
 
@@ -1088,7 +1170,9 @@ class BundleEntry extends BackboneElement {
     this.resource,
   });
 
-  factory BundleEntry.fromJson(Map<String, dynamic> json) => _$BundleEntryFromJson(json);
+  factory BundleEntry.fromJson(Map<String, dynamic> json) =>
+      _$BundleEntryFromJson(json);
+
   Map<String, dynamic> toJson() => _$BundleEntryToJson(this);
 }
 
@@ -1103,7 +1187,9 @@ class BundleSearch extends BackboneElement {
     this.score,
   });
 
-  factory BundleSearch.fromJson(Map<String, dynamic> json) => _$BundleSearchFromJson(json);
+  factory BundleSearch.fromJson(Map<String, dynamic> json) =>
+      _$BundleSearchFromJson(json);
+
   Map<String, dynamic> toJson() => _$BundleSearchToJson(this);
 }
 
@@ -1126,7 +1212,9 @@ class BundleRequest extends BackboneElement {
     this.ifNoneExist,
   });
 
-  factory BundleRequest.fromJson(Map<String, dynamic> json) => _$BundleRequestFromJson(json);
+  factory BundleRequest.fromJson(Map<String, dynamic> json) =>
+      _$BundleRequestFromJson(json);
+
   Map<String, dynamic> toJson() => _$BundleRequestToJson(this);
 }
 
@@ -1147,7 +1235,9 @@ class BundleResponse extends BackboneElement {
     this.outcome,
   });
 
-  factory BundleResponse.fromJson(Map<String, dynamic> json) => _$BundleResponseFromJson(json);
+  factory BundleResponse.fromJson(Map<String, dynamic> json) =>
+      _$BundleResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$BundleResponseToJson(this);
 }
 
@@ -1172,7 +1262,9 @@ class Signature extends FHIRElement {
     this.data,
   });
 
-  factory Signature.fromJson(Map<String, dynamic> json) => _$SignatureFromJson(json);
+  factory Signature.fromJson(Map<String, dynamic> json) =>
+      _$SignatureFromJson(json);
+
   Map<String, dynamic> toJson() => _$SignatureToJson(this);
 }
 
@@ -1185,7 +1277,9 @@ class OperationOutcome extends DomainResource {
     this.issue,
   });
 
-  factory OperationOutcome.fromJson(Map<String, dynamic> json) => _$OperationOutcomeFromJson(json);
+  factory OperationOutcome.fromJson(Map<String, dynamic> json) =>
+      _$OperationOutcomeFromJson(json);
+
   Map<String, dynamic> toJson() => _$OperationOutcomeToJson(this);
 }
 
@@ -1208,6 +1302,244 @@ class OperationOutcomeIssue extends BackboneElement {
     this.expression,
   });
 
-  factory OperationOutcomeIssue.fromJson(Map<String, dynamic> json) => _$OperationOutcomeIssueFromJson(json);
+  factory OperationOutcomeIssue.fromJson(Map<String, dynamic> json) =>
+      _$OperationOutcomeIssueFromJson(json);
+
   Map<String, dynamic> toJson() => _$OperationOutcomeIssueToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class CareTeam extends DomainResource {
+  final String resourceType = 'CareTeam';
+
+  Identifier identifier;
+  String status;
+  List<CodeableConcept> category;
+  String name;
+  Reference subject;
+  Reference encounter;
+  Period period;
+  List<CareTeamParticipant> participant;
+  List<CodeableConcept> reasonCode;
+  List<Reference> reasonReference;
+  List<Reference> managingOrganization;
+  List<ContactPoint> telecom;
+  List<Annotation> note;
+
+  CareTeam(
+      {this.identifier,
+      this.status,
+      this.category,
+      this.name,
+      this.subject,
+      this.encounter,
+      this.period,
+      this.participant,
+      this.reasonCode,
+      this.reasonReference,
+      this.managingOrganization,
+      this.telecom,
+      this.note});
+
+  factory CareTeam.fromJson(Map<String, dynamic> json) =>
+      _$CareTeamFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CareTeamToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class CareTeamParticipant extends FHIRElement {
+  CodeableConcept role;
+  Reference member;
+  Reference onBehalfOf;
+  Period period;
+
+  CareTeamParticipant({this.role, this.member, this.onBehalfOf, this.period});
+
+  factory CareTeamParticipant.fromJson(Map<String, dynamic> json) =>
+      _$CareTeamParticipantFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CareTeamParticipantToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class Annotation extends FHIRElement {
+  Reference authorReference;
+  String authorString;
+  String time;
+  String text;
+
+  Annotation({this.authorReference, this.authorString, this.time, this.text});
+
+  factory Annotation.fromJson(Map<String, dynamic> json) =>
+      _$AnnotationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AnnotationToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class Encounter extends DomainResource {
+  final String resourceType = 'Encounter';
+  List<Identifier> identifier;
+  String status;
+  List<StatusHistory> statusHistory;
+
+//  Coding class;
+//  List<ClassHistory> classHistory;
+  List<CodeableConcept> type;
+  CodeableConcept serviceType;
+  CodeableConcept priority;
+  Reference subject;
+  List<Reference> episodeOfCare;
+  List<Reference> basedOn;
+  List<Participant> participant;
+  List<Reference> appointment;
+  Period period;
+
+//  Duration length;
+  List<CodeableConcept> reasonCode;
+  List<Diagnosis> diagnosis;
+  List<Reference> account;
+  Hospitalization hospitalization;
+  List<EncounterLocation> location;
+  Reference serviceProvider;
+  Reference partOf;
+
+  Encounter(
+      {this.identifier,
+      this.status,
+      this.statusHistory,
+      this.type,
+      this.serviceType,
+      this.priority,
+      this.subject,
+      this.episodeOfCare,
+      this.basedOn,
+      this.participant,
+      this.appointment,
+      this.period,
+      this.reasonCode,
+      this.diagnosis,
+      this.account,
+      this.hospitalization,
+      this.location,
+      this.serviceProvider,
+      this.partOf});
+
+  factory Encounter.fromJson(Map<String, dynamic> json) =>
+      _$EncounterFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EncounterToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class StatusHistory extends FHIRElement {
+  String status;
+  Period period;
+
+  StatusHistory({this.status, this.period});
+
+  factory StatusHistory.fromJson(Map<String, dynamic> json) =>
+      _$StatusHistoryFromJson(json);
+
+  Map<String, dynamic> toJson() => _$StatusHistoryToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class EncounterLocation extends FHIRElement {
+  Reference location;
+  String status;
+  CodeableConcept physicalType;
+  Period period;
+
+  EncounterLocation(
+      {this.location, this.status, this.physicalType, this.period});
+
+  factory EncounterLocation.fromJson(Map<String, dynamic> json) =>
+      _$EncounterLocationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$EncounterLocationToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class Diagnosis extends FHIRElement {
+  Reference condition;
+  CodeableConcept use;
+  int rank;
+
+  Diagnosis({this.condition, this.use, this.rank});
+
+  factory Diagnosis.fromJson(Map<String, dynamic> json) =>
+      _$DiagnosisFromJson(json);
+
+  Map<String, dynamic> toJson() => _$DiagnosisToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class Hospitalization extends FHIRElement {
+  Identifier preAdmissionIdentifier;
+  Reference origin;
+  CodeableConcept admitSource;
+  CodeableConcept reAdmission;
+  List<CodeableConcept> dietPreference;
+  List<CodeableConcept> specialCourtesy;
+  List<CodeableConcept> specialArrangement;
+  Reference destination;
+  CodeableConcept dischargeDisposition;
+
+  Hospitalization(
+      {this.preAdmissionIdentifier,
+      this.origin,
+      this.admitSource,
+      this.reAdmission,
+      this.dietPreference,
+      this.specialCourtesy,
+      this.specialArrangement,
+      this.destination,
+      this.dischargeDisposition});
+
+  factory Hospitalization.fromJson(Map<String, dynamic> json) =>
+      _$HospitalizationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$HospitalizationToJson(this);
+}
+
+//@JsonSerializable(includeIfNull: false, explicitToJson: true)
+//@FHIRDateTimeConverter()
+//class ClassHistory extends FHIRElement {
+//  Coding 'class';
+//  Period period;
+//
+//  ClassHistory({
+//    this.status,
+//    this.period
+//  });
+//
+//  factory ClassHistory.fromJson(Map<String, dynamic> json) => _$ClassHistoryFromJson(json);
+//  Map<String, dynamic> toJson() => _$ClassHistoryToJson(this);
+//}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class Participant extends FHIRElement {
+  List<CodeableConcept> type;
+  Reference actor;
+  String required;
+  String status;
+  Period period;
+
+  Participant({this.type, this.actor, this.required, this.status, this.period});
+
+  factory Participant.fromJson(Map<String, dynamic> json) =>
+      _$ParticipantFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ParticipantToJson(this);
 }
