@@ -9,10 +9,16 @@ export class FhirOperationsService {
 
   constructor() { }
 
-  generateQuestionnaireResponse(formValues, quest: any, serviceRequestUUID?) {
+  generateQuestionnaireResponse(formValues, quest: any, patientUUID, serviceRequestUUID?) {
     const scope = this;
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
     const identifier = new FHIR.Identifier();
+
+    if (patientUUID) {
+      const _subject = new FHIR.Reference();
+      _subject.reference = patientUUID;
+      questionnaireResponse.subject = _subject;
+    }
 
     if (serviceRequestUUID) {
       const basedOnRef = serviceRequestUUID;

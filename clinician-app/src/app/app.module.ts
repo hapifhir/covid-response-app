@@ -15,6 +15,7 @@ import { UtilService } from './services/util.service';
 import { HttpService } from './services/http.service';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdmitpatientComponent } from './components/admit-patient/admit-patient.component';
+import { LoginComponent } from './components/login/login.component';
 import { MomentModule } from 'ngx-moment';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -26,6 +27,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     NavbarComponent,
     FormviewComponent,
+    LoginComponent,
     DashboardComponent,
     AdmitpatientComponent
   ],
