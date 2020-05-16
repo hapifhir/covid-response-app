@@ -17,6 +17,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdmitpatientComponent } from './components/admit-patient/admit-patient.component';
 import { LoginComponent } from './components/login/login.component';
 import { MomentModule } from 'ngx-moment';
+import { AuthGuardService } from './services/auth-guard.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -48,7 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
     MomentModule
   ],
-  providers: [FhirOperationsService, UtilService, HttpService],
+  providers: [FhirOperationsService, UtilService, HttpService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

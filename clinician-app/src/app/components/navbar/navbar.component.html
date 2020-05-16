@@ -2,7 +2,7 @@
     <div class="branding">
         <span class="title">{{'navbarPage.title' | translate}}</span>
     </div>    
-    <div class="header-nav">
+    <div class="header-nav" *ngIf="userLoggedIn()">
         <a *ngFor="let item of navLinks" routerLink="{{ item.link }}" [ngClass]="{ 'nav-link': true, 'nav-icon-text': true }" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <clr-icon *ngIf="item.iconShape && item.iconShape != null" [attr.shape]="item.iconShape" class="is-inverse"></clr-icon>
             <span class="nav-text">{{ item.text }}</span>

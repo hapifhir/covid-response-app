@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class NavbarComponent implements OnInit {
 
   currentLanguage;
+  authorized: boolean = false;
   
   languageList = [
     { display: "EN", code: "en" },
@@ -17,12 +18,11 @@ export class NavbarComponent implements OnInit {
   ];
 
   navLinks = [
-    { link: '/', iconShape: 'home', text: 'Home' },
+    { link: '/dashboard', iconShape: 'home', text: 'Dashboard' },
     { link: '/admit-patient', iconShape: 'form', text: 'Admit Patient' },
   ];
   
   constructor(private translate: TranslateService) { }
-
   ngOnInit(): void {
     this.currentLanguage = this.languageList.find(x => x.code === this.translate.getDefaultLang()).display;
   }
@@ -30,5 +30,12 @@ export class NavbarComponent implements OnInit {
   changeLanguage(langCode) {
     this.translate.setDefaultLang(langCode);
     this.currentLanguage = this.languageList.find(x => x.code === langCode).display;
+  }
+
+  userLoggedIn() {
+    if(sessionStorage.getItem('userLogged')) {
+      this.authorized = true;
+    }
+    return this.authorized;
   }
 }
