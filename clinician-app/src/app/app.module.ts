@@ -18,6 +18,7 @@ import { AdmitpatientComponent } from './components/admit-patient/admit-patient.
 import { LoginComponent } from './components/login/login.component';
 import { MomentModule } from 'ngx-moment';
 import { AuthGuardService } from './services/auth-guard.service';
+import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -30,7 +31,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormviewComponent,
     LoginComponent,
     DashboardComponent,
-    AdmitpatientComponent
+    AdmitpatientComponent,
+    PatientDetailsComponent
   ],
   imports: [
     BrowserModule,
