@@ -1543,3 +1543,171 @@ class Participant extends FHIRElement {
 
   Map<String, dynamic> toJson() => _$ParticipantToJson(this);
 }
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class Consent extends DomainResource {
+  final String resourceType = 'Consent';
+  List<Identifier> identifier;
+  String status;
+  CodeableConcept scope;
+  List<CodeableConcept> category;
+  Reference patient;
+  String dateTime;
+  List<Reference> performer;
+  List<Reference> organization;
+  ConsentSource source;
+  List<ConsentPolicy> policy;
+  CodeableConcept policyRule;
+  List<ConsentVerfication> verification;
+  ConsentProvision provision;
+  Consent({
+    this.identifier,
+    this.status,
+    this.scope,
+    this.category,
+    this.patient,
+    this.dateTime,
+    this.performer,
+    this.organization,
+    this.source,
+    this.policy,
+    this.policyRule,
+    this.verification,
+    this.provision
+});
+
+  factory Consent.fromJson(Map<String, dynamic> json) =>
+      _$ConsentFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ConsentToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class ConsentSource extends BackboneElement {
+  Attachment sourceAttachment;
+  Reference sourceReference;
+
+  ConsentSource({
+    this.sourceAttachment,
+    this.sourceReference
+});
+
+  factory ConsentSource.fromJson(Map<String, dynamic> json) =>
+      _$ConsentSourceFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ConsentSourceToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class ConsentPolicy extends BackboneElement {
+  String authority;
+  String uri;
+
+  ConsentPolicy({
+  this.authority,
+    this.uri
+  });
+
+  factory ConsentPolicy.fromJson(Map<String, dynamic> json) =>
+      _$ConsentPolicyFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ConsentPolicyToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class ConsentVerfication extends BackboneElement {
+  bool verified;
+  Reference verifiedWith;
+  String verificationDate;
+
+  ConsentVerfication({
+    this.verified,
+    this.verifiedWith,
+    this.verificationDate
+  });
+
+  factory ConsentVerfication.fromJson(Map<String, dynamic> json) =>
+      _$ConsentVerficationFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ConsentVerficationToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class ConsentProvision extends BackboneElement {
+
+  String type;
+  Period period;
+  List<ConsentActor> actor;
+  List<CodeableConcept> action;
+  List<Coding> securityLabel;
+  List<Coding> purpose;
+//  List<Coding> class;
+  List<CodeableConcept> code;
+  Period dataPeriod;
+  List<ConsentData> data;
+  ConsentProvision provision;
+  ConsentProvision({
+    this.type,
+    this.period,
+    this.actor,
+    this.action,
+    this.securityLabel,
+    this.purpose,
+    this.code,
+    this.dataPeriod,
+    this.data,
+    this.provision
+  });
+
+  factory ConsentProvision.fromJson(Map<String, dynamic> json) =>
+      _$ConsentProvisionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ConsentProvisionToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class ConsentActor extends BackboneElement {
+  CodeableConcept role;
+  Reference reference;
+
+  ConsentActor({
+    this.role,
+    this.reference
+  });
+
+  factory ConsentActor.fromJson(Map<String, dynamic> json) =>
+      _$ConsentActorFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ConsentActorToJson(this);
+}
+
+@JsonSerializable(includeIfNull: false, explicitToJson: true)
+@FHIRDateTimeConverter()
+class ConsentData extends BackboneElement {
+  Code meaning;
+  Reference reference;
+
+  ConsentData({
+    this.meaning,
+    this.reference
+  });
+
+  factory ConsentData.fromJson(Map<String, dynamic> json) =>
+      _$ConsentDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ConsentDataToJson(this);
+}
+
+
+
+
+
+
+
+
