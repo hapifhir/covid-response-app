@@ -1,4 +1,4 @@
-import 'FHIR.dart';
+import 'models/FHIR.dart';
 
 abstract class ISerializer {
   T deserialize<T extends IResource>(String json);

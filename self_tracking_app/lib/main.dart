@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'TestScreen.dart';
+import 'DBService.dart';
 
 void main() => runApp(TestScreen());
 
@@ -46,9 +47,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var dbService;
   @override
   void initState() {
     super.initState();
+    dbService = DBService();
   }
 
   @override

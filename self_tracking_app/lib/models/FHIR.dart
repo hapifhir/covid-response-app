@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'JsonSerializer.dart';
+import '../JsonSerializer.dart';
 
 part 'FHIR.g.dart';
 
