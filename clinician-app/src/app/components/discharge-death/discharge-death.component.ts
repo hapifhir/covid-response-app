@@ -22,7 +22,7 @@ export class DischargeDeathComponent implements OnInit {
 
   ngOnInit(): void {
       this.route.queryParamMap.subscribe(params => {
-      this.idPac = params.get('id');
+      this.idPac = this.route.snapshot.params.pacId;
    });
     console.log('patient:' + this.idPac);
     this.loadForm();

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'admit-patient', component: AdmitpatientComponent, canActivate: [AuthGuardService] },
   { path: 'patient-details/:eocId', component: PatientDetailsComponent, canActivate: [AuthGuardService] },
-  {path: 'discharge-death', component: DischargeDeathComponent, canActivate: [AuthGuardService] }
+  {path: 'discharge-death/:pacId', component: DischargeDeathComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({
