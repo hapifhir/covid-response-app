@@ -17,6 +17,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AdmitpatientComponent } from './components/admit-patient/admit-patient.component';
 import { LoginComponent } from './components/login/login.component';
 import { MomentModule } from 'ngx-moment';
+import { DischargeDeathComponent } from './components/discharge-death/discharge-death.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -29,7 +30,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     FormviewComponent,
     LoginComponent,
     DashboardComponent,
-    AdmitpatientComponent
+    AdmitpatientComponent,
+    DischargeDeathComponent
   ],
   imports: [
     BrowserModule,
