@@ -11,8 +11,8 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuardService] },
   { path: 'admit-patient', component: AdmitpatientComponent, canActivate: [AuthGuardService] },
-  { path: 'patient-details/:eocId', component: PatientDetailsComponent, canActivate: [AuthGuardService] }
-  {path: 'discharge-death', component: DischargeDeathComponent}
+  { path: 'patient-details/:eocId', component: PatientDetailsComponent, canActivate: [AuthGuardService] },
+  {path: 'discharge-death', component: DischargeDeathComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

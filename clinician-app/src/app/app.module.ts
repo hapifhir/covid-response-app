@@ -33,7 +33,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginComponent,
     DashboardComponent,
     AdmitpatientComponent,
-    PatientDetailsComponent
+    PatientDetailsComponent,
     DischargeDeathComponent
   ],
   imports: [
