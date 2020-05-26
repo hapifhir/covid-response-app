@@ -42,7 +42,7 @@ class FHIRDateTimeConverter implements JsonConverter<DateTime, String> {
 
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 @FHIRDateTimeConverter()
-class FHIRElement {
+class FHIRElement extends FHIRType {
   String id;
 
   FHIRElement({
@@ -483,6 +483,35 @@ class QuestionnaireResponseItem extends BackboneElement {
   Map<String, dynamic> toJson() => _$QuestionnaireResponseItemToJson(this);
 }
 
+class FHIRType {
+
+}
+
+class BooleanType extends FHIRType {
+  bool value;
+
+  BooleanType({
+    this.value
+  });
+}
+
+class DecimalType extends FHIRType {
+  double value;
+
+  DecimalType({
+    this.value
+  });
+}
+
+class StringType extends FHIRType {
+  String value;
+
+  StringType({
+    this.value
+  });
+}
+
+
 @JsonSerializable(includeIfNull: false, explicitToJson: true)
 @FHIRDateTimeConverter()
 class Answer extends BackboneElement {
@@ -498,6 +527,7 @@ class Answer extends BackboneElement {
   Coding valueCoding;
   Quantity valueQuantity;
   Reference valueReference;
+  QuestionnaireResponseItem item;
 
   Answer({
     this.valueBoolean,
@@ -763,6 +793,19 @@ class EnableWhen extends BackboneElement {
   Coding answerCoding;
   Quantity answerQuantity;
   Reference answerReference;
+
+  FHIRType get answer {
+    return  answerBoolean ??
+            answerDecimal ??
+            answerInteger ??
+            answerDate ??
+            answerDateTime ??
+            answerTime ??
+            answerString ??
+            answerCoding ??
+            answerQuantity ??
+            answerReference;
+  }
 
   EnableWhen({
     this.question,
