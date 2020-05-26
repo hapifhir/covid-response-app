@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'FHIR.dart';
+import 'models/FHIR.dart';
 import 'FHIRClient.dart';
 import 'IFHIRClient.dart';
 import 'JsonSerializer.dart';

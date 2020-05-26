@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'FHIR.dart';
+import 'models/FHIR.dart';
 
 typedef ItemToWidgetFunc = Widget Function(Item);
 typedef OnSubmitFunc = void Function(Map<String, List<FHIRType>>);

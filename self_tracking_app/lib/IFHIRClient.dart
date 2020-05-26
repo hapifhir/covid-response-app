@@ -1,4 +1,4 @@
-import 'FHIR.dart';
+import 'models/FHIR.dart';
 import 'package:http/http.dart' as http;
 
 typedef RequestFunc = FHIRRequest Function(FHIRRequest);

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'FHIR.dart';
+import 'models/FHIR.dart';
 import 'IFHIRClient.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';

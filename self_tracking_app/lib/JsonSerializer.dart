@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'FHIR.dart';
+import 'models/FHIR.dart';
 import 'ISerializer.dart';
 
 abstract class IResourceSerializer<T extends IResource> {

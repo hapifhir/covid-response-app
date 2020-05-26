@@ -1,47 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:selftrackingapp/FHIR.dart';
-import 'package:selftrackingapp/JsonSerializer.dart';
-import 'package:selftrackingapp/PlainQuestionnaireFormGenerator.dart';
-import 'package:flutter/services.dart' show rootBundle;
+import 'TestScreen.dart';
+import 'DBService.dart';
 
-//void main() => runApp(TestScreen());
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(TestApp());
-}
-
-
-class TestApp extends StatelessWidget {
-  Future<Questionnaire> futureQuestionnaire = _foo();
-
-  static Future<Questionnaire> _foo() async {
-    JsonSerializer jsonSerializer = JsonSerializer();
-    String data = await rootBundle.loadString('assets/questionnaires/Self_Assessment_Daily_Assessment.json');
-    return jsonSerializer.deserialize<Questionnaire>(data);
-  }
-
-  TestApp() {
-    futureQuestionnaire = _foo();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Test',
-      home: FutureBuilder(
-        future: futureQuestionnaire,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return PlainQuestionnaireFormGenerator(snapshot.data);
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error);
-          }
-          return CircularProgressIndicator();
-        }
-      )
-    );
-  }
-}
+void main() => runApp(TestScreen());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -86,9 +47,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  var dbService;
   @override
   void initState() {
     super.initState();
+    dbService = DBService();
   }
 
   @override
