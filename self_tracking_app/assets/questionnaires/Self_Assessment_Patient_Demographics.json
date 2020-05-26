@@ -1,0 +1,92 @@
+{
+  "resourceType": "Questionnaire",
+  "identifier": [
+    {
+      "value": "Patient_Demographics"
+    }
+  ],
+  "name": "Patient Demographics Form",
+  "title": "Patient Demographics Form",
+  "description": "Patient Demographics Form",
+  "item": [
+    {
+      "linkId": "first_name",
+      "text": "First Name",
+      "type": "string"
+    },
+    {
+      "linkId": "last_name",
+      "text": "Last Name",
+      "type": "string"
+    },
+    {
+      "linkId": "address_line_1",
+      "text": "Address Line 1",
+      "type": "string"
+    },
+    {
+      "linkId": "address_city",
+      "text": "City",
+      "type": "string"
+    },
+    {
+      "linkId": "address_province",
+      "text": "Province",
+      "type": "string"
+    },
+    {
+      "linkId": "address_postal_code",
+      "text": "Postal Code",
+      "type": "string"
+    },
+    {
+      "linkId": "address_country",
+      "text": "Country",
+      "type": "string"
+    },
+    {
+      "linkId": "gender",
+      "text": "gender",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "male",
+            "display": "Male"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "female",
+            "display": "Female"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "other",
+            "display": "Other"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "date_of_birth",
+      "text": "Date of birth",
+      "type": "date"
+    },
+    {
+      "linkId": "phone_number",
+      "text": "Phone Number",
+      "type": "string"
+    },
+    {
+      "linkId": "email",
+      "text": "Email",
+      "type": "string"
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "resourceType": "Questionnaire",
+  "identifier": [
+    {
+      "value": "Daily_Assessments"
+    }
+  ],
+  "name": "Daily Assessments",
+  "title": "Daily Assessments",
+  "description": "Daily Assessments",
+  "item": [
+    {
+      "linkId": "cough",
+      "text": "Cough",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "sore_throat",
+      "text": "Sore Throat",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "chest_pain",
+      "text": "Chest Pain",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "shortness_of_breath",
+      "text": "Shortness of breath",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "seizures",
+      "text": "Seizures",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "vomiting_nausea",
+      "text": "Vomiting/Nausea",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "diarrhoea",
+      "text": "Diarrhoea",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "conjunctivities",
+      "text": "Conjunctivities",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "muscle_ache",
+      "text": "Muscle Ache",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "other",
+      "text": "Other",
+      "type": "choice",
+      "required": true,
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "no",
+            "display": "No"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "unknown",
+            "display": "Unknown"
+          }
+        }
+      ]
+    },
+    {
+      "linkId": "other_specify",
+      "text": "If yes, specify",
+      "type": "string",
+      "enableWhen": [
+        {
+          "question": "other",
+          "operator": "=",
+          "answerCoding": {
+            "system": "https://localhost/Questionnaire",
+            "code": "yes",
+            "display": "Yes"
+          }
+        }
+      ]
+    }
+  ]
+}
