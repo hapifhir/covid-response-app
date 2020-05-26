@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:selftrackingapp/shared/NavDrawer.dart';
 
 import 'models/FHIR.dart';
 import 'FHIRClient.dart';
@@ -56,9 +57,7 @@ class _TestScreenState extends State<TestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Test',
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text('Test'),
         ),
@@ -76,8 +75,8 @@ class _TestScreenState extends State<TestScreen> {
               return CircularProgressIndicator();
             }
           )
-        )
-      ),
-    );
+        ),
+        drawer: NavDrawer(),
+      );
   }
 }

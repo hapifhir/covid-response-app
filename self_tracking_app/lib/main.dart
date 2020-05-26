@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:selftrackingapp/shared/NavDrawer.dart';
 import 'TestScreen.dart';
 import 'DBService.dart';
 
-void main() => runApp(TestScreen());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        title: 'Flutter Demo',
+        initialRoute: '/',
+        routes: {
+          '/testScreen': (context) => TestScreen()
+        },
+        theme: ThemeData(
+          // This is the theme of your application.
+          //
+          // Try running your application with "flutter run". You'll see the
+          // application has a blue toolbar. Then, without quitting the app, try
+          // changing the primarySwatch below to Colors.green and then invoke
+          // "hot reload" (press "r" in the console where you ran "flutter run",
+          // or simply save your changes to "hot reload" in a Flutter IDE).
+          // Notice that the counter didn't reset back to zero; the application
+          // is not restarted.
+          primarySwatch: Colors.blue,
+        ),
+        home: MyHomePage(title: 'Flutter Demo Home Page'));
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
-
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -48,6 +51,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var dbService;
+
   @override
   void initState() {
     super.initState();
@@ -64,44 +68,43 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     final _formKey = GlobalKey<FormState>();
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Form(
-          key: _formKey,
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-          TextFormField(
-          validator: (value) {
-        if (value.isEmpty) {
-        return 'Please enter some text';
-        }
-        return null;
-        },
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
-          child: RaisedButton(
-            onPressed: () {
-              // Validate returns true if the form is valid, or false
-              // otherwise.
-              if (_formKey.currentState.validate()) {
-                // If the form is valid, display a Snackbar.
-                Scaffold.of(context)
-                    .showSnackBar(SnackBar(content: Text('Processing Data')));
-              }
-            },
-            child: Text('Submit')
-          ),
-        )
-          ]
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    )));
+        body: Center(
+            // Center is a layout widget. It takes a single child and positions it
+            // in the middle of the parent.
+            child: Form(
+          key: _formKey,
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
+                  Widget>[
+            TextFormField(
+              validator: (value) {
+                if (value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return 'null';
+              },
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              child: RaisedButton(
+                  onPressed: () {
+                    // Validate returns true if the form is valid, or false
+                    // otherwise.
+                    if (_formKey.currentState.validate()) {
+                      // If the form is valid, display a Snackbar.
+                      Scaffold.of(context).showSnackBar(
+                          SnackBar(content: Text('Processing Data')));
+                    }
+                  },
+                  child: Text('Submit')),
+            )
+          ]), // This trailing comma makes auto-formatting nicer for build methods.
+        )),
+        drawer: NavDrawer());
   }
 }
