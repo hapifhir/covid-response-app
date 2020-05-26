@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import * as moment from 'moment';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,7 +12,7 @@ export class DashboardComponent implements OnInit {
 
   patients = [];
 
-  constructor(private httpService: HttpService) { }
+  constructor(private httpService: HttpService, private router: Router) { }
 
   ngOnInit(): void {
     this.loadPatients();
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
     this.httpService.getResourceByQueryParam('Patient', '?_revinclude=EpisodeOfCare:patient').then(res => {
       const resources = res['entry'].map(item => item.resource);
       
-      this.patients = resources.filter(item => item.resourceType == 'Patient').map(item => {
+      this.patients = resources.filter(item => item.resourceType === 'Patient').map(item => {
         const obj = {};
 
         if (item.name && item.name[0] && item.name[0].given) {
@@ -37,11 +38,11 @@ export class DashboardComponent implements OnInit {
           obj['date_of_birth'] = item.birthDate;
         }
 
-        const eoc = resources.filter(i => i.resourceType == 'EpisodeOfCare' && i.patient && i.patient.reference == (item.resourceType + '/' + item.id));
+        const eoc = resources.filter(i => i.resourceType === 'EpisodeOfCare' && i.patient && i.patient.reference === (item.resourceType + '/' + item.id));
 
         if (eoc && Array.isArray(eoc) && eoc.length > 0) {
           // console.log(eoc);
-          obj['episodeOfCareId'] = eoc[0].resourceType + '/' + eoc[0].id;
+          obj['episodeOfCareId'] = eoc[0].id;
         }
 
         return obj;
@@ -52,7 +53,8 @@ export class DashboardComponent implements OnInit {
   }
 
   routeTo(path) {
-    alert(path);
+    // alert(path);
+    this.router.navigate(['patient-details', path]);
   }
 
   calculateAge(dob) {

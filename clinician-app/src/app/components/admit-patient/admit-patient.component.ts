@@ -18,7 +18,7 @@ export class AdmitpatientComponent implements OnInit {
 
 
   constructor(private httpService: HttpService, private route: ActivatedRoute, private fhirOperations: FhirOperationsService,private routes:Router) { }
-
+  modalStatus = false;
   ngOnInit(): void {
     this.loadForm();
   }
@@ -62,21 +62,6 @@ export class AdmitpatientComponent implements OnInit {
     entry_one.request = req_one;
 
     transaction.entry.push(entry_one);
-
-    // create service request - no longer used
-    // const serviceRequestHL7 = this.fhirOperations.generateServiceRequest(patient_temp_id);
-    // const serviceRequest_temp_id = 'urn:uuid:' + uuidv4();
-    // const entry_two = new FHIR.Entry();
-    // entry_two.fullUrl = serviceRequest_temp_id;
-    // entry_two.resource = serviceRequestHL7;
-
-    // const req_two = new FHIR.Request();
-    // req_two.method = 'POST';
-    // req_two.url = 'ServiceRequest';
-
-    // entry_two.request = req_two;
-
-    // transaction.entry.push(entry_two);
 
     // create care team resource
     const ct = this.fhirOperations.generateCareTeam(patient_temp_id);

@@ -1,0 +1,99 @@
+<div class="clr-row">
+    <div class="clr-col-1 clr-col-sm-2 clr-col-md-2 clr-col-lg-2"></div>
+    <div class="clr-col-10 clr-col-sm-8 clr-col-md-8 clr-col-lg-8">
+        <div class="clr-row">
+            <div class="clr-col">
+                <div class="card">
+                    <div class="card-header">
+                        Patient Demographics
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    First Name
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.name[0].given[0]}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Last Name
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.name[0].family}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    DOB
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.birthDate}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Gender
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.gender}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Address Line 1
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].line[0]}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    City
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].city}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Province
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].state}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Postal Code
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].postalCode}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Country
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].country}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-1 clr-col-sm-2 clr-col-md-2 clr-col-lg-2"></div>
+</div>

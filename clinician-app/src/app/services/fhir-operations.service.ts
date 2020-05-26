@@ -190,7 +190,7 @@ export class FhirOperationsService {
   generateEpisodeOfCare(patientId, careteamId) {
     const eoc = new FHIR.EpisodeOfCare();
     eoc.resourceType = 'EpisodeOfCare';
-    eoc.status = 'waitlist';
+    eoc.status = 'active';
 
     // add team ref to care team
     const _ct = new FHIR.Reference();
