@@ -6,6 +6,8 @@ import { FhirOperationsService } from '../../services/fhir-operations.service';
 import { v4 as uuidv4 } from 'uuid';
 import * as FHIR from '../../interfaces/FHIR';
 
+
+
 @Component({
   selector: 'app-admit-patient',
   templateUrl: './admit-patient.component.html',
@@ -16,7 +18,7 @@ export class AdmitpatientComponent implements OnInit {
   loadData: boolean;
 
 
-  constructor(private httpService: HttpService, private route: ActivatedRoute, private fhirOperations: FhirOperationsService) { }
+  constructor(private httpService: HttpService, private route: ActivatedRoute, private fhirOperations: FhirOperationsService,private routes:Router) { }
   modalStatus = false;
   ngOnInit(): void {
     this.loadForm();
@@ -33,7 +35,7 @@ export class AdmitpatientComponent implements OnInit {
   }
 
   async submitQuestionnaire(formQuestions: any) {
-    console.log('formQuestions', formQuestions);
+    
 
     // extract patient_demographics and save as Patient
     const patient_demographics = Object.assign({}, formQuestions.patient_demographics);
@@ -105,7 +107,7 @@ export class AdmitpatientComponent implements OnInit {
     transaction.entry.push(entry_five);
 
     // create question response resource
-    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions, patient_temp_id);
+    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions,patient_temp_id,  'WHO_MODULE_1_Questionnaire_Response');
     const entry_three = new FHIR.Entry();
     entry_three.resource = questionnaireResponse;
 
@@ -119,9 +121,15 @@ export class AdmitpatientComponent implements OnInit {
 
     console.log('transaction', transaction);
 
-    const transactionResponse = await this.httpService.postTransaction(transaction);
-    this.modalStatus = true;
-    console.log('transactionResponse', transactionResponse);
+    try{
+      const transactionResponse = await this.httpService.postTransaction(transaction);
+      console.log('transactionResponse', transactionResponse);
+      this.routes.navigate(['']);
+    }catch (error)
+    {
+      console.log(error);
+    }
+    
   }
 
 }

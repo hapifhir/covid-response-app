@@ -9,9 +9,10 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class PatientDetailsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private httpService: HttpService) { }
+  constructor(private route: ActivatedRoute, private httpService: HttpService,private router: Router) { }
   eocId;
   patientDetails;
+
   ngOnInit(): void {
     this.eocId = this.route.snapshot.params.eocId;
     this.getPatientBundle();
@@ -21,5 +22,13 @@ export class PatientDetailsComponent implements OnInit {
     const patientBundle = await this.httpService.getResourceByQueryParam('EpisodeOfCare', '?_id=' + this.eocId + '&_include=*');
     this.patientDetails = patientBundle['entry'].filter(i => i.resource.resourceType === 'Patient')[0].resource;
   }
+ 
+ 
+  routeToDischarge() {
+    // alert(path);
+    this.router.navigate(['discharge-death', this.patientDetails.id]);
+  }
+
+  
 
 }
