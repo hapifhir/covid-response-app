@@ -9,7 +9,7 @@ export class FhirOperationsService {
 
   constructor() { }
 
-  generateQuestionnaireResponse(formValues, quest: any, patientUUID, serviceRequestUUID?) {
+  generateQuestionnaireResponse(formValues, quest: any, patientUUID?) {
     const scope = this;
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
     const identifier = new FHIR.Identifier();
@@ -18,11 +18,6 @@ export class FhirOperationsService {
       const _subject = new FHIR.Reference();
       _subject.reference = patientUUID;
       questionnaireResponse.subject = _subject;
-    }
-
-    if (serviceRequestUUID) {
-      const basedOnRef = serviceRequestUUID;
-      questionnaireResponse.basedOn = [basedOnRef];
     }
 
     // questionnaire id
