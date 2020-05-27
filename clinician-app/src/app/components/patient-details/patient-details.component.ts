@@ -22,12 +22,6 @@ export class PatientDetailsComponent implements OnInit {
     const patientBundle = await this.httpService.getResourceByQueryParam('EpisodeOfCare', '?_id=' + this.eocId + '&_include=*');
     this.patientDetails = patientBundle['entry'].filter(i => i.resource.resourceType === 'Patient')[0].resource;
   }
- 
- 
-  routeToDischarge() {
-    // alert(path);
-    this.router.navigate(['discharge-death', this.patientDetails.id]);
-  }
 
   
 

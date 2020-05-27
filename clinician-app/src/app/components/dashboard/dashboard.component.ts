@@ -53,10 +53,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  routeTo(path) {
-    // alert(path);
-    this.router.navigate(['patient-details', path]);
-  }
+  
 
   calculateAge(dob) {
     return moment().diff(dob, 'years');

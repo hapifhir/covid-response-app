@@ -94,7 +94,7 @@ export class AdmitpatientComponent implements OnInit {
 
     transaction.entry.push(entry_two);
     
-    const encounterHL7 = this.fhirOperations.generateEncounter(eoc_temp_id);
+    const encounterHL7 = this.fhirOperations.generateEncounter(eoc_temp_id, 'arrived');
     const entry_five = new FHIR.Entry();
     entry_five.resource = encounterHL7;
 
@@ -107,7 +107,7 @@ export class AdmitpatientComponent implements OnInit {
     transaction.entry.push(entry_five);
 
     // create question response resource
-    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions,patient_temp_id,  'WHO_MODULE_1_Questionnaire_Response');
+    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions, patient_temp_id, 'WHO_MODULE_1_Questionnaire_Response');
     const entry_three = new FHIR.Entry();
     entry_three.resource = questionnaireResponse;
 
