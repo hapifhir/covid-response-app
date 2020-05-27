@@ -20,6 +20,7 @@ import { MomentModule } from 'ngx-moment';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { DailyAssessmentsComponent } from './components/daily-assessments/daily-assessments.component';
+import { DischargeDeathComponent } from './components/discharge-death/discharge-death.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/');
@@ -34,7 +35,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardComponent,
     AdmitpatientComponent,
     PatientDetailsComponent,
-    DailyAssessmentsComponent
+    DailyAssessmentsComponent,
+    DischargeDeathComponent
   ],
   imports: [
     BrowserModule,

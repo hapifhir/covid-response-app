@@ -9,11 +9,12 @@ export class FhirOperationsService {
 
   constructor() { }
 
-  generateQuestionnaireResponse(formValues, quest: any, patientUUID?) {
+  generateQuestionnaireResponse(formValues, quest: any, patientUUID, questionnaireName,serviceRequestUUID?) {
     const scope = this;
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
     const identifier = new FHIR.Identifier();
-
+    console.log ("patient generate" + patientUUID);
+    
     if (patientUUID) {
       const _subject = new FHIR.Reference();
       _subject.reference = patientUUID;
@@ -21,10 +22,10 @@ export class FhirOperationsService {
     }
 
     // questionnaire id
-    const questionnaireId = quest.resourceType + '/' + quest.id;
+    const questionnaireId = quest.resourceType + '/' + quest.id; 
     questionnaireResponse.questionnaire = questionnaireId;
 
-    identifier.value = 'WHO_MODULE_1_Questionnaire_Response';
+    identifier.value = questionnaireName;
     questionnaireResponse.identifier = identifier;
     questionnaireResponse.resourceType = 'QuestionnaireResponse'
     questionnaireResponse.status = 'completed';
@@ -221,4 +222,5 @@ export class FhirOperationsService {
 
     return ct;
   }
+  
 }
