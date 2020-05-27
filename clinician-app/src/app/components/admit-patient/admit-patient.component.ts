@@ -80,7 +80,7 @@ export class AdmitpatientComponent implements OnInit {
     transaction.entry.push(entry_four);
 
     // create episode of care
-    const eocHL7 = this.fhirOperations.generateEpisodeOfCare(patient_temp_id, ct_temp_id);
+    const eocHL7 = this.fhirOperations.generateEpisodeOfCare(patient_temp_id,'active', ct_temp_id);
     const eoc_temp_id = 'urn:uuid:' + uuidv4();
     const entry_two = new FHIR.Entry();
     entry_two.fullUrl = eoc_temp_id;
