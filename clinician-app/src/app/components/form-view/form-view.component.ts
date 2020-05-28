@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Questionnaire, QuestionnaireItem, QuestionnaireItemGroup } from './../../interfaces/FHIR';
 import { ChangeDetectorRef } from '@angular/core';
 // import * as testData from '../../../assets/test_data/admit_patient_test_values.json';
-import * as testData from '../../../assets/test_data/daily_assessment_test_values.json';
+// import * as testData from '../../../assets/test_data/daily_assessment_test_values.json';
+import * as testData from '../../../assets/test_data/death_discharge_test_values.json';
 
 @Component({
   selector: 'app-form-view',
