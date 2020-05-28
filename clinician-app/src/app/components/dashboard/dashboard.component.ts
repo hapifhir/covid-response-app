@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
       
       this.patients = resources.filter(item => item.resourceType === 'Patient').map(item => {
         const obj = {};
-
+        obj['patId'] = item.id;
         if (item.name && item.name[0] && item.name[0].given) {
           obj['first_name'] = item.name[0].given.join(' ');
         }
@@ -43,6 +43,7 @@ export class DashboardComponent implements OnInit {
         if (eoc && Array.isArray(eoc) && eoc.length > 0) {
           // console.log(eoc);
           obj['episodeOfCareId'] = eoc[0].id;
+          obj['status'] = eoc[0].status;
         }
 
         return obj;
@@ -52,10 +53,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  routeTo(path) {
-    // alert(path);
-    this.router.navigate(['patient-details', path]);
-  }
+  
 
   calculateAge(dob) {
     return moment().diff(dob, 'years');

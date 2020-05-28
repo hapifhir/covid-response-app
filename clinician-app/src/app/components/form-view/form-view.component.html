@@ -1,86 +1,92 @@
 <ng-template #drawCtrl let-formgroup="formgroup" let-elementson="elementson" let-element="element">
-<div [ngSwitch]="elementson.type" [formGroup]="formgroup">
-    <div *ngSwitchCase="'string'">
-        <clr-input-container>
-            <label>{{elementson.text}}</label>
-            <input clrInput type="text" [formControlName]="elementson.linkId" [id]="elementson.linkId" />
-            <clr-control-helper></clr-control-helper>
-            <clr-control-error>This field is required!</clr-control-error>
-        </clr-input-container>
-    </div>
-    <div *ngSwitchCase="'choice'">
-        <div class="clr-form-control">
-            <label>{{elementson.text}}</label>
-            <div class="clr-control-container">
-                <div *ngFor="let option of elementson.answerOption">
-                    <clr-radio-wrapper>
-                        <input type="radio" clrRadio [formControlName]="elementson.linkId"  [value]="option.valueCoding.code"   [id]="elementson.linkId + '' + option.valueCoding.code"/>
-                        <label>{{option.valueCoding.display}}</label>
-                    </clr-radio-wrapper>
+    <div [ngSwitch]="elementson.type" [formGroup]="formgroup">
+        <div *ngSwitchCase="'string'">
+            <clr-input-container>
+                <label>{{elementson.text}}</label>
+                <input clrInput type="text" [formControlName]="elementson.linkId" [id]="elementson.linkId" />
+                <clr-control-helper></clr-control-helper>
+                <clr-control-error>This field is required!</clr-control-error>
+            </clr-input-container>
+        </div>
+        <div *ngSwitchCase="'choice'">
+            <div class="clr-form-control">
+                <label>{{elementson.text}}</label>
+                <div class="clr-control-container">
+                    <div *ngFor="let option of elementson.answerOption">
+                        <clr-radio-wrapper>
+                            <input type="radio" clrRadio [formControlName]="elementson.linkId"
+                                [value]="option.valueCoding.code"
+                                [id]="elementson.linkId + '' + option.valueCoding.code" />
+                            <label>{{option.valueCoding.display}}</label>
+                        </clr-radio-wrapper>
+                    </div>
+                    <div class="clr-error"
+                        *ngIf="formgroup.get(elementson.linkId).invalid  && ((formgroup.get(elementson.linkId).dirty || formgroup.get(elementson.linkId).touched))">
+                        <clr-control-error>This field is required!</clr-control-error>
+                    </div>
                 </div>
-                <div class="clr-error" *ngIf="formgroup.get(elementson.linkId).invalid  && ((formgroup.get(elementson.linkId).dirty || formgroup.get(elementson.linkId).touched))">
+            </div>
+        </div>
+        <div *ngSwitchCase="'boolean'">
+            <div class="clr-form-control">
+                <label>{{elementson.text}}</label>
+                <div class="clr-control-container">
+                    <clr-checkbox-wrapper>
+                        <input type="checkbox" clrCheckbox [formControlName]="elementson.linkId"
+                            [value]="elementson.value" [id]="elementson.linkId" />
+                    </clr-checkbox-wrapper>
+                    <clr-control-helper></clr-control-helper>
                     <clr-control-error>This field is required!</clr-control-error>
                 </div>
             </div>
         </div>
-    </div>
-    <div *ngSwitchCase="'boolean'">
-        <div class="clr-form-control">
-            <label>{{elementson.text}}</label>
-            <div class="clr-control-container">
-                <clr-checkbox-wrapper>
-                    <input type="checkbox" clrCheckbox [formControlName]="elementson.linkId"  [value]="elementson.value"   [id]="elementson.linkId" />
-                </clr-checkbox-wrapper>  
-                <clr-control-helper></clr-control-helper>
-                <clr-control-error>This field is required!</clr-control-error>
-            </div>  
+        <div *ngSwitchCase="'date'">
+            <div class="clr-form-control">
+                <clr-date-container>
+                    <label>{{elementson.text}}</label>
+                    <input type="date" clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId" />
+                    <clr-control-helper></clr-control-helper>
+                    <clr-control-error>This field is required!</clr-control-error>
+                </clr-date-container>
+            </div>
         </div>
     </div>
-    <div *ngSwitchCase="'date'">
-        <div class="clr-form-control">
-        <clr-date-container>
-            <label>{{elementson.text}}</label>
-            <input type="date" clrDate [formControlName]="elementson.linkId" [id]="elementson.linkId"/>
-            <clr-control-helper></clr-control-helper>
-            <clr-control-error>This field is required!</clr-control-error>
-        </clr-date-container>
-    </div>
-    </div>
-</div>
 </ng-template>
 <div class="content-container">
     <div class="content-area">
         <form clrStepper [formGroup]="form" clrForm clrLayout="vertical">
-        <div *ngFor="let element of questions.item">
-            <clr-stepper-panel [formGroupName]="element.linkId">
-                <clr-step-title>{{element.text}}</clr-step-title>
-                <clr-step-description></clr-step-description>
-                <clr-step-content *clrIfExpanded>
-                    <div *ngFor="let elementson of element.item;let i = index;let even=even">
-                        <span *ngIf="even">
-                            <div class="clr-row">
-                                <div *ngIf="isEnableWhen(element,element.item[i])" class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
-                                    <ng-container 
-                                            [ngTemplateOutlet]="drawCtrl" 
+            <div *ngFor="let element of questions.item">
+                <clr-stepper-panel [formGroupName]="element.linkId">
+                    <clr-step-title>{{element.text}}</clr-step-title>
+                    <clr-step-description></clr-step-description>
+                    <clr-step-content *clrIfExpanded>
+                        <div *ngFor="let elementson of element.item;let i = index;let even=even">
+                            <span *ngIf="even">
+                                <div class="clr-row">
+                                    <div *ngIf="isEnableWhen(element,element.item[i])"
+                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
+                                        <ng-container [ngTemplateOutlet]="drawCtrl"
                                             [ngTemplateOutletContext]="{formgroup:this.form.get(element.linkId),element:element,elementson:element.item[i]}">
-                                    </ng-container>
-                                </div>
-                                <div *ngIf="element.item.length>i+1 && isEnableWhen(element,element.item[i+1])" class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
-                                    <ng-container 
-                                            [ngTemplateOutlet]="drawCtrl" 
+                                        </ng-container>
+                                    </div>
+                                    <div *ngIf="element.item.length>i+1 && isEnableWhen(element,element.item[i+1])"
+                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
+                                        <ng-container [ngTemplateOutlet]="drawCtrl"
                                             [ngTemplateOutletContext]="{formgroup:this.form.get(element.linkId),element:element,elementson:element.item[i+1]}">
-                                    </ng-container>
+                                        </ng-container>
+                                    </div>
+                                    <div *ngIf="!(isEnableWhen(element,element.item[i]))"
+                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
+                                    <div *ngIf="!(element.item.length>i+1 && isEnableWhen(element,element.item[i+1]))"
+                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
                                 </div>
-                                <div *ngIf="!(isEnableWhen(element,element.item[i]))" class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
-                                <div *ngIf="!(element.item.length>i+1 && isEnableWhen(element,element.item[i+1]))" class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
-                            </div>
-                        </span>
-                    </div>
-                    <button clrStepButton="next" name="{{element.linkId + '_button'}} ">next</button>
-                </clr-step-content>
-            </clr-stepper-panel>
-        </div> 
-        <button class="btn btn-success" type="submit" (click)="submitForm()">Submit</button>
+                            </span>
+                        </div>
+                        <button clrStepButton="next" name="{{element.linkId + '_button'}} ">next</button>
+                    </clr-step-content>
+                </clr-stepper-panel>
+            </div>
+            <button class="btn btn-success" type="submit" (click)="submitForm()">Submit</button>
         </form>
     </div>
 </div>

@@ -13,8 +13,8 @@
                       <th>Last Name</th>
                       <th>Date of Birth (YYYY-MM-DD)</th>
                       <th>Age</th>
-                      <th>Ward</th>
-                      <th>Condition</th>
+                      <th>Status</th>
+                      <th></th>
                       <th></th>
                     </tr>
                   </thead>
@@ -24,10 +24,12 @@
                       <td class="clr-align-middle">{{ patient.last_name }}</td>
                       <td class="clr-align-middle">{{ patient.date_of_birth }}</td>
                       <td class="clr-align-middle">{{ patient.date_of_birth ? calculateAge(patient.date_of_birth) : ''}}</td>
-                      <td class="clr-align-middle">12</td>
-                      <td class="clr-align-middle">Great</td>
+                      <td class="clr-align-middle">{{ patient.status }}</td>
                       <td>
-                        <button class="btn btn-primary" (click)="routeTo(patient.episodeOfCareId)" [disabled]="!(patient && patient.episodeOfCareId)">Details</button>
+                        <button class="btn btn-primary" [routerLink]="['/patient-details', patient.episodeOfCareId]" [disabled]="!(patient && patient.episodeOfCareId && patient.status !== 'finished')">Details</button>
+                      </td>
+                      <td>
+                        <button class="btn btn-primary" [routerLink]="['/discharge-death', patient.episodeOfCareId]" [disabled]="!(patient && patient.episodeOfCareId && patient.status !== 'finished')">Discharge/Declare Dead</button>
                       </td>
                     </tr>
                   </tbody>

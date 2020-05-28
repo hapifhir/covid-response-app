@@ -80,7 +80,7 @@ export class AdmitpatientComponent implements OnInit {
     transaction.entry.push(entry_four);
 
     // create episode of care
-    const eocHL7 = this.fhirOperations.generateEpisodeOfCare(patient_temp_id, ct_temp_id);
+    const eocHL7 = this.fhirOperations.generateEpisodeOfCare(patient_temp_id,'active', ct_temp_id);
     const eoc_temp_id = 'urn:uuid:' + uuidv4();
     const entry_two = new FHIR.Entry();
     entry_two.fullUrl = eoc_temp_id;
@@ -94,7 +94,7 @@ export class AdmitpatientComponent implements OnInit {
 
     transaction.entry.push(entry_two);
     
-    const encounterHL7 = this.fhirOperations.generateEncounter(eoc_temp_id);
+    const encounterHL7 = this.fhirOperations.generateEncounter(eoc_temp_id, 'arrived');
     const entry_five = new FHIR.Entry();
     entry_five.resource = encounterHL7;
 
@@ -107,7 +107,7 @@ export class AdmitpatientComponent implements OnInit {
     transaction.entry.push(entry_five);
 
     // create question response resource
-    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions,patient_temp_id,  'WHO_MODULE_1_Questionnaire_Response');
+    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions, patient_temp_id, 'WHO_MODULE_1_Questionnaire_Response');
     const entry_three = new FHIR.Entry();
     entry_three.resource = questionnaireResponse;
 
@@ -124,7 +124,7 @@ export class AdmitpatientComponent implements OnInit {
     try{
       const transactionResponse = await this.httpService.postTransaction(transaction);
       console.log('transactionResponse', transactionResponse);
-      this.routes.navigate(['']);
+      this.modalStatus = true;
     }catch (error)
     {
       console.log(error);

@@ -9,7 +9,7 @@ export class FhirOperationsService {
 
   constructor() { }
 
-  generateQuestionnaireResponse(formValues, quest: any, patientUUID, questionnaireName,serviceRequestUUID?) {
+  generateQuestionnaireResponse(formValues, quest: any, patientUUID, questionnaireName) {
     const scope = this;
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
     const identifier = new FHIR.Identifier();
@@ -19,11 +19,6 @@ export class FhirOperationsService {
       const _subject = new FHIR.Reference();
       _subject.reference = patientUUID;
       questionnaireResponse.subject = _subject;
-    }
-
-    if (serviceRequestUUID) {
-      const basedOnRef = serviceRequestUUID;
-      questionnaireResponse.basedOn = [basedOnRef];
     }
 
     // questionnaire id
@@ -159,38 +154,11 @@ export class FhirOperationsService {
     return patient;
   }
 
-  // not being use currently
-  generateServiceRequest(subject) {
-    // {
-    //   "resourceType": "ServiceRequest",
-    //   "status": "active",
-    //   "intent": "order",
-    //   "priority": "routine",
-    //   "subject": {
-    //     "reference": "Patient/example"
-    //   },
-    //   "authoredOn": "2013-05-02T16:16:00-07:00"  // skipped for now
-    // }
 
-    const sr = new FHIR.ServiceRequest();
-    sr.resourceType = 'ServiceRequest';
-    sr.status = 'active';
-    sr.intent = 'order';
-    sr.priority = 'routine';
-
-    const _subject = new FHIR.Reference();
-    _subject.reference = subject;
-    sr.subject = _subject;
-
-    // sr.authoredOn = 
-
-    return sr;
-  }
-
-  generateEpisodeOfCare(patientId, careteamId) {
+  generateEpisodeOfCare(patientId, status, careteamId) {
     const eoc = new FHIR.EpisodeOfCare();
     eoc.resourceType = 'EpisodeOfCare';
-    eoc.status = 'active';
+    eoc.status = status;
 
     // add team ref to care team
     const _ct = new FHIR.Reference();
@@ -204,10 +172,10 @@ export class FhirOperationsService {
     return eoc;
   }
 
-  generateEncounter(eocId) {
+  generateEncounter(eocId, status) {
     const encounter = new FHIR.Encounter();
     encounter.resourceType = 'Encounter';
-    encounter.status = 'planned';
+    encounter.status = status;
 
     const _eoc = new FHIR.Reference();
     _eoc.reference = eocId;

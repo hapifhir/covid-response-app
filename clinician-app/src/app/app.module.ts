@@ -19,6 +19,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MomentModule } from 'ngx-moment';
 import { AuthGuardService } from './services/auth-guard.service';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
+import { DailyAssessmentsComponent } from './components/daily-assessments/daily-assessments.component';
 import { DischargeDeathComponent } from './components/discharge-death/discharge-death.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     DashboardComponent,
     AdmitpatientComponent,
     PatientDetailsComponent,
+    DailyAssessmentsComponent,
     DischargeDeathComponent
   ],
   imports: [

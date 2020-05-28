@@ -1,8 +1,8 @@
-<div *ngIf="this.loadData" class="clr-row">    
+<div *ngIf="this.loadData" class="clr-row">
     <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
     <div class="clr-col-10 clr-col-sm-6 clr-col-md-6 clr-col-lg-8">
         <div class="clr-row clr-justify-content-center">
-            <h2>Patient Discharge/Death Form</h2>
+            <h2>Daily Assessment Form</h2>
         </div>
         <app-form-view [questions]="this.questions" (submitEvent)="submitQuestionnaire($event)"></app-form-view>
     </div>

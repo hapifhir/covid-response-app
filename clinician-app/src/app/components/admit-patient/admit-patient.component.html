@@ -1,8 +1,11 @@
-<h2>Admit patient questionnaire</h2> 
 <div *ngIf="this.loadData" class="clr-row">
     <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
     <div class="clr-col-10 clr-col-sm-6 clr-col-md-6 clr-col-lg-8">
-        <app-form-view [questions]="this.questions" (submitEvent)="submitQuestionnaire($event)"></app-form-view>
+        <div class="clr-row clr-justify-content-center">
+            <h2>Patient Admission Form</h2>
+        </div>
+        <app-form-view [questions]="this.questions" (submitEvent)="submitQuestionnaire($event)">
+        </app-form-view>
         <clr-modal [(clrModalOpen)]="modalStatus" [clrModalSize]="'sm'" [clrModalClosable]="false">
             <h3 class="modal-title">Information</h3>
             <div class="modal-body">
