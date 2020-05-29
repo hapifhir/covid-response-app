@@ -29,6 +29,12 @@ class NavDrawer extends StatelessWidget {
                 Navigator.pushNamed(context, '/testScreen');
               },
             ),
+            ListTile(
+              title: Text('User Settings'),
+              onTap: () {
+                Navigator.pushNamed(context, '/userSettings');
+              },
+            ),
           ],
         )
     );

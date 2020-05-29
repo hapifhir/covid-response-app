@@ -9,7 +9,7 @@ class UserDefaults {
     var map = <String, dynamic>{
       'id': id,
       'preferenceOption': preferenceOption,
-      'preferenceOption': preferenceOption
+      'preferenceValue': preferenceValue
     };
     return map;
   }

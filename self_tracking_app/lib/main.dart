@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:selftrackingapp/pages/UserSettings.dart';
 import 'package:selftrackingapp/shared/NavDrawer.dart';
 import 'TestScreen.dart';
 import 'DBService.dart';
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         initialRoute: '/',
         routes: {
-          '/testScreen': (context) => TestScreen()
+          '/testScreen': (context) => TestScreen(),
+          '/userSettings': (context) => UserSettings()
         },
         theme: ThemeData(
           // This is the theme of your application.
