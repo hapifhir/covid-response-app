@@ -9,7 +9,7 @@ class UserTrackingForm extends StatefulWidget {
   final state = _UserTrackingFormState();
   final OnDelete onDelete;
 
-  UserTrackingForm({this.userTracking, this.onDelete});
+  UserTrackingForm({Key key, this.userTracking, this.onDelete}): super(key: key);
 
   @override
   _UserTrackingFormState createState() => state;

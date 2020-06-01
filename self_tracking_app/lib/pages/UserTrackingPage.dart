@@ -13,6 +13,8 @@ class UserTrackingPage extends StatefulWidget {
 
 class _UserTrackingPageState extends State<UserTrackingPage> {
   List<UserTracking> userTrackings = [];
+  List<UserTrackingForm> userTrackingForms = [];
+
   @override
   void initState() {
     super.initState();
@@ -20,25 +22,28 @@ class _UserTrackingPageState extends State<UserTrackingPage> {
 
   @override
   Widget build(BuildContext context) {
+    userTrackingForms.clear();
+    for (int i = 0; i < userTrackings.length; i++) {
+      userTrackingForms.add(UserTrackingForm(key: GlobalKey(),userTracking: userTrackings[i],
+      onDelete: () => onDelete(i)
+      ));
+    }
     return Scaffold(
         appBar: AppBar(
           title: Text('User Preferences'),
+          actions: <Widget>[
+            FlatButton(onPressed: onSave, child: Text('Save'))
+          ],
         ),
         body: Container(
           margin: EdgeInsets.only(top: 50),
           child: userTrackings.length <= 0
-              ? Center(
-                  child: Text('Please add locations using the button',
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 16)))
+              ? null
               : ListView.builder(
                   addAutomaticKeepAlives: true,
                   itemCount: userTrackings.length,
-                  itemBuilder: (_, i) => UserTrackingForm(
-                      userTracking: userTrackings[i],
-                      onDelete: () => onDelete(i)),
-                ),
+                  itemBuilder: (_, i) => userTrackingForms[i]
+                )
         ),
         floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
@@ -48,17 +53,26 @@ class _UserTrackingPageState extends State<UserTrackingPage> {
         drawer: NavDrawer());
   }
 
-  ///on form userTracking deleted
+  ///on form userTracking delete
   void onDelete(int index) {
     setState(() {
       userTrackings.removeAt(index);
     });
   }
 
-  ///on form userTracking added
+  ///on form userTracking add
   void onAdd() {
     setState(() {
       userTrackings.add(UserTracking());
     });
+  }
+
+  // on form save
+  void onSave() {
+    userTrackingForms.forEach((form) {
+      if(form.isValid()) {
+        print(form);
+      }
+    } );
   }
 }
