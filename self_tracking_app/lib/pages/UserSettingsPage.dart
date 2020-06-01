@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_country_picker/flutter_country_picker.dart';
 import 'package:selftrackingapp/shared/NavDrawer.dart';
 
-class UserSettings extends StatefulWidget {
+class UserSettingsPage extends StatefulWidget {
   @override
-  _UserSettingsState createState() {
-    return _UserSettingsState();
+  _UserSettingsPageState createState() {
+    return _UserSettingsPageState();
   }
 }
 
-class _UserSettingsState extends State<UserSettings> {
+class _UserSettingsPageState extends State<UserSettingsPage> {
   Country _selected;
   final _userSettingsForm = GlobalKey<FormState>();
   bool _notificationsCheckBox = false;
