@@ -96,8 +96,39 @@
         </div>
         <div class="clr-row">
             <div class="clr-col">
-                <button class="btn btn-primary" [routerLink]="['/daily-assessments', eocId]">Conduct Daily
-                    Assessment</button>
+                <div class="card">
+                    <div class="card-header">
+                        Assessment
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        <table class="table table-compact">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let questionnaire of patientAssessments">
+                                    <td>{{questionnaire.resource.identifier.value}}</td>
+                                    <td>{{questionnaire.resource.authored | date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clr-row">
+            <div class="clr-col">
+                <div class="card">
+                    <div class="card-header">
+                        Encounters
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        
+                    </div>
+                </div>
             </div>
         </div>
     </div>
