@@ -23,7 +23,7 @@ class _UserTrackingPageState extends State<UserTrackingPage> {
 
   @override
   Widget build(BuildContext context) {
-    userTrackingForms.clear();
+    // userTrackingForms.clear();
     for (int i = 0; i < userTrackings.length; i++) {
       userTrackingForms.add(UserTrackingForm(
           key: GlobalKey(),
