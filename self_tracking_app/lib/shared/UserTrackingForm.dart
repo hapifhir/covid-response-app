@@ -6,13 +6,17 @@ typedef OnDelete();
 
 class UserTrackingForm extends StatefulWidget {
   final UserTracking userTracking;
-  final state = _UserTrackingFormState();
   final OnDelete onDelete;
+
 
   UserTrackingForm({Key key, this.userTracking, this.onDelete}): super(key: key);
 
+  var state =  _UserTrackingFormState();
+
   @override
-  _UserTrackingFormState createState() => state;
+  _UserTrackingFormState createState() {
+    return this.state = new _UserTrackingFormState();
+  } 
   bool isValid() => state.validate();
 }
 
@@ -94,6 +98,7 @@ class _UserTrackingFormState extends State<UserTrackingForm> {
 
   bool validate() {
     var valid = _userTrackingFormKey.currentState.validate();
+    print(valid);
     if (valid) _userTrackingFormKey.currentState.save();
     return valid;
   }
