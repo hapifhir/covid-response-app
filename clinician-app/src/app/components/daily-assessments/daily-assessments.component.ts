@@ -47,7 +47,7 @@ export class DailyAssessmentsComponent implements OnInit {
     transaction.type = 'transaction';
     transaction.entry = [];
     
-    const encounterHL7 = this.fhirOperations.generateEncounter('EpisodeOfCare/' + this.eocId, 'in-progress');
+    const encounterHL7 = this.fhirOperations.generateEncounter('EpisodeOfCare/' + this.eocId, 'Patient/' +  this.patientDetails.id, 'in-progress');
     const entry_five = new FHIR.Entry();
     entry_five.resource = encounterHL7;
 
@@ -76,7 +76,7 @@ export class DailyAssessmentsComponent implements OnInit {
 
     try{
       const transactionResponse = await this.httpService.postTransaction(transaction);
-      this.router.navigate(['patient-details', this.eocId]);
+      this.router.navigate(['patient-details', this.patientDetails.id]);
     }catch (error)
     {
       console.log(error);

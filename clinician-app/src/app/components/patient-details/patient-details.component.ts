@@ -15,25 +15,21 @@ export class PatientDetailsComponent implements OnInit {
   patientDetails;
   patientAssessments;
   patientEncounters;
+  eocId;
 
   ngOnInit(): void {
     this.pacId = this.route.snapshot.params.pacId;
     console.log ('pacID:'+ this.pacId);
     this.getPatientBundle();
-    //assesment
-    
   }
   
   async getPatientBundle() {
     const patientBundle = await this.httpService.getResourceByQueryParam('Patient', '?_id=' + this.pacId + '&_revinclude=*');
     this.patientDetails = patientBundle['entry'].filter(i => i.resource.resourceType === 'Patient')[0].resource;
     this.patientAssessments = patientBundle['entry'].filter(i => i.resource.resourceType === 'QuestionnaireResponse');
-    //load encounters
-    const  episodeBundle = await this.httpService.getResourceByQueryParam('EpisodeOfCare','?patient=' + this.pacId + '&_revinclude=*');
-    this.patientEncounters = episodeBundle['entry'].filter(i => i.resource.resourceType === 'Encounter')
-    console.log(this.patientEncounters[0]);
+    this.patientEncounters = patientBundle['entry'].filter(i => i.resource.resourceType === 'Encounter');
+    const eoc =  patientBundle['entry'].filter(i => i.resource.resourceType === 'EpisodeOfCare')[0].resource;
+    this.eocId = eoc.id;
   }
- 
 
- 
 }

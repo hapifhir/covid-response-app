@@ -94,7 +94,7 @@ export class AdmitpatientComponent implements OnInit {
 
     transaction.entry.push(entry_two);
     
-    const encounterHL7 = this.fhirOperations.generateEncounter(eoc_temp_id, 'arrived');
+    const encounterHL7 = this.fhirOperations.generateEncounter(eoc_temp_id, patient_temp_id, 'arrived');
     const entry_five = new FHIR.Entry();
     entry_five.resource = encounterHL7;
 
