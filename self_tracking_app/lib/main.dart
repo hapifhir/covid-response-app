@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:selftrackingapp/DBService.dart';
 import 'package:selftrackingapp/pages/UserSettingsPage.dart';
 import 'package:selftrackingapp/pages/UserTrackingPage.dart';
 import 'package:selftrackingapp/shared/NavDrawer.dart';
 import 'TestScreen.dart';
-import 'DBService.dart';
 
 void main() => runApp(MyApp());
 
@@ -54,12 +54,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var dbService;
-
+  var dbService; 
   @override
   void initState() {
-    super.initState();
     dbService = DBService();
+    super.initState();
   }
 
   @override

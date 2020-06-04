@@ -26,6 +26,7 @@ class DBService {
     Batch initBatch = db.batch();
     initBatch.execute("CREATE TABLE UserDefaults (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, preferenceOption TEXT, preferenceValue TEXT)");
     initBatch.execute("CREATE TABLE FHIRResources (patientId INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, patient TEXT, episodeOfCare TEXT, questionnaireResponse TEXT, careTeam TEXT, encounter TEXT, consent TEXT)");
+    await initBatch.commit(noResult: true);
   }
 
   Future<FHIRResources> saveFHIRResources(FHIRResources fhirResources) async {
@@ -63,6 +64,10 @@ class DBService {
     dbClient.close();
   }
 
+  Future<List<Map<String, dynamic>>> getBySqlQuery(String query) async {
+    var dbClient = await db;
+    return await dbClient.rawQuery(query);
+  }
 
 
 
