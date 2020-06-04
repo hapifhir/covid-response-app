@@ -109,9 +109,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let questionnaire of patientAssessments">
-                                    <td>{{questionnaire.resource.identifier.value}}</td>
-                                    <td>{{questionnaire.resource.authored | date}}</td>
+                                <tr *ngFor="let assessment of patientAssessments">
+                                    <td>{{assessment.resource.identifier.value}}</td>
+                                    <td>{{assessment.resource.authored | date}}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -126,7 +126,12 @@
                         Encounters
                     </div>
                     <div class="card-block" *ngIf="patientDetails">
-                        
+                        <clr-accordion>
+                            <clr-accordion-panel *ngFor="let encounter of patientEncounters">
+                              <clr-accordion-title>{{encounter.resource.id}}</clr-accordion-title>
+                              <clr-accordion-content *clrIfExpanded>Date</clr-accordion-content>
+                            </clr-accordion-panel>
+                        </clr-accordion>
                     </div>
                 </div>
             </div>
