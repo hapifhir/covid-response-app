@@ -10,19 +10,30 @@ import { HttpService } from 'src/app/services/http.service';
 export class PatientDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private httpService: HttpService,private router: Router) { }
-  eocId;
+
+  pacId;
   patientDetails;
+  patientAssessments;
+  patientEncounters;
 
   ngOnInit(): void {
-    this.eocId = this.route.snapshot.params.eocId;
+    this.pacId = this.route.snapshot.params.pacId;
+    console.log ('pacID:'+ this.pacId);
     this.getPatientBundle();
+    //assesment
+    
   }
-
-  async getPatientBundle() {
-    const patientBundle = await this.httpService.getResourceByQueryParam('EpisodeOfCare', '?_id=' + this.eocId + '&_include=*');
-    this.patientDetails = patientBundle['entry'].filter(i => i.resource.resourceType === 'Patient')[0].resource;
-  }
-
   
+  async getPatientBundle() {
+    const patientBundle = await this.httpService.getResourceByQueryParam('Patient', '?_id=' + this.pacId + '&_revinclude=*');
+    this.patientDetails = patientBundle['entry'].filter(i => i.resource.resourceType === 'Patient')[0].resource;
+    this.patientAssessments = patientBundle['entry'].filter(i => i.resource.resourceType === 'QuestionnaireResponse');
+    //load encounters
+    const  episodeBundle = await this.httpService.getResourceByQueryParam('EpisodeOfCare','?patient=' + this.pacId + '&_revinclude=*');
+    this.patientEncounters = episodeBundle['entry'].filter(i => i.resource.resourceType === 'Encounter')
+    console.log(this.patientEncounters[0]);
+  }
+ 
 
+ 
 }

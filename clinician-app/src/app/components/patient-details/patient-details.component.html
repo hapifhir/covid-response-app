@@ -96,8 +96,44 @@
         </div>
         <div class="clr-row">
             <div class="clr-col">
-                <button class="btn btn-primary" [routerLink]="['/daily-assessments', eocId]">Conduct Daily
-                    Assessment</button>
+                <div class="card">
+                    <div class="card-header">
+                        Assessment
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        <table class="table table-compact">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let assessment of patientAssessments">
+                                    <td>{{assessment.resource.identifier.value}}</td>
+                                    <td>{{assessment.resource.authored | date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clr-row">
+            <div class="clr-col">
+                <div class="card">
+                    <div class="card-header">
+                        Encounters
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        <clr-accordion>
+                            <clr-accordion-panel *ngFor="let encounter of patientEncounters">
+                              <clr-accordion-title>{{encounter.resource.id}}</clr-accordion-title>
+                              <clr-accordion-content *clrIfExpanded>Date</clr-accordion-content>
+                            </clr-accordion-panel>
+                        </clr-accordion>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
