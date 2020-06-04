@@ -54,7 +54,7 @@ export class DischargeDeathComponent implements OnInit {
     transaction.type = 'transaction';
     transaction.entry = [];
 
-    const patient_temp_id = 'Patient/' + this.patientDetails.id;
+    const patientFullId = 'Patient/' + this.patientDetails.id;
 
     // update episode of care
     const entry_one = new FHIR.Entry();
@@ -71,7 +71,7 @@ export class DischargeDeathComponent implements OnInit {
     transaction.entry.push(entry_one);
 
     // create question response resource
-    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions, patient_temp_id, "WHO_Module_3_Questionnaire_Response");
+    const questionnaireResponse = this.fhirOperations.generateQuestionnaireResponse(formQuestions, this.questions, patientFullId, "WHO_Module_3_Questionnaire_Response");
     const entry_two = new FHIR.Entry();
     entry_two.resource = questionnaireResponse;
 
@@ -82,6 +82,18 @@ export class DischargeDeathComponent implements OnInit {
     entry_two.request = req_two;
 
     transaction.entry.push(entry_two);
+
+    const encounterHL7 = this.fhirOperations.generateEncounter('EpisodeOfCare/' + this.eocId, patientFullId, 'finished');
+    const entry_three = new FHIR.Entry();
+    entry_three.resource = encounterHL7;
+
+    const req_three = new FHIR.Request();
+    req_three.method = 'POST';
+    req_three.url = 'Encounter';
+
+    entry_three.request = req_three;
+
+    transaction.entry.push(entry_three);
 
     console.log('transaction', transaction);
 

@@ -172,7 +172,7 @@ export class FhirOperationsService {
     return eoc;
   }
 
-  generateEncounter(eocId, status) {
+  generateEncounter(eocId, patId, status) {
     const encounter = new FHIR.Encounter();
     encounter.resourceType = 'Encounter';
     encounter.status = status;
@@ -181,6 +181,10 @@ export class FhirOperationsService {
     _eoc.reference = eocId;
     encounter.episodeOfCare = [_eoc];
 
+    const _subject = new FHIR.Reference();
+    _subject.reference = patId;
+    encounter.subject = _subject;
+    
     return encounter;
   }
 
