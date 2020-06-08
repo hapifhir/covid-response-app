@@ -12,32 +12,56 @@ import * as FHIR from '../../interfaces/FHIR';
   styleUrls: ['./discharge-death.component.css']
 })
 export class DischargeDeathComponent implements OnInit {
+  @Input() questId: string;
   questions: any;
   loadData: boolean;
   eocId: string;
   patientDetails: FHIR.Patient;
   eoc: FHIR.EpisodeOfCare;
+  questionnaireResponse: any;
+  finishloadQuest: boolean;
+  finishloadResp: boolean;
 
   constructor(private httpService: HttpService, private route: ActivatedRoute, private fhirOperations: FhirOperationsService,
     private router: Router) { }
 
 
   ngOnInit(): void {
+    
     this.route.queryParamMap.subscribe(params => {
       this.eocId = this.route.snapshot.params.eocId;
     });
+    this.questId = this.route.snapshot.queryParamMap.get('questId')
+  
     this.loadForm();
-    this.getResourcesBundle();
+    
+    if ( this.questId != null && this.questId != undefined )
+    {
+      this.loadQuestionnaireResponse();
+    }else
+    {
+      this.getResourcesBundle();
+    }
   }
+  async loadForm() {
 
-  loadForm() {
-    this.httpService.getResourceByQueryParam('Questionnaire', '?identifier=WHO_Module_3').then(res => {
-      const resource = res['entry'][0].resource;
-      this.questions = resource;
+    const res = await this.httpService.getResourceByQueryParam('Questionnaire', '?identifier=WHO_Module_3');
+    const resource = res['entry'][0].resource;
+    this.questions = resource;
+    this.finishloadQuest = true;
+    if ( this.questId != null && this.questId != undefined )
+      this.loadData = this.finishloadQuest && this.finishloadResp;
+    else
       this.loadData = true;
-    }).catch(error => {
-      console.log(Promise.reject(error));
-    });
+      
+  }
+ 
+  async loadQuestionnaireResponse()
+  {
+    this.questionnaireResponse = await this.httpService.getResourceByQueryParam('QuestionnaireResponse', '/' + this.questId );
+    this.finishloadResp = true;
+    this.loadData = this.finishloadQuest && this.finishloadResp;
+    
   }
 
   async getResourcesBundle() {

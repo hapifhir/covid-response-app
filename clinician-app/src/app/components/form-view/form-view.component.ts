@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Questionnaire, QuestionnaireItem, QuestionnaireItemGroup } from './../../interfaces/FHIR';
+import { Questionnaire, QuestionnaireItem, QuestionnaireItemGroup,QuestionnaireResponse } from './../../interfaces/FHIR';
 import { ChangeDetectorRef } from '@angular/core';
  import * as testData from '../../../assets/test_data/admit_patient_test_values.json';
+import { Items } from '@clr/angular/data/datagrid/providers/items';
 // import * as testData from '../../../assets/test_data/daily_assessment_test_values.json';
 // import * as testData from '../../../assets/test_data/death_discharge_test_values.json';
 
@@ -14,7 +15,10 @@ import { ChangeDetectorRef } from '@angular/core';
 export class FormviewComponent implements OnInit {
   form: FormGroup;
   @Input() questions: Questionnaire;
+  @Input() questionnaireResponse: QuestionnaireResponse;
   @Output() submitEvent: EventEmitter<Questionnaire> = new EventEmitter();
+
+  isReadOnly: boolean;
 
   testData = (testData as any).default;
 
@@ -22,23 +26,57 @@ export class FormviewComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log('testData', this.testData);
-
+    console.log("pruba");
     let group: any = {};
     let controls: any = {};
+    
+ 
+    this.isReadOnly = this.questionnaireResponse != null && this.questionnaireResponse != undefined ;
 
     this.questions.item.forEach(question => {
       controls = {};
       question.item.forEach(ctrl2 => {
         if (ctrl2.required)
-          controls[ctrl2.linkId] = new FormControl(ctrl2.value, [Validators.required]);
-        else
-          controls[ctrl2.linkId] = new FormControl(ctrl2.value);
+        {
+          if (this.isReadOnly)
+          {
+           // controls[ctrl2.linkId] = new FormControl({value: ctrl2.value, disabled: this.isReadOnly});      
+           controls[ctrl2.linkId] = new FormControl({value: ctrl2.value});       
+          }
+          else
+          {
+            controls[ctrl2.linkId] = new FormControl(ctrl2.value, [Validators.required]);
+
+          }
+
+        }else
+        {
+          if (this.isReadOnly)
+          {
+       //     controls[ctrl2.linkId] = new FormControl({value: ctrl2.value, disabled: this.isReadOnly});
+            controls[ctrl2.linkId] = new FormControl({value: ctrl2.value});
+           
+          }
+          else
+          controls[ctrl2.linkId] = new FormControl({value: ctrl2.value});
+        } 
+        
+        
       });
       group[question.linkId] = new FormGroup(controls);
+      console.log( group[question.linkId].valid);
+      
     });
     
     this.form = new FormGroup(group);
     
+    
+    
+    if (this.questionnaireResponse != null && this.questionnaireResponse != undefined )
+    {
+      this.questionnaireResponseToForm(this.questionnaireResponse);
+      this.isReadOnly = true;
+    }
   // this.form.setValue(this.testData); // set default values for testing purposes, comment it out for prod
   }
 
@@ -77,12 +115,53 @@ export class FormviewComponent implements OnInit {
 
     return valid;
   }
-
+ 
   submitForm() {
     if (!this.form.invalid) {
       const formValues = this.form.value;
       // console.log('formValues', formValues);
       this.submitEvent.emit(formValues);
     }
+  }
+ 
+  questionnaireResponseToForm(questionnaireResponse : any)
+  {
+    
+    let group:any={};
+    let ctrl:any={};
+
+
+    questionnaireResponse.item.forEach(element => {
+        ctrl={};
+        element.item.forEach(subElement => {
+          ctrl[subElement.linkId.substring(element.linkId.length+1)] = this.getItemValue(subElement.answer[0]);              
+        });
+        group[element.linkId] = ctrl;
+      
+    });
+    //missing demografics patients
+    this.form.patchValue(group);
+    
+
+  }
+  getItemValue (item: any)
+  {
+    if (item.valueString != null && item.valueString != undefined)
+    {
+      return item.valueString;
+    }
+    if (item.valueCoding != null && item.valueCoding != undefined)
+    {
+      return item.valueCoding.code;
+    }
+    if (item.valueDate != null && item.valueDate != undefined)
+    {
+      return item.valueDate;
+    }
+    if (item.valueBoolean != null && item.valueBoolean != undefined)
+    {
+      return item.valueBoolean;
+    }
+    
   }
 }

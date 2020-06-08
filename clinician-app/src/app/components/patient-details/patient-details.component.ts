@@ -32,4 +32,17 @@ export class PatientDetailsComponent implements OnInit {
     this.eocId = eoc.id;
   }
 
+  ViewAssessment(assessment:any)
+  {
+    switch (assessment.identifier.value)
+    {
+      case "WHO_MODULE_1_Questionnaire_Response":
+        this.router.navigate(['/admit-patient', assessment.id]);
+        break;
+      case "WHO_Module_3_Questionnaire_Response":
+        this.router.navigate(['/discharge-death',this.eocId],{ queryParams: { questId: assessment.id }}); 
+        break;
+    }
+  }
+
 }

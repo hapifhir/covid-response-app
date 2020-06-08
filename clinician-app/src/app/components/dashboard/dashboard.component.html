@@ -26,7 +26,7 @@
                       <td class="clr-align-middle">{{ patient.date_of_birth ? calculateAge(patient.date_of_birth) : ''}}</td>
                       <td class="clr-align-middle">{{ patient.status }}</td>
                       <td>
-                        <button class="btn btn-primary" [routerLink]="['/patient-details', patient.patId]" [disabled]="!(patient && patient.episodeOfCareId && patient.status !== 'finished')">Details</button>
+                        <button class="btn btn-primary" [routerLink]="['/patient-details', patient.patId]" >Details</button>
                       </td>
                       <td>
                         <button class="btn btn-primary" [routerLink]="['/discharge-death', patient.episodeOfCareId]" [disabled]="!(patient && patient.episodeOfCareId && patient.status !== 'finished')">Discharge/Declare Dead</button>
