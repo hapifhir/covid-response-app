@@ -16,6 +16,7 @@ export class PatientDetailsComponent implements OnInit {
   patientAssessments;
   patientEncounters;
   eocId;
+  patStatus;
 
   ngOnInit(): void {
     this.pacId = this.route.snapshot.params.pacId;
@@ -30,6 +31,7 @@ export class PatientDetailsComponent implements OnInit {
     this.patientEncounters = patientBundle['entry'].filter(i => i.resource.resourceType === 'Encounter');
     const eoc =  patientBundle['entry'].filter(i => i.resource.resourceType === 'EpisodeOfCare')[0].resource;
     this.eocId = eoc.id;
+    this.patStatus = eoc.status;
   }
 
   ViewAssessment(assessment:any)
