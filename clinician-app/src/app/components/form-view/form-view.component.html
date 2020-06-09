@@ -86,7 +86,7 @@
                     </clr-step-content>
                 </clr-stepper-panel>
             </div>
-            <button class="btn btn-success" type="submit" (click)="submitForm()">Submit</button>
+            <button class="btn btn-success" type="submit" (click)="submitForm()" *ngIf="!this.isReadOnly">Submit</button>
         </form>
     </div>
 </div>

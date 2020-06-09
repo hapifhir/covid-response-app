@@ -14,24 +14,45 @@ import * as FHIR from '../../interfaces/FHIR';
   styleUrls: ['./admit-patient.component.css']
 })
 export class AdmitpatientComponent implements OnInit {
+  @Input() questId: string;
   questions: any;
+  questionnaireResponse: any;
   loadData: boolean;
+  finishloadQuest: boolean;
+  finishloadResp: boolean;
 
 
   constructor(private httpService: HttpService, private route: ActivatedRoute, private fhirOperations: FhirOperationsService,private routes:Router) { }
   modalStatus = false;
   ngOnInit(): void {
     this.loadForm();
+    this.questId =  this.route.snapshot.params.questId;
+  
+    if ( this.questId != null && this.questId != undefined )
+    {
+      this.loadQuestionnaireResponse();
+    }
+    
   }
+  
+  async loadQuestionnaireResponse()
+  {
+    this.questionnaireResponse = await this.httpService.getResourceByQueryParam('QuestionnaireResponse', '/' + this.questId );
+    this.finishloadResp = true;
+    this.loadData = this.finishloadQuest && this.finishloadResp;
+    
+  }
+  async loadForm() {
 
-  loadForm() {
-    this.httpService.getResourceByQueryParam('Questionnaire', '?identifier=WHO_Module_1').then(res => {
-      const resource = res['entry'][0].resource;
-      this.questions = resource;
+    const res = await this.httpService.getResourceByQueryParam('Questionnaire', '?identifier=WHO_Module_1');
+    const resource = res['entry'][0].resource;
+    this.questions = resource;
+    this.finishloadQuest = true;
+    if ( this.questId != null && this.questId != undefined )
+      this.loadData = this.finishloadQuest && this.finishloadResp;
+    else
       this.loadData = true;
-    }).catch(error => {
-      console.log(Promise.reject(error));
-    });
+      
   }
 
   async submitQuestionnaire(formQuestions: any) {

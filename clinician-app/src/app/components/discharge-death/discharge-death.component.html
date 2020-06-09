@@ -4,7 +4,8 @@
         <div class="clr-row clr-justify-content-center">
             <h2>Patient Discharge/Death Form</h2>
         </div>
-        <app-form-view [questions]="this.questions" (submitEvent)="submitQuestionnaire($event)"></app-form-view>
+        <app-form-view [questions]="this.questions" [questionnaireResponse]="this.questionnaireResponse" (submitEvent)="submitQuestionnaire($event)">
+    </app-form-view>
     </div>
     <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
 </div>
