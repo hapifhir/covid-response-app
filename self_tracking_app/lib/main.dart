@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:selftrackingapp/DBService.dart';
+import 'package:selftrackingapp/pages/PatientListPage.dart';
+import 'package:selftrackingapp/pages/PatientRegistrationPage.dart';
 import 'package:selftrackingapp/pages/UserSettingsPage.dart';
 import 'package:selftrackingapp/pages/UserTrackingPage.dart';
 import 'package:selftrackingapp/shared/NavDrawer.dart';
@@ -17,7 +19,9 @@ class MyApp extends StatelessWidget {
         routes: {
           '/testScreen': (context) => TestScreen(),
           '/userSettings': (context) => UserSettingsPage(),
-          '/userTracking': (context) => UserTrackingPage()
+          '/userTracking': (context) => UserTrackingPage(),
+          '/patientRegistration': (context) => PatientRegistrationPage(),
+          '/patientList': (context) => PatientListPage(),
         },
         theme: ThemeData(
           // This is the theme of your application.
