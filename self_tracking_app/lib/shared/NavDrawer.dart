@@ -3,9 +3,30 @@ import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
 
+  final Map<String, String> _navs = {
+    'Home': '/',
+    'Serializer': '/testScreen',
+    'User Settings': '/userSettings',
+    'User Tracking': '/userTracking',
+    'Patient Registration': '/patientRegistration',
+    'Patient List': '/patientList',
+  };
+
+  Widget _generateNavWidget(BuildContext context, String title, String route) {
+    return ListTile(
+      title: Text(title),
+      onTap: () => Navigator.pushNamed(context, route),
+    );
+  }
+
+  List<Widget> _generateTiles(BuildContext context) {
+    List<Widget> result = [];
+    _navs.forEach((k, v) => result.add(_generateNavWidget(context, k, v)));
+    return result;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Drawer(
         child: ListView(
           // Important: Remove any padding from the ListView.
@@ -17,30 +38,7 @@ class NavDrawer extends StatelessWidget {
                 color: Colors.blue,
               ),
             ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                Navigator.pushNamed(context, '/');
-              },
-            ),
-            ListTile(
-              title: Text('Serializer'),
-              onTap: () {
-                Navigator.pushNamed(context, '/testScreen');
-              },
-            ),
-            ListTile(
-              title: Text('User Settings'),
-              onTap: () {
-                Navigator.pushNamed(context, '/userSettings');
-              },
-            ),
-            ListTile(
-              title: Text('User Tracking'),
-              onTap: () {
-                Navigator.pushNamed(context, '/userTracking');
-              },
-            ),
+            ..._generateTiles(context)
           ],
         )
     );

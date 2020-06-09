@@ -1,12 +1,14 @@
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
+
 import 'models/FHIR.dart';
 
 typedef ItemToWidgetFunc = Widget Function(Item);
-typedef OnSubmitFunc = void Function(Map<String, List<FHIRType>>);
+typedef OnSubmitFunc = void Function(QuestionnaireResponse response, Map<String, List<FHIRType>>);
 
 class PlainQuestionnaireFormGenerator extends StatefulWidget {
   final Questionnaire questionnaire;
@@ -37,7 +39,30 @@ class _PlainQuestionnaireFormGeneratorState extends State<PlainQuestionnaireForm
     return {
       'string': generateStringItem,
       'choice': generateChoiceItem,
+      'date': generateDateItem,
     };
+  }
+
+  Widget generateDateItem(Item item) {
+    final format = DateFormat("yyyy-MM-dd");
+    return DateTimeField(
+      enabled: _isVisible[item.linkId],
+      format: format,
+      decoration: InputDecoration(
+        labelText: item.text,
+      ),
+      onShowPicker: (context, currentValue) {
+        return showDatePicker(
+            context: context,
+            firstDate: DateTime(1900),
+            initialDate: currentValue ?? DateTime.now(),
+            lastDate: DateTime(2100));
+      },
+      onChanged: (val) {
+        _answers[item.linkId] = [StringType(value: val?.toIso8601String())];
+        updateEnabled();
+      },
+    );
   }
 
   Widget generateStringItem(Item item) {
@@ -159,10 +184,7 @@ class _PlainQuestionnaireFormGeneratorState extends State<PlainQuestionnaireForm
         actions: <Widget>[
           IconButton(icon: const Icon(Icons.save), onPressed: () {
             if (_formKey.currentState.validate()) {
-              widget.onSubmit?.forEach((f) => f(_answers));
-              generateQuestionnaireResponse().item.forEach((item) {
-                print(JsonEncoder.withIndent('  ').convert(item.toJson()));
-              });
+              widget.onSubmit?.forEach((f) => f(generateQuestionnaireResponse(), _answers));
             }
           }),
         ]
