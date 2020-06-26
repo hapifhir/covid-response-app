@@ -25,55 +25,43 @@ export class FormviewComponent implements OnInit {
   constructor(private cdref: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    // console.log('testData', this.testData);
-    console.log("pruba");
     let group: any = {};
     let controls: any = {};
+    
 
 
     this.isReadOnly = this.questionnaireResponse != null && this.questionnaireResponse != undefined;
-
+    
+    
     this.questions.item.forEach(question => {
       controls = {};
+     
       question.item.forEach(ctrl2 => {
-        if (ctrl2.required) {
-          if (this.isReadOnly) {
-            // controls[ctrl2.linkId] = new FormControl({value: ctrl2.value, disabled: this.isReadOnly});      
-            controls[ctrl2.linkId] = new FormControl({ value: ctrl2.value });
-          }
-          else {
+        if (ctrl2.required && !this.isReadOnly) {
             controls[ctrl2.linkId] = new FormControl(ctrl2.value, [Validators.required]);
-          }
         } else {
-          if (this.isReadOnly) {
-            //     controls[ctrl2.linkId] = new FormControl({value: ctrl2.value, disabled: this.isReadOnly});
             controls[ctrl2.linkId] = new FormControl({ value: ctrl2.value });
-          }
-          else {
-            controls[ctrl2.linkId] = new FormControl({ value: ctrl2.value });
-          }
         }
+     
       });
       group[question.linkId] = new FormGroup(controls);
-      console.log(group[question.linkId].valid);
-
+     
     });
-
     this.form = new FormGroup(group);
 
     if (this.questionnaireResponse != null && this.questionnaireResponse != undefined) {
       this.questionnaireResponseToForm(this.questionnaireResponse);
       this.isReadOnly = true;
     }
-    this.form.setValue(this.testData); // set default values for testing purposes, comment it out for prod
+    //this.form.setValue(this.testData); // set default values for testing purposes, comment it out for prod
   }
 
   isEnableWhen(itemGroup: QuestionnaireItemGroup, item: QuestionnaireItem) {
     var conditionvalue;
     var value: string;
     var valid: boolean = false;
-    //--no rules enablewhen
-
+    
+    //--no rules enablewhen  
     if (item.enableWhen === undefined || item.enableWhen === null) {
       valid = true;
     } else {
@@ -92,15 +80,19 @@ export class FormviewComponent implements OnInit {
         }
       });
 
-      if (!valid) {
-        this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
-        this.form.get(itemGroup.linkId + '.' + item.linkId).clearValidators();
-        this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity();
-      } else {
-        this.form.get(itemGroup.linkId + '.' + item.linkId).setValidators(Validators.required);
+      if (!this.isReadOnly)
+      {
+        if (!valid) {
+          this.form.get(itemGroup.linkId + '.' + item.linkId).reset();
+          this.form.get(itemGroup.linkId + '.' + item.linkId).clearValidators();
+          this.form.get(itemGroup.linkId + '.' + item.linkId).updateValueAndValidity();
+        } else {
+          this.form.get(itemGroup.linkId + '.' + item.linkId).setValidators(Validators.required);
+        }
       }
     }
     return valid;
+    
   }
 
   submitForm() {
@@ -115,7 +107,7 @@ export class FormviewComponent implements OnInit {
 
     let group: any = {};
     let ctrl: any = {};
-
+    
     questionnaireResponse.item.forEach(element => {
       ctrl = {};
       element.item.forEach(subElement => {
@@ -125,6 +117,7 @@ export class FormviewComponent implements OnInit {
     });
     //missing demografics patients
     this.form.patchValue(group);
+   
   }
 
   getItemValue(item: any) {
@@ -141,4 +134,5 @@ export class FormviewComponent implements OnInit {
       return item.valueBoolean;
     }
   }
+  
 }

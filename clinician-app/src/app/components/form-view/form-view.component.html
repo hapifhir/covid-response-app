@@ -59,28 +59,30 @@
                     <clr-step-title>{{element.text}}</clr-step-title>
                     <clr-step-description></clr-step-description>
                     <clr-step-content *clrIfExpanded>
-                        <div *ngFor="let elementson of element.item;let i = index;let even=even">
-                            <span *ngIf="even">
-                                <div class="clr-row">
-                                    <div *ngIf="isEnableWhen(element,element.item[i])"
-                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
-                                        <ng-container [ngTemplateOutlet]="drawCtrl"
-                                            [ngTemplateOutletContext]="{formgroup:this.form.get(element.linkId),element:element,elementson:element.item[i]}">
-                                        </ng-container>
+                        <fieldset [disabled]="isReadOnly">
+                            <div *ngFor="let elementson of element.item;let i = index;let even=even">
+                                <span *ngIf="even">
+                                    <div class="clr-row">
+                                        <div *ngIf="isEnableWhen(element,element.item[i])"
+                                            class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
+                                            <ng-container [ngTemplateOutlet]="drawCtrl"
+                                                [ngTemplateOutletContext]="{formgroup:this.form.get(element.linkId),element:element,elementson:element.item[i]}">
+                                            </ng-container>
+                                        </div>
+                                        <div *ngIf="element.item.length>i+1 && isEnableWhen(element,element.item[i+1])"
+                                            class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
+                                            <ng-container [ngTemplateOutlet]="drawCtrl"
+                                                [ngTemplateOutletContext]="{formgroup:this.form.get(element.linkId),element:element,elementson:element.item[i+1]}">
+                                            </ng-container>
+                                        </div>
+                                        <div *ngIf="!(isEnableWhen(element,element.item[i]))"
+                                            class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
+                                        <div *ngIf="!(element.item.length>i+1 && isEnableWhen(element,element.item[i+1]))"
+                                            class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
                                     </div>
-                                    <div *ngIf="element.item.length>i+1 && isEnableWhen(element,element.item[i+1])"
-                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6">
-                                        <ng-container [ngTemplateOutlet]="drawCtrl"
-                                            [ngTemplateOutletContext]="{formgroup:this.form.get(element.linkId),element:element,elementson:element.item[i+1]}">
-                                        </ng-container>
-                                    </div>
-                                    <div *ngIf="!(isEnableWhen(element,element.item[i]))"
-                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
-                                    <div *ngIf="!(element.item.length>i+1 && isEnableWhen(element,element.item[i+1]))"
-                                        class="clr-col-6 clr-col-sm-6 clr-col-md-6 clr-col-lg-6"></div>
-                                </div>
-                            </span>
-                        </div>
+                                </span>
+                            </div>
+                        </fieldset>
                         <button clrStepButton="next" name="{{element.linkId + '_button'}} ">next</button>
                     </clr-step-content>
                 </clr-stepper-panel>
