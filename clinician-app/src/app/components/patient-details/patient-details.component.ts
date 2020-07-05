@@ -34,6 +34,19 @@ export class PatientDetailsComponent implements OnInit {
     this.patStatus = eoc.status;
   }
 
+  getNameAssessment(nameId:string)
+  {
+    switch(nameId)
+    {
+      case "WHO_MODULE_1_Questionnaire_Response":
+        return "Admit";
+      case "WHO_Module_3_Questionnaire_Response":
+        return "Discharge";
+      case "WHO_MODULE_2_Questionnaire_Response":
+        return "Daily";
+    }
+    
+  }
   ViewAssessment(assessment:any)
   {
     switch (assessment.identifier.value)
@@ -43,6 +56,9 @@ export class PatientDetailsComponent implements OnInit {
         break;
       case "WHO_Module_3_Questionnaire_Response":
         this.router.navigate(['/discharge-death',this.eocId],{ queryParams: { questId: assessment.id }}); 
+        break;
+      case "WHO_MODULE_2_Questionnaire_Response":
+        this.router.navigate(['/daily-assessments',this.eocId],{ queryParams: { questId: assessment.id }}); 
         break;
     }
   }

@@ -113,7 +113,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let assessment of patientAssessments">
-                                    <td>{{assessment.resource.identifier.value}}</td>
+                                    <td>{{getNameAssessment(assessment.resource.identifier.value)}}</td>
                                     <td>{{assessment.resource.authored | date}}</td>
                                     <td><button class="btn btn-primary" (click)="ViewAssessment(assessment.resource)">View Assessment</button></td>
                                 </tr>

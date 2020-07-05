@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from 'src/app/services/http.service';
 import * as FHIR from './../../interfaces/FHIR';
 import { FhirOperationsService } from 'src/app/services/fhir-operations.service';
@@ -13,25 +13,49 @@ export class DailyAssessmentsComponent implements OnInit {
 
   constructor(private httpService: HttpService, private fhirOperations: FhirOperationsService,
     private route: ActivatedRoute, private router: Router) { }
-
+  @Input() questId: string;
   questions: any;
+  questionnaireResponse: any;
   loadData: boolean;
   eocId;
   patientDetails;
+  finishloadQuest: boolean;
+  finishloadResp: boolean;
+
   ngOnInit(): void {
     this.eocId = this.route.snapshot.params.eocId;
+    this.questId = this.route.snapshot.queryParamMap.get('questId'); 
     this.loadForm();
-    this.getPatientBundle();
+
+    if ( this.questId != null && this.questId != undefined )
+    {
+      this.loadQuestionnaireResponse();
+    }else
+    {
+      this.getPatientBundle();
+    }
   }
 
   loadForm() {
     this.httpService.getResourceByQueryParam('Questionnaire', '?identifier=WHO_Module_2').then(res => {
       const resource = res['entry'][0].resource;
       this.questions = resource;
-      this.loadData = true;
+      this.finishloadQuest = true;
+      if ( this.questId != null && this.questId != undefined )
+        this.loadData = this.finishloadQuest && this.finishloadResp;
+      else
+        this.loadData = true;
+        
     }).catch(error => {
       console.log(Promise.reject(error));
     });
+  }
+  async loadQuestionnaireResponse()
+  {
+    this.questionnaireResponse = await this.httpService.getResourceByQueryParam('QuestionnaireResponse', '/' + this.questId );
+    this.finishloadResp = true;
+    this.loadData = this.finishloadQuest && this.finishloadResp;
+    
   }
 
   async getPatientBundle() {
