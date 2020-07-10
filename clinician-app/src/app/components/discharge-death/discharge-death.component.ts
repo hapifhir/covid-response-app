@@ -31,7 +31,7 @@ export class DischargeDeathComponent implements OnInit {
     this.route.queryParamMap.subscribe(params => {
       this.eocId = this.route.snapshot.params.eocId;
     });
-    this.questId = this.route.snapshot.queryParamMap.get('questId')
+    this.questId = this.route.snapshot.queryParamMap.get('questId');
   
     this.loadForm();
     
