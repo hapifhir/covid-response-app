@@ -132,8 +132,12 @@
                     <div class="card-block" *ngIf="patientDetails">
                         <clr-accordion>
                             <clr-accordion-panel *ngFor="let encounter of patientEncounters">
-                              <clr-accordion-title>{{encounter.resource.id}}</clr-accordion-title>
-                              <clr-accordion-content *clrIfExpanded>Date</clr-accordion-content>
+                              <clr-accordion-title> {{encounter.resource.meta.lastUpdated | date}}</clr-accordion-title>
+                              <clr-accordion-content *clrIfExpanded>
+                                <span *ngIf="encounter.resource.status === 'arrived'">Patient admitted</span>
+                                <span *ngIf="encounter.resource.status === 'in-progress'">Patient daily assessment conducted</span>
+                                <span *ngIf="encounter.resource.status === 'finished'">Patient discharged</span>
+                              </clr-accordion-content>
                             </clr-accordion-panel>
                         </clr-accordion>
                     </div>
