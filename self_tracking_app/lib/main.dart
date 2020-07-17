@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:selftrackingapp/DBService.dart';
+import 'package:selftrackingapp/pages/HomePage.dart';
 import 'package:selftrackingapp/pages/PatientListPage.dart';
 import 'package:selftrackingapp/pages/PatientRegistrationPage.dart';
 import 'package:selftrackingapp/pages/UserSettingsPage.dart';
@@ -7,9 +8,9 @@ import 'package:selftrackingapp/pages/UserTrackingPage.dart';
 import 'package:selftrackingapp/shared/NavDrawer.dart';
 import 'TestScreen.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(SelfTrackingApp());
 
-class MyApp extends StatelessWidget {
+class SelfTrackingApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -35,83 +36,6 @@ class MyApp extends StatelessWidget {
           // is not restarted.
           primarySwatch: Colors.blue,
         ),
-        home: MyHomePage(title: 'Flutter Demo Home Page'));
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  var dbService; 
-  @override
-  void initState() {
-    dbService = DBService();
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    final _formKey = GlobalKey<FormState>();
-    return Scaffold(
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Text(widget.title),
-        ),
-        body: Center(
-            // Center is a layout widget. It takes a single child and positions it
-            // in the middle of the parent.
-            child: Form(
-          key: _formKey,
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: <
-                  Widget>[
-            TextFormField(
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return 'null';
-              },
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: RaisedButton(
-                  onPressed: () {
-                    // Validate returns true if the form is valid, or false
-                    // otherwise.
-                    if (_formKey.currentState.validate()) {
-                      // If the form is valid, display a Snackbar.
-                      Scaffold.of(context).showSnackBar(
-                          SnackBar(content: Text('Processing Data')));
-                    }
-                  },
-                  child: Text('Submit')),
-            )
-          ]), // This trailing comma makes auto-formatting nicer for build methods.
-        )),
-        drawer: NavDrawer());
+        home: HomePage(title: 'Home'));
   }
 }

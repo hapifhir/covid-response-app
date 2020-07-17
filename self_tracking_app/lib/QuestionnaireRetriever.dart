@@ -13,6 +13,18 @@ class QuestionnaireRetriever {
     return JsonSerializer().deserialize(questionnaireJson);
   }
 
+  static String getDisplayOfFHIRType(FHIRType element) {
+    if (element == null)
+      return null;
+
+    switch (element.runtimeType) {
+      case StringType: return (element as StringType)?.value;
+      case Coding: return (element as Coding)?.code;
+    }
+
+    return null;
+  }
+
   static Future<PlainQuestionnaireFormGenerator> getQuestionnaireForm(String filename, {
     Map<String, ItemToWidgetFunc> overrideWidgets,
     List<OnSubmitFunc> onSubmit

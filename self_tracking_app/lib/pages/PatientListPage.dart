@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:selftrackingapp/models/FHIR.dart';
-import 'package:selftrackingapp/pages/PatientAssessmentPage.dart';
+import 'package:selftrackingapp/pages/PatientAssessmentListPage.dart';
+import 'package:selftrackingapp/pages/PatientAssessmentFormPage.dart';
 
 List<Patient> _registeredPatients = [];
 Map<Patient, List<QuestionnaireResponse>> _assessments = {};
@@ -12,6 +13,10 @@ class PatientListPage extends StatefulWidget {
 
   static void registerPatient(Patient patient) {
     _registeredPatients.add(patient);
+  }
+
+  static List<QuestionnaireResponse> getAssessments(Patient patient) {
+    return _assessments[patient];
   }
 
   static void registerAssessment(Patient patient, QuestionnaireResponse assessment) {
@@ -31,10 +36,12 @@ class PatientListPage extends StatefulWidget {
 
 class _PatientListPageState extends State<PatientListPage> {
   ScrollController _scrollController;
+  DateTime now;
 
   @override
   void initState() {
     _scrollController = ScrollController();
+    now = DateTime.now();
     super.initState();
   }
 
@@ -59,18 +66,53 @@ class _PatientListPageState extends State<PatientListPage> {
     );
   }
 
+  static String _generateAgeString(DateTime birthDate) {
+    if (birthDate == null)
+      return '?';
+    DateTime now = DateTime.now();
+    int years = now.year - birthDate.year - 1;
+    int months = (now.month - birthDate.month) % 12;
+    if (now.year  >= birthDate.year &&
+        now.month >= birthDate.month &&
+        now.day   >= birthDate.day) {
+      years += 1;
+    }
+    if (months < 0) {
+      months = months + 12;
+    }
+    return '$years year${years == 1 ? "" : "s"}, ' +
+           '$months month${months == 1 ? "" : "s"}';
+  }
+
   Widget _generatePatientListItemWidget(Patient patient) {
     int i = _assessments[patient]?.length ?? 0;
-    return ListTile(
-      title: Text('${patient?.name?.first?.given?.first} ${patient?.name?.first?.family} (Total assessments: $i)'),
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => PatientAssessmentPage(patient),
+    return Card(
+      child: ExpansionTile(
+        title: Text('${patient?.name?.first?.given?.first} ${patient?.name?.first?.family}'),
+        trailing: Icon(Icons.keyboard_arrow_down),
+        subtitle: Text(
+            'Age: ${_generateAgeString(DateTime.parse(patient?.birthDate))}\n' +
+            'Total assessments: $i'
+        ),
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text('Details'),
           ),
-        ).then((_) => setState(() => _));
-      }
+          ListTile(
+            leading: Icon(Icons.view_list),
+            title: Text('Assessments'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (ctx) => PatientAssessmentListPage(patient),
+                ),
+              ).then((_) => setState(() => _));
+            }
+          ),
+        ],
+      )
     );
   }
 }
