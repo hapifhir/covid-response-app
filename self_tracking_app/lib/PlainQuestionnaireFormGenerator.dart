@@ -8,7 +8,7 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'models/FHIR.dart';
 
 typedef ItemToWidgetFunc = Widget Function(Item);
-typedef OnSubmitFunc = void Function(QuestionnaireResponse response, Map<String, List<FHIRType>>);
+typedef OnSubmitFunc = void Function(BuildContext context, QuestionnaireResponse response, Map<String, List<FHIRType>>);
 
 class PlainQuestionnaireFormGenerator extends StatefulWidget {
   final Questionnaire questionnaire;
@@ -180,11 +180,11 @@ class _PlainQuestionnaireFormGeneratorState extends State<PlainQuestionnaireForm
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text(_questionnaire.title),
+        title: Text(_questionnaire.title),
         actions: <Widget>[
           IconButton(icon: const Icon(Icons.save), onPressed: () {
             if (_formKey.currentState.validate()) {
-              widget.onSubmit?.forEach((f) => f(generateQuestionnaireResponse(), _answers));
+              widget.onSubmit?.forEach((f) => f(context, generateQuestionnaireResponse(), _answers));
             }
           }),
         ]

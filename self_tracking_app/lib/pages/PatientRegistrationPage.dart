@@ -44,8 +44,15 @@ class _PatientRegistrationPageState extends State<PatientRegistrationPage> {
     );
   }
 
-  void onDone(QuestionnaireResponse response, Map<String, List<FHIRType>> answers) {
+  void onDone(BuildContext context, QuestionnaireResponse response, Map<String, List<FHIRType>> answers) {
+    response.authored = DateTime.now().toIso8601String();
     PatientListPage.registerPatient(generatePatientFromResponse(answers));
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => PatientListPage(),
+      ),
+    );
   }
 
   @override
