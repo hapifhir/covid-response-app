@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:selftrackingapp/models/UserTracking.dart';
 
-
 typedef OnDelete();
 
 class UserTrackingForm extends StatefulWidget {
   final UserTracking userTracking;
   final OnDelete onDelete;
 
+  UserTrackingForm({Key key, this.userTracking, this.onDelete})
+      : super(key: key);
 
-  UserTrackingForm({Key key, this.userTracking, this.onDelete}): super(key: key);
-
-  var state =  _UserTrackingFormState();
+  var state = _UserTrackingFormState();
 
   @override
   _UserTrackingFormState createState() {
     return this.state = new _UserTrackingFormState();
-  } 
+  }
+
   bool isValid() => state.validate();
 }
 
@@ -50,45 +50,43 @@ class _UserTrackingFormState extends State<UserTrackingForm> {
                 ],
               ),
               Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, top: 16),
-                child: TextFormField(
-                  initialValue: widget.userTracking.purpose,
-                  onSaved: (val) => widget.userTracking.purpose = val,
-                  validator: (val) =>
-                      val.length > 1 ? null : 'Please enter a valid purpose',
-                  decoration: InputDecoration(
-                    labelText: 'Purpose of your trip',
-                    icon: Icon(Icons.directions_walk),
-                    isDense: true,
-                  ),
-                ),
-              ),
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+                  child: TextFormField(
+                    initialValue: widget.userTracking.purpose,
+                    onSaved: (val) => widget.userTracking.purpose = val,
+                    validator: (val) =>
+                        val.length > 1 ? null : 'Please enter a valid purpose',
+                    decoration: InputDecoration(
+                      labelText: 'Purpose of your trip',
+                      icon: Icon(Icons.directions_walk),
+                      isDense: true,
+                    ),
+                  )),
               Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                child: TextFormField(
-                  initialValue: widget.userTracking.location,
-                  onSaved: (val) => widget.userTracking.location = val,
-                  validator: (val) =>
-                      val.length > 1 ? null : 'Please enter a valid address',
-                  decoration: InputDecoration(
-                    labelText: 'Address',
-                    icon: Icon(Icons.location_on),
-                    isDense: true,
-                  ),
-                ),
-              ),
+                  padding: EdgeInsets.only(left: 16, right: 16, top: 16),
+                  child: TextFormField(
+                    initialValue: widget.userTracking.location,
+                    onSaved: (val) => widget.userTracking.location = val,
+                    validator: (val) =>
+                        val.length > 1 ? null : 'Please enter a valid address',
+                    decoration: InputDecoration(
+                      labelText: 'Address',
+                      icon: Icon(Icons.location_on),
+                      isDense: true,
+                    ),
+                  )),
               Padding(
-                padding: EdgeInsets.only(left: 16, right: 16, bottom: 16),
-                child: TextFormField(
-                  initialValue: widget.userTracking.peopleMet,
-                  onSaved: (val) => widget.userTracking.peopleMet = val,
-                  decoration: InputDecoration(
-                    labelText: 'Human Contact',
-                    icon: Icon(Icons.supervisor_account),
-                    isDense: true,
-                  ),
-                ),
-              )
+                  padding:
+                      EdgeInsets.only(left: 16, right: 16, top: 16, bottom: 16),
+                  child: TextFormField(
+                    initialValue: widget.userTracking.peopleMet,
+                    onSaved: (val) => widget.userTracking.peopleMet = val,
+                    decoration: InputDecoration(
+                      labelText: 'Human Contact',
+                      icon: Icon(Icons.supervisor_account),
+                      isDense: true,
+                    ),
+                  )),
             ],
           ),
         ),
@@ -97,10 +95,10 @@ class _UserTrackingFormState extends State<UserTrackingForm> {
   }
 
   bool validate() {
-    var valid = _userTrackingFormKey.currentState.validate();
-    print(valid);
+    var valid = _userTrackingFormKey.currentState != null
+        ? _userTrackingFormKey.currentState.validate()
+        : false;
     if (valid) _userTrackingFormKey.currentState.save();
     return valid;
   }
-
 }

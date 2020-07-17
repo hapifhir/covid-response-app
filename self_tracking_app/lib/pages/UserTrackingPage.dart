@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:selftrackingapp/models/UserTracking.dart';
@@ -24,15 +26,10 @@ class _UserTrackingPageState extends State<UserTrackingPage> {
   @override
   Widget build(BuildContext context) {
     // userTrackingForms.clear();
-    for (int i = 0; i < userTrackings.length; i++) {
-      userTrackingForms.add(UserTrackingForm(
-          key: GlobalKey(),
-          userTracking: userTrackings[i],
-          onDelete: () => onDelete(i)));
-    }
+
     return Scaffold(
         appBar: AppBar(
-          title: Text('User Preferences'),
+          title: Text('User Tracking'),
           actions: <Widget>[FlatButton(onPressed: onSave, child: Text('Save'))],
         ),
         body: Column(
@@ -40,11 +37,11 @@ class _UserTrackingPageState extends State<UserTrackingPage> {
             // FlatButton(onPressed: null, child: Text('Test')),
             Expanded(
                 child: ListView.builder(
-                        shrinkWrap: true,
-                        controller: _scrollController,
-                        addAutomaticKeepAlives: true,
-                        itemCount: userTrackings.length,
-                        itemBuilder: (_, i) => userTrackingForms[i]))
+                    shrinkWrap: true,
+                    controller: _scrollController,
+                    addAutomaticKeepAlives: true,
+                    itemCount: userTrackings.length,
+                    itemBuilder: (_, i) => userTrackingForms[i]))
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -57,24 +54,44 @@ class _UserTrackingPageState extends State<UserTrackingPage> {
 
   ///on form userTracking delete
   void onDelete(int index) {
-    setState(() {
+    // TODO: Add index at 0 fix
+    if (index == 0) {
       userTrackings.removeAt(index);
-    });
+      userTrackingForms.removeAt(index);
+    } else if (index == (userTrackings.length - 1)) {
+      userTrackings.removeLast();
+      userTrackingForms.removeLast();
+    } else {
+      userTrackings.removeAt(index - 1);
+      userTrackingForms.removeAt(index - 1);
+    }
+
+    setState(() {});
   }
 
   ///on form userTracking add
   void onAdd() {
-    setState(() {
-      userTrackings.add(UserTracking());
-    });
+    userTrackings.add(UserTracking());
+    userTrackingForms.add(UserTrackingForm(
+        key: GlobalKey(),
+        userTracking: userTrackings[userTrackings.length - 1],
+        onDelete: () => onDelete(userTrackings.length - 1)));
+    setState(() {});
   }
 
   // on form save
   void onSave() {
+    bool validForms = false;
     userTrackingForms.forEach((form) {
-      if (form.isValid()) {
-        print(form);
+      if (!form.isValid()) {
+        validForms = false;
+      } else {
+        validForms = true;
       }
     });
+    if(validForms) {
+      String valueAttachment = jsonEncode(userTrackings.map((e) => e.toString()).toList().toString());
+      print(valueAttachment.toString());
+    }
   }
 }
