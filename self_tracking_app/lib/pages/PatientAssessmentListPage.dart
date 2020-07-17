@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:selftrackingapp/PlainQuestionnaireResponseViewer.dart';
 
 import 'package:selftrackingapp/models/FHIR.dart';
 import 'package:selftrackingapp/pages/PatientListPage.dart';
@@ -70,6 +71,14 @@ class _PatientAssessmentListPageState extends State<PatientAssessmentListPage> {
       child: ListTile(
         title: Text(_dateFormat.format(DateTime.parse(response.authored)).toString()),
         trailing: Icon(Icons.keyboard_arrow_right),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) => PlainQuestionnaireResponseViewer(response, 'Assessment'),
+            ),
+          ).then((_) => setState(() => _));
+        }
       )
     );
   }
