@@ -13,7 +13,6 @@ export class FhirOperationsService {
     const scope = this;
     const questionnaireResponse = new FHIR.QuestionnaireResponse();
     const identifier = new FHIR.Identifier();
-    console.log ("patient generate" + patientUUID);
     
     if (patientUUID) {
       const _subject = new FHIR.Reference();
@@ -33,8 +32,6 @@ export class FhirOperationsService {
     questionnaireResponse.item = [];
 
     quest.item.forEach(elementGroup => {
-      // console.log('elementGroup', elementGroup);
-      if (elementGroup.linkId != 'patient_demographics') {
         const questionnaireResponseGroupItem = scope.generateQuestionnaireResponseGroupItem(elementGroup.linkId, elementGroup.text);
         questionnaireResponseGroupItem.item = [];
         elementGroup.item.forEach(elementItem => {
@@ -45,7 +42,6 @@ export class FhirOperationsService {
         });
         if (questionnaireResponseGroupItem.item.length > 0)
           questionnaireResponse.item.push(questionnaireResponseGroupItem);
-      }
     });
 
     return questionnaireResponse;
@@ -90,7 +86,6 @@ export class FhirOperationsService {
   }
 
   getAnswerSelected(answers, responseSelected) {
-    // console.log(JSON.stringify(answers));
     for (let answer of answers) {
       if (answer.valueCoding.code == responseSelected) {
         return answer;
@@ -184,6 +179,12 @@ export class FhirOperationsService {
     const _subject = new FHIR.Reference();
     _subject.reference = patId;
     encounter.subject = _subject;
+    
+    encounter.participant = [];
+    const pracRef = new FHIR.Reference();
+    pracRef.reference = 'Practitioner/516'
+    encounter.participant[0] = new FHIR.Participant();
+    encounter.participant[0].individual = pracRef;
     
     return encounter;
   }

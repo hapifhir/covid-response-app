@@ -119,8 +119,6 @@ export class DischargeDeathComponent implements OnInit {
 
     transaction.entry.push(entry_three);
 
-    console.log('transaction', transaction);
-
     //post
 
     try {

@@ -38,4 +38,8 @@ export class NavbarComponent implements OnInit {
     }
     return this.authorized;
   }
+
+  toggleNavBarLinks() {
+    return sessionStorage.getItem('token') ? true : false;
+  }
 }

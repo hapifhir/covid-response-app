@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private httpService: HttpService) { }
 
   loginForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    username: new FormControl('democlinician', Validators.required),
+    password: new FormControl('practitioner1', Validators.required)
   });
   ngOnInit(): void {
   }
@@ -23,13 +24,20 @@ export class LoginComponent implements OnInit {
       const usernameEntered = this.loginForm.value.username;
       const passwordEntered = this.loginForm.value.password;
       // Placeholder login, will need integration enhancements 
-      if((usernameEntered.toLowerCase() === 'roy' && passwordEntered === 'practitioner1') ||
-      (usernameEntered.toLowerCase() === 'olivia' && passwordEntered === 'practitioner2'))  {
+      if((usernameEntered.toLowerCase() === 'democlinician' && passwordEntered === 'practitioner1'))  {
         sessionStorage.setItem('userLogged', usernameEntered);
-        this.router.navigate(['dashboard']);
+        this.setLoginParams();
+        setTimeout(() => {
+          this.router.navigate(['dashboard'])
+        }, 1000);
       } else {
         this.loginForm.reset();
       }
     }
+  }
+
+  async setLoginParams() {
+    const token = await this.httpService.getToken();
+    sessionStorage.setItem('token', token['token']);
   }
 }

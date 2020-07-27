@@ -5,7 +5,7 @@
     <div class="header-nav" *ngIf="userLoggedIn()">
         <a *ngFor="let item of navLinks" routerLink="{{ item.link }}" [ngClass]="{ 'nav-link': true, 'nav-icon-text': true }" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
             <clr-icon *ngIf="item.iconShape && item.iconShape != null" [attr.shape]="item.iconShape" class="is-inverse"></clr-icon>
-            <span class="nav-text">{{ item.text }}</span>
+            <span class="nav-text" *ngIf="toggleNavBarLinks()">{{ item.text }}</span>
         </a>
     </div>
     <div class="header-actions">

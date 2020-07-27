@@ -20,40 +20,40 @@ export class DashboardComponent implements OnInit {
 
   loadPatients() {
     this.httpService.getResourceByQueryParam('Patient', '?_revinclude=EpisodeOfCare:patient').then(res => {
-      const resources = res['entry'].map(item => item.resource);
-      
-      this.patients = resources.filter(item => item.resourceType === 'Patient').map(item => {
-        const obj = {};
-        obj['patId'] = item.id;
-        if (item.name && item.name[0] && item.name[0].given) {
-          obj['first_name'] = item.name[0].given.join(' ');
-        }
+      if (res['entry']) {
+        const resources = res['entry'].map(item => item.resource);
+        this.patients = resources.filter(item => item.resourceType === 'Patient').map(item => {
+          const obj = {};
+          obj['patId'] = item.id;
+          if (item.name && item.name[0] && item.name[0].given) {
+            obj['first_name'] = item.name[0].given.join(' ');
+          }
 
-        if (item.name && item.name[0] && item.name[0].family) {
-          obj['last_name'] = item.name[0].family;
-        }
+          if (item.name && item.name[0] && item.name[0].family) {
+            obj['last_name'] = item.name[0].family;
+          }
 
-        if (item.birthDate) {
-          // date format from fhir YYYY-MM-DD
-          obj['date_of_birth'] = item.birthDate;
-        }
+          if (item.birthDate) {
+            // date format from fhir YYYY-MM-DD
+            obj['date_of_birth'] = item.birthDate;
+          }
 
-        const eoc = resources.filter(i => i.resourceType === 'EpisodeOfCare' && i.patient && i.patient.reference === (item.resourceType + '/' + item.id));
+          const eoc = resources.filter(i => i.resourceType === 'EpisodeOfCare' && i.patient && i.patient.reference === (item.resourceType + '/' + item.id));
 
-        if (eoc && Array.isArray(eoc) && eoc.length > 0) {
-          // console.log(eoc);
-          obj['episodeOfCareId'] = eoc[0].id;
-          obj['status'] = eoc[0].status;
-        }
+          if (eoc && Array.isArray(eoc) && eoc.length > 0) {
+            obj['episodeOfCareId'] = eoc[0].id;
+            obj['status'] = eoc[0].status;
+          }
 
-        return obj;
-      });
+          return obj;
+        });
+      }
     }).catch(error => {
       console.log(error);
     });
   }
 
-  
+
 
   calculateAge(dob) {
     return moment().diff(dob, 'years');

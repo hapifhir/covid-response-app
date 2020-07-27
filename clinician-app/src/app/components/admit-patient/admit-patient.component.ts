@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
-import { FhirOperationsService } from '../../services/fhir-operations.service'; 
+import { FhirOperationsService } from '../../services/fhir-operations.service';
 import { v4 as uuidv4 } from 'uuid';
 import * as FHIR from '../../interfaces/FHIR';
 
@@ -22,25 +22,23 @@ export class AdmitpatientComponent implements OnInit {
   finishloadResp: boolean;
 
 
-  constructor(private httpService: HttpService, private route: ActivatedRoute, private fhirOperations: FhirOperationsService,private routes:Router) { }
+  constructor(private httpService: HttpService, private route: ActivatedRoute, private fhirOperations: FhirOperationsService, private routes: Router) { }
   modalStatus = false;
   ngOnInit(): void {
     this.loadForm();
-    this.questId =  this.route.snapshot.params.questId;
-  
-    if ( this.questId != null && this.questId != undefined )
-    {
+    this.questId = this.route.snapshot.params.questId;
+
+    if (this.questId != null && this.questId != undefined) {
       this.loadQuestionnaireResponse();
     }
-    
+
   }
-  
-  async loadQuestionnaireResponse()
-  {
-    this.questionnaireResponse = await this.httpService.getResourceByQueryParam('QuestionnaireResponse', '/' + this.questId );
+
+  async loadQuestionnaireResponse() {
+    this.questionnaireResponse = await this.httpService.getResourceByQueryParam('QuestionnaireResponse', '/' + this.questId);
     this.finishloadResp = true;
     this.loadData = this.finishloadQuest && this.finishloadResp;
-    
+
   }
   async loadForm() {
 
@@ -48,21 +46,19 @@ export class AdmitpatientComponent implements OnInit {
     const resource = res['entry'][0].resource;
     this.questions = resource;
     this.finishloadQuest = true;
-    if ( this.questId != null && this.questId != undefined )
+    if (this.questId != null && this.questId != undefined)
       this.loadData = this.finishloadQuest && this.finishloadResp;
     else
       this.loadData = true;
-      
+
   }
 
   async submitQuestionnaire(formQuestions: any) {
-    
+
 
     // extract patient_demographics and save as Patient
     const patient_demographics = Object.assign({}, formQuestions.patient_demographics);
-    delete formQuestions.patient_demographics;
 
-    console.log('patient_demographics', patient_demographics);
 
     // create transaction bundle
     const transaction = new FHIR.Bundle();
@@ -76,7 +72,7 @@ export class AdmitpatientComponent implements OnInit {
     const entry_one = new FHIR.Entry();
     entry_one.fullUrl = patient_temp_id;
     entry_one.resource = patientHL7;
-    
+
     const req_one = new FHIR.Request();
     req_one.method = 'POST';
     req_one.url = 'Patient';
@@ -101,7 +97,7 @@ export class AdmitpatientComponent implements OnInit {
     transaction.entry.push(entry_four);
 
     // create episode of care
-    const eocHL7 = this.fhirOperations.generateEpisodeOfCare(patient_temp_id,'active', ct_temp_id);
+    const eocHL7 = this.fhirOperations.generateEpisodeOfCare(patient_temp_id, 'active', ct_temp_id);
     const eoc_temp_id = 'urn:uuid:' + uuidv4();
     const entry_two = new FHIR.Entry();
     entry_two.fullUrl = eoc_temp_id;
@@ -114,7 +110,7 @@ export class AdmitpatientComponent implements OnInit {
     entry_two.request = req_two;
 
     transaction.entry.push(entry_two);
-    
+
     const encounterHL7 = this.fhirOperations.generateEncounter(eoc_temp_id, patient_temp_id, 'arrived');
     const entry_five = new FHIR.Entry();
     entry_five.resource = encounterHL7;
@@ -140,17 +136,13 @@ export class AdmitpatientComponent implements OnInit {
 
     transaction.entry.push(entry_three);
 
-    console.log('transaction', transaction);
-
-    try{
+    try {
       const transactionResponse = await this.httpService.postTransaction(transaction);
-      console.log('transactionResponse', transactionResponse);
       this.modalStatus = true;
-    }catch (error)
-    {
+    } catch (error) {
       console.log(error);
     }
-    
+
   }
 
 }

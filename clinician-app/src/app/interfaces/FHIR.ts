@@ -430,10 +430,8 @@ export class Encounter extends Resource implements Serializable<Encounter> {
 
 export class Participant extends BackboneElement {
   type: CodeableConcept[];
-  actor: Reference;
-  required: string;
-  status: string;
   period: Period;
+  individual: Reference;
 }
 
 export class CareTeam extends Resource implements Serializable<CareTeam> {

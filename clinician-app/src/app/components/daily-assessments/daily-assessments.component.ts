@@ -64,7 +64,6 @@ export class DailyAssessmentsComponent implements OnInit {
   }
 
   async submitQuestionnaire(formQuestions: any) {
-    console.log(formQuestions);
     // create transaction bundle
     const transaction = new FHIR.Bundle();
     transaction.resourceType = 'Bundle';
@@ -96,7 +95,6 @@ export class DailyAssessmentsComponent implements OnInit {
 
     transaction.entry.push(entry_three);
 
-    console.log('transaction', transaction);
 
     try{
       const transactionResponse = await this.httpService.postTransaction(transaction);

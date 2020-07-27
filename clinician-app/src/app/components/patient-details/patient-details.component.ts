@@ -20,7 +20,6 @@ export class PatientDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.pacId = this.route.snapshot.params.pacId;
-    console.log ('pacID:'+ this.pacId);
     this.getPatientBundle();
   }
   
