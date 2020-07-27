@@ -1,19 +1,24 @@
-<div class="clr-row custom-header">
-    <div class="clr-col-1 clr-col-sm-3 clr-col-md-3 clr-col-lg-2"></div>
-    <div class="clr-col-9 clr-col-sm-7 clr-col-md-7 clr-col-lg-8">
+<header class="header-4">
+    <div class="branding">
         <span class="title">{{'navbarPage.title' | translate}}</span>
+    </div>    
+    <div class="header-nav" *ngIf="userLoggedIn()">
+        <a *ngFor="let item of navLinks" routerLink="{{ item.link }}" [ngClass]="{ 'nav-link': true, 'nav-icon-text': true }" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <clr-icon *ngIf="item.iconShape && item.iconShape != null" [attr.shape]="item.iconShape" class="is-inverse"></clr-icon>
+            <span class="nav-text" *ngIf="toggleNavBarLinks()">{{ item.text }}</span>
+        </a>
     </div>
-    <div class="clr-col-2 clr-col-sm-2 clr-col-md-2 clr-col-lg-2">
+    <div class="header-actions">
         <clr-dropdown class="languageDropDown">
             <button class="nav-text" clrDropdownTrigger aria-label="open user profile">
                 {{currentLanguage}}
                 <clr-icon shape="caret down"></clr-icon>
             </button>
             <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-                <div clrDropdownItem *ngFor="let language of languageList" (click)="changeLanguage(language.code)">
+                <div clrDropdownItem *ngFor="let language of languageList" (click)="changeLanguage(language.code)" [ngClass]="{ 'active': currentLanguage == language.display }">
                     <a>{{language.display}}</a>
                 </div>
             </clr-dropdown-menu>
         </clr-dropdown>
     </div>
-</div>
+</header>

@@ -1,0 +1,40 @@
+<div class="clr-row">
+    <div class="clr-col-2 clr-col-sm-2 clr-col-md-2 clr-col-lg-4"></div>
+    <div class="clr-col-8 clr-col-sm-8 clr-col-md-8 clr-col-lg-4">
+        <div class="additionalPadding"></div>
+        <div class="card">
+            <div class="card-header">
+                <div class="clr-row clr-justify-content-center">
+                    <div class="clr-col-2">
+                        <span>Login</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-block">
+                <div class="card-text">
+                    <form clrForm clrLayout="vertical" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <clr-input-container>
+                            <label>Username</label>
+                            <input clrInput type="text" formControlName="username" />
+                        </clr-input-container>
+                        <clr-input-container>
+                            <label>Password</label>
+                            <input clrInput type="password" formControlName="password" />
+                        </clr-input-container>
+                        <div class="additionalPadding">
+                            <br>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col">
+                                <button class="btn btn-primary">Submit</button>
+                                <button class="btn btn-primary">Reset</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="clr-col-2 clr-col-sm-2 clr-col-md-2 clr-col-lg-4"></div>
+    </div>
+</div>

@@ -1,30 +1,33 @@
-# Clinician App
+# Clinician Application
 
-Clinician App is an open-source COVID-19 tool for clinicians. This repository includes code for the app to run on local machine. This app is still in progress.
+* This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.6.
 
-## App URL
+### Purpose
 
-* [COVID Patient App](https://covid19.smilecdr.com/clinician-app/)
- 
-## Prerequisites
+* This application is focused on Clincians.
+* The application focuses on a case, which is a patient, and handles  patient's admission, daily assessments & discharge or death. 
 
-* [Node](https://nodejs.org/en/) 
-* NPM :- Packaged with Node
-* [Angular CLI](https://cli.angular.io/)
+### Forms 
 
-## Local Setup
+* All the forms generated in this application are based on WHO's COVID19 forms.
 
-* Clone the repo. `git clone https://github.com/hapifhir/covid-response-app.git`
-* Once you're in the root of cloned repo, change the directory to `clincian-app`.
-* Install `node_modules` using command `npm install`.
-* Once `node_modules` are installed start the angular server by `npm start` and navigate to `http://localhost:4200` in your browser.
+### Authentication
 
-## FHIR Resources Used
+* Currently, the application receives a static token from the hapi fhir server to perform FHIR operations.
+* **Note** :- The current application currently doesn't support any other authentication mechanism as that would be upto a implementor and the application didn't intend to narrow those options. 
 
-* [QuestionnaireResponse](http://hl7.org/fhir/questionnaireresponse.html)
+### Dynamic Forms
 
-## Languages Supported 
+* This application extensively uses [angular dynamic forms](https://angular.io/guide/dynamic-form) for form generation.
 
-* English
-* French
+### FHIR Architecture
+
+![FHIR Resources](./src/assets/images/FHIR_Resources.png)
+
+
+
+
+
+
+
 

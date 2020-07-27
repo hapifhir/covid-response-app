@@ -8,19 +8,38 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private translate: TranslateService) { }
   currentLanguage;
+  authorized: boolean = false;
+  
   languageList = [
-    {display: "EN", code: "en"},
-    {display: "FR", code: "fr"},
-    {display: "ES", code: "es"},
-  ]
+    { display: "EN", code: "en" },
+    { display: "FR", code: "fr" },
+    { display: "ES", code: "es" },
+  ];
+
+  navLinks = [
+    { link: '/dashboard', iconShape: 'home', text: 'Dashboard' },
+    { link: '/admit-patient', iconShape: 'form', text: 'Admit Patient' },
+  ];
+  
+  constructor(private translate: TranslateService) { }
   ngOnInit(): void {
     this.currentLanguage = this.languageList.find(x => x.code === this.translate.getDefaultLang()).display;
   }
 
   changeLanguage(langCode) {
-      this.translate.setDefaultLang(langCode);
-      this.currentLanguage = this.languageList.find(x => x.code === langCode).display;
+    this.translate.setDefaultLang(langCode);
+    this.currentLanguage = this.languageList.find(x => x.code === langCode).display;
+  }
+
+  userLoggedIn() {
+    if(sessionStorage.getItem('userLogged')) {
+      this.authorized = true;
+    }
+    return this.authorized;
+  }
+
+  toggleNavBarLinks() {
+    return sessionStorage.getItem('token') ? true : false;
   }
 }

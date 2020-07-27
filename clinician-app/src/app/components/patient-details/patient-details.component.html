@@ -1,0 +1,149 @@
+<div class="clr-row">
+    <div class="clr-col-1 clr-col-sm-2 clr-col-md-2 clr-col-lg-2"></div>
+    <div class="clr-col-10 clr-col-sm-8 clr-col-md-8 clr-col-lg-8">
+        <div class="clr-row">
+            <div class="clr-col">
+                <div class="card">
+                    <div class="card-header">
+                        Patient Demographics
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    First Name
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.name[0].given[0]}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Last Name
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.name[0].family}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    DOB
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.birthDate}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Gender
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.gender}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Address Line 1
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].line[0]}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    City
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].city}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Province
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].state}}
+                                </div>
+                            </div>
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Postal Code
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].postalCode}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clr-row">
+                            <div class="clr-col-6">
+                                <div class="card-title">
+                                    Country
+                                </div>
+                                <div class="card-text">
+                                    {{patientDetails.address[0].country}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-primary" [routerLink]="['/daily-assessments', eocId]" *ngIf="patStatus !== null && patStatus !== 'finished'">Conduct Daily
+            Assessment</button>
+        <div class="clr-row">
+            <div class="clr-col">
+                <div class="card">
+                    <div class="card-header">
+                        Assessments
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        <table class="table table-compact">
+                            <thead>
+                                <tr>
+                                    <th>Assessment</th>
+                                    <th>Date</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let assessment of patientAssessments">
+                                    <td>{{getNameAssessment(assessment.resource.identifier.value)}}</td>
+                                    <td>{{assessment.resource.authored | date}}</td>
+                                    <td><button class="btn btn-primary" (click)="ViewAssessment(assessment.resource)">View Assessment</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clr-row" *ngIf="patientEncounters && patientEncounters.length > 0">
+            <div class="clr-col">
+                <div class="card">
+                    <div class="card-header">
+                        Encounters
+                    </div>
+                    <div class="card-block" *ngIf="patientDetails">
+                        <clr-accordion>
+                            <clr-accordion-panel *ngFor="let encounter of patientEncounters">
+                              <clr-accordion-title> {{encounter.resource.meta.lastUpdated | date}}</clr-accordion-title>
+                              <clr-accordion-content *clrIfExpanded>
+                                <span *ngIf="encounter.resource.status === 'arrived'">Patient admitted</span>
+                                <span *ngIf="encounter.resource.status === 'in-progress'">Patient daily assessment conducted</span>
+                                <span *ngIf="encounter.resource.status === 'finished'">Patient discharged</span>
+                              </clr-accordion-content>
+                            </clr-accordion-panel>
+                        </clr-accordion>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-col-1 clr-col-sm-2 clr-col-md-2 clr-col-lg-2"></div>
+</div>
