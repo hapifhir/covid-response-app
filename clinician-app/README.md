@@ -18,7 +18,12 @@
 
 ### Dynamic Forms
 
-* This application extensively uses [angular dynamic forms](https://angular.io/guide/dynamic-form) for form generation. 
+* This application extensively uses [angular dynamic forms](https://angular.io/guide/dynamic-form) for form generation.
+
+### FHIR Architecture
+
+![FHIR Resources](./src/assets/images/FHIR_Resources.png)
+
 
 
 
