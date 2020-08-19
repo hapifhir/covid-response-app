@@ -10,6 +10,7 @@ class NavDrawer extends StatelessWidget {
     'User Tracking': '/userTracking',
     'Patient Registration': '/patientRegistration',
     'Patient List': '/patientList',
+    'Analytics': '/analytics'
   };
 
   Widget _generateNavWidget(BuildContext context, String title, String route) {

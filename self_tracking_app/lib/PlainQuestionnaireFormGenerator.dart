@@ -191,7 +191,9 @@ class _PlainQuestionnaireFormGeneratorState extends State<PlainQuestionnaireForm
       ),
       body: Form(
         key: _formKey,
-        child: ListView(
+        child:
+          ListView(
+          padding: const EdgeInsets.all(10),
           children: _getWidgets(),
           controller: _scrollController,
         ),
