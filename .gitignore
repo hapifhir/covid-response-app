@@ -8,6 +8,11 @@ clinician-app/dist
 clinician-app/tmp
 clinician-app/out-tsc
 
+## package-lock.json
+patient-app/package-lock.json
+clinician-app/package-lock.json
+
+
 # Only exists if Bazel was run
 /bazel-out
 
