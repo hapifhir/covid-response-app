@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:selftrackingapp/QuestionnaireRetriever.dart';
+import 'package:selftrackingapp/helpers/FutureHelper.dart';
 
 import 'package:selftrackingapp/models/FHIR.dart';
 import 'package:selftrackingapp/pages/PatientAssessmentListPage.dart';
@@ -29,12 +30,16 @@ class _PatientAssessmentPageState extends State<PatientAssessmentPage> {
 
   void onDone(BuildContext context, QuestionnaireResponse response, Map<String, List<FHIRType>> answers) {
     response.authored = DateTime.now().toIso8601String();
-    PatientListPage.registerAssessment(widget.patient, response);
-    Navigator.pushReplacement(
+    PatientListPage.registerAssessment(int.parse(widget.patient.id), response);
+    Future<List<QuestionnaireResponse>> assessments = PatientListPage.getAssessments(int.parse(widget.patient.id));
+    Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
-        builder: (ctx) => PatientAssessmentListPage(widget.patient),
+        builder: (context) {
+          return FutureHelper.getStandardFutureBuilder(assessments, (data) => PatientListPage());
+        },
       ),
-    ).then((_) => setState(() => _));
+      ModalRoute.withName('/')
+    );
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:selftrackingapp/PlainQuestionnaireResponseViewer.dart';
+import 'package:selftrackingapp/helpers/FutureHelper.dart';
 
 import 'package:selftrackingapp/models/FHIR.dart';
 import 'package:selftrackingapp/pages/PatientListPage.dart';
@@ -11,8 +12,9 @@ import 'PatientAssessmentFormPage.dart';
 class PatientAssessmentListPage extends StatefulWidget {
   final String title = 'Assessment List';
   final Patient patient;
+  final List<QuestionnaireResponse> assessments;
 
-  PatientAssessmentListPage(this.patient);
+  PatientAssessmentListPage(this.patient, this.assessments);
 
   @override
   _PatientAssessmentListPageState createState() {
@@ -31,8 +33,7 @@ class _PatientAssessmentListPageState extends State<PatientAssessmentListPage> {
 
   @override
   Widget build(BuildContext context) {
-    List<QuestionnaireResponse> assessments = PatientListPage.getAssessments(widget.patient);
-    int assessmentCount = assessments?.length ?? 0;
+    Future<List<QuestionnaireResponse>> assessments = PatientListPage.getAssessments(int.parse(widget.patient.id));
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -50,17 +51,22 @@ class _PatientAssessmentListPageState extends State<PatientAssessmentListPage> {
           ),
         ],
       ),
-      body: Center(
-        child: assessmentCount == 0 ?
-            Text('No registered assessments') :
-            ListView.builder(
-              itemCount: assessmentCount,
-              controller: _scrollController,
-              itemBuilder: (context, index) {
-                return _generateAssessmentListItemWidget(assessments[index]);
-              },
-            ),
-      )
+      body: FutureHelper.getStandardFutureBuilder(assessments, (data) => _getWidget(data)),
+    );
+  }
+
+  Widget _getWidget(List<QuestionnaireResponse> assessments) {
+    int assessmentCount = assessments?.length ?? 0;
+    return Center(
+      child: assessmentCount == 0 ?
+          Text('No registered assessments') :
+          ListView.builder(
+            itemCount: assessmentCount,
+            controller: _scrollController,
+            itemBuilder: (context, index) {
+              return _generateAssessmentListItemWidget(assessments[index]);
+            }
+          ),
     );
   }
 
