@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:selftrackingapp/DBService.dart';
 import 'package:selftrackingapp/pages/HomePage.dart';
 import 'package:selftrackingapp/pages/PatientListPage.dart';
 import 'package:selftrackingapp/pages/PatientRegistrationPage.dart';
 import 'package:selftrackingapp/pages/UserSettingsPage.dart';
 import 'package:selftrackingapp/pages/UserTrackingPage.dart';
-import 'package:selftrackingapp/shared/NavDrawer.dart';
+import 'package:selftrackingapp/pages/AnalyticsPage.dart';
 import 'TestScreen.dart';
 
 void main() => runApp(SelfTrackingApp());
@@ -23,6 +22,7 @@ class SelfTrackingApp extends StatelessWidget {
           '/userTracking': (context) => UserTrackingPage(),
           '/patientRegistration': (context) => PatientRegistrationPage(),
           '/patientList': (context) => PatientListPage(),
+          '/analytics': (context) => AnalyticsPage()
         },
         theme: ThemeData(
           // This is the theme of your application.
