@@ -34,11 +34,20 @@ class JsonSerializer implements ISerializer {
     return result;
   }
 
+  String _getResourceType<T extends IResource>(T resource) {
+    if (resource is Patient)
+      return 'Patient';
+    else if (resource is QuestionnaireResponse)
+      return 'QuestionnaireResponse';
+    return null;
+  }
+
   String serialize<T extends IResource>(T resource, {bool pretty}) {
     Map<String, dynamic> json = jsonDecode(map[resource.resourceType].toJson(resource));
     JsonEncoder encoder;
+    json['resourceType'] = _getResourceType(resource);
 
-    if (pretty)
+    if (pretty == true)
       encoder = JsonEncoder.withIndent('  ');
     else
       encoder = JsonEncoder();
