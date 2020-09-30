@@ -44,9 +44,9 @@ class _PatientRegistrationPageState extends State<PatientRegistrationPage> {
     );
   }
 
-  void onDone(BuildContext context, QuestionnaireResponse response, Map<String, List<FHIRType>> answers) {
+  Future<void> onDone(BuildContext context, QuestionnaireResponse response, Map<String, List<FHIRType>> answers) async {
     response.authored = DateTime.now().toIso8601String();
-    PatientListPage.registerPatient(generatePatientFromResponse(answers));
+    await PatientListPage.registerPatient(generatePatientFromResponse(answers));
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(

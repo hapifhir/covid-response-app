@@ -3,8 +3,11 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:selftrackingapp/DBService.dart';
+import 'package:selftrackingapp/FHIRClient.dart';
 import 'package:selftrackingapp/JsonSerializer.dart';
+import 'package:selftrackingapp/UserDefaultsService.dart';
 import 'package:selftrackingapp/helpers/FutureHelper.dart';
+import 'package:selftrackingapp/main.dart';
 
 import 'package:selftrackingapp/models/FHIRResources.dart';
 import 'package:selftrackingapp/models/FHIR.dart';
@@ -13,6 +16,7 @@ import 'package:uuid/uuid.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'PatientAssessmentListPage.dart';
+import 'package:selftrackingapp/models/UserDefaults.dart';
 
 class PatientListPage extends StatefulWidget {
   final String title = 'Patient List';
@@ -21,6 +25,18 @@ class PatientListPage extends StatefulWidget {
   static Future<int> registerPatient(Patient patient) async {
     if (patient == null)
       return null;
+    if (await UserDefaultsService.hasGivenConsent()) {
+      FHIRClient client = FHIRClient(globalConfig.fhirEndpoint);
+      if (patient.id == null) {
+        Patient result = await client.create(patient);
+        print('Created Patient/${result.id}');
+        patient.id = result.id;
+      } else {
+        Patient result = await client.update(patient);
+        print('Updated Patient/${result.id}');
+        patient.id = result.id;
+      }
+    }
     FHIRResources resource = await DBService().saveFHIRResources(
         FHIRResources(
           patient: JsonSerializer().serialize(patient),
@@ -63,6 +79,14 @@ class PatientListPage extends StatefulWidget {
 
     Map<String, dynamic> theJson = result.first;
     assessment.subject = Reference(reference: 'Patient/$patientId');
+
+    if (await UserDefaultsService.hasGivenConsent()) {
+      FHIRClient client = FHIRClient(globalConfig.fhirEndpoint);
+      QuestionnaireResponse result = await client.create(assessment);
+      print('Created QuestionnaireResponse/${result.id}');
+      assessment = result;
+    }
+
     FHIRResources fhirResources = FHIRResources.fromJson(theJson);
 
     List<QuestionnaireResponse> assessments = [];
@@ -83,7 +107,6 @@ class PatientListPage extends StatefulWidget {
       finishedJson.add(JsonDecoder().convert(JsonSerializer().serialize(response)));
     }
     fhirResources.questionnaireResponse = JsonEncoder().convert(finishedJson);
-    print(fhirResources.questionnaireResponse);
 
     return db.update('FHIRResources', fhirResources.toMap(), where: 'patientId = ?', whereArgs: [patientId]);
   }
@@ -114,7 +137,6 @@ class _PatientListPageState extends State<PatientListPage> {
     List<Map<String, dynamic>> data = await _dbService.getBySqlQuery('SELECT * from FHIRResources');
     List<FHIRResources> result = [];
     for (Map<String, dynamic> json in data) {
-      print(JsonEncoder.withIndent('   ').convert(json));
       FHIRResources fhirResources = FHIRResources.fromJson(json);
       result.add(fhirResources);
     }

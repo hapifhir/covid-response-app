@@ -5,16 +5,23 @@ import 'package:selftrackingapp/pages/PatientRegistrationPage.dart';
 import 'package:selftrackingapp/pages/UserSettingsPage.dart';
 import 'package:selftrackingapp/pages/UserTrackingPage.dart';
 import 'package:selftrackingapp/pages/AnalyticsPage.dart';
+import 'Configuration.dart';
 import 'TestScreen.dart';
 
-void main() => runApp(SelfTrackingApp());
+Configuration globalConfig;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  globalConfig = await Configuration.getConfiguration('dev');
+  runApp(SelfTrackingApp());
+}
 
 class SelfTrackingApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Self Tracking App',
         initialRoute: '/',
         routes: {
           '/testScreen': (context) => TestScreen(),

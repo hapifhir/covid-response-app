@@ -66,6 +66,7 @@ flutter:
   assets:
     - assets/
     - assets/questionnaires/
+    - assets/config/
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
