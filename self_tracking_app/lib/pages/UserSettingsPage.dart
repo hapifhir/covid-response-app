@@ -17,6 +17,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
   final _userSettingsForm = GlobalKey<FormState>();
   bool _notificationsCheckBox = false;
   bool _reportCheckBox = false;
+  bool _shareData = false;
   List<UserDefaults> _currentPerferences = new List<UserDefaults>();
   bool _valuesUpdated = false;
   @override
@@ -70,6 +71,16 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
                           .leading, //  <-- leading Checkbox
                     ),
                     CheckboxListTile(
+                      title: Text("Would you like to share your data with your GP?"),
+                      value: _shareData,
+                      onChanged: (newValue) {
+                        setState(() {
+                          _shareData = newValue;
+                          this.updateValues('shareData', newValue.toString());
+                        });
+                      }
+                    ),
+                    CheckboxListTile(
                       title: Text(
                           "Would you like to report technical issues or suggest new features ?"),
                       value: _reportCheckBox,
@@ -98,6 +109,7 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
     String currentNotificationPref = this._notificationsCheckBox.toString();
     String currentReportPref = this._reportCheckBox.toString();
     String currentCountryPref = this._selectedCountry.isoCode;
+    String currentShareDataPref = this._shareData.toString();
     var res = await dbService.getBySqlQuery('SELECT * FROM UserDefaults');
     // if no defaults found then create db entries
     // else update them
@@ -111,9 +123,13 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
       var countrySelected = new UserDefaults(
           preferenceOption: 'countrySelected',
           preferenceValue: currentCountryPref);
+      var shareData = new UserDefaults(
+          preferenceOption: 'shareData',
+          preferenceValue: currentShareDataPref);
       dbService.saveUserDefaults(notificationEnabled);
       dbService.saveUserDefaults(reportingEnabled);
       dbService.saveUserDefaults(countrySelected);
+      dbService.saveUserDefaults(shareData);
     } else {
       this._currentPerferences.forEach((element) {
         if (this._valuesUpdated) {
@@ -135,7 +151,8 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
             UserDefaults(
                 id: res[i]['id'],
                 preferenceOption: res[i]['preferenceOption'],
-                preferenceValue: res[i]['preferenceValue']));
+                preferenceValue: res[i]['preferenceValue'],
+            ));
         setState(() {
           if (res[i]['preferenceOption'] == 'notificationEnabled') {
             this._notificationsCheckBox = res[i]['preferenceValue'] == 'true';
@@ -144,6 +161,8 @@ class _UserSettingsPageState extends State<UserSettingsPage> {
           } else if (res[i]['preferenceOption'] == 'countrySelected') {
             this._selectedCountry =
                 Country.findByIsoCode(res[i]['preferenceValue']);
+          } else if (res[i]['preferenceOption'] == 'shareData') {
+            this._shareData = res[i]['shareData'] == 'true';
           }
         });
       });

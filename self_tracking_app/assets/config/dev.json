@@ -1,0 +1,3 @@
+{
+  "fhirEndpoint": "http://localhost:8080/fhir"
+}

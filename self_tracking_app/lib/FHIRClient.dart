@@ -32,7 +32,7 @@ class FHIRClient extends IFHIRClient {
     http.Response response = processOnAfterResponse(await http.post(
       request.url,
       headers: request.headers,
-      body: jsonEncode(request.resource.toJson()),
+      body: _jsonSerializer.serialize(resource),
     ));
     if (response.statusCode == 201) {
       return _jsonSerializer.deserialize(response.body);
