@@ -1,4 +1,8 @@
-<div class="main-container">
-  <app-nav></app-nav>
-  <router-outlet></router-outlet>
-</div>
+
+<mat-toolbar color="primary">
+  <span>Questionnaire Generator</span>
+</mat-toolbar>
+<form [formGroup]="form" (ngSubmit)="submit()" *ngIf="fields">
+  <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
+  <button type="submit" class="btn btn-primary submit-button" [disabled]="!form.valid">Submit</button>
+</form>
