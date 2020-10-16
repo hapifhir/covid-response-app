@@ -1,8 +1,7 @@
-
 <mat-toolbar color="primary">
   <span>Questionnaire Generator</span>
 </mat-toolbar>
 <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="fields">
+  <button type="submit" mat-raised-button color="primary" [disabled]="!form.valid">Submit</button>
   <formly-form [model]="model" [fields]="fields" [options]="options" [form]="form"></formly-form>
-  <button type="submit" class="btn btn-primary submit-button" [disabled]="!form.valid">Submit</button>
 </form>

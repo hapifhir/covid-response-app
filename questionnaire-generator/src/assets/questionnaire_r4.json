@@ -4,10 +4,12 @@
       "type": "object",
       "properties": {
         "url": {
+          "className": "flex-1",
           "type": "string",
           "title": "url"
         },
         "version": {
+          "className": "flex-1",
           "type": "string",
           "title": "version"
         },
@@ -65,7 +67,7 @@
         },
         "items": {
           "type": "array",
-          "title": "Items",
+          "title": "Item",
           "items": {
             "type": "object",
             "required": [

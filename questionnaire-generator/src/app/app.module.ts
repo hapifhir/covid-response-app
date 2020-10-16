@@ -12,7 +12,9 @@ import { ObjectTypeComponent } from './formly-types/object.type';
 import { ArrayTypeComponent } from './formly-types/array.type';
 import {MatGridListModule} from '@angular/material/grid-list'; 
 import {MatToolbarModule} from '@angular/material/toolbar'; 
-
+import {MatExpansionModule} from '@angular/material/expansion'
+import {MatButtonModule} from '@angular/material/button'; 
+import {MatIconModule} from '@angular/material/icon'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +50,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     FormlyMaterialModule,
     HttpClientModule,
     MatGridListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatExpansionModule,
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

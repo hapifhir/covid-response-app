@@ -4,25 +4,30 @@ import { FieldArrayType } from '@ngx-formly/core';
 @Component({
   selector: 'formly-array-type',
   template: `
-  <div class="mb-3">
-    <legend *ngIf="to.label">{{ to.label }}</legend>
-    <p *ngIf="to.description">{{ to.description }}</p>
-
-    <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
-      <formly-validation-message [field]="field"></formly-validation-message>
-    </div>
-
-    <div *ngFor="let field of field.fieldGroup;let i = index;" class="row">
+  <section>
+    <section class="add-item-section">
+      <button mat-raised-button color="accent" (click)="add()" type="button">
+        {{ to.label }} <mat-icon>add</mat-icon>
+      </button>
+    </section>
+    <mat-expansion-panel *ngFor="let field of field.fieldGroup;let i = index;" class="row item-expansion-panel"
+      hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title *ngIf="to.label">
+          <section>
+            {{ to.label }} [{{i}}]
+            <button mat-icon-button color="warn" (click)="remove(i)" type="button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </section>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
       <formly-field class="col-10" [field]="field"></formly-field>
-      <div class="col-2 text-right">
-        <button class="btn btn-danger" type="button" (click)="remove(i)">-</button>
-      </div>
-    </div>
-
-    <div class="d-flex flex-row-reverse">
-      <button class="btn btn-primary" type="button" (click)="add()">+</button>
-    </div>
-  </div>
-  `,
+    </mat-expansion-panel>
+</section>`,
 })
-export class ArrayTypeComponent extends FieldArrayType {}
+export class ArrayTypeComponent extends FieldArrayType { }
+
+// <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
+//       <formly-validation-message [field]="field"></formly-validation-message>
+//     </div>

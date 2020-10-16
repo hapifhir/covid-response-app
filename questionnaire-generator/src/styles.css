@@ -2,3 +2,15 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.add-item-section {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    float: right;
+}
+
+.item-expansion-panel {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    clear: both;
+}
