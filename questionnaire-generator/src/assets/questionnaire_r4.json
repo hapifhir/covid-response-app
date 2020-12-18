@@ -1,132 +1,132 @@
 {
-    "schema": {
-      "title" : "",
-      "type": "object",
-      "properties": {
-        "url": {
-          "className": "flex-1",
-          "type": "string",
-          "title": "url"
-        },
-        "version": {
-          "className": "flex-1",
-          "type": "string",
-          "title": "version"
-        },
-        "name":{
-          "type": "string",
-          "title": "name"
-        },
-        "Title":{
-          "type": "string",
-          "title": "title"
-        },
-        "derivedFrom":{
-          "type": "string",
-          "title": "derivedFrom"
-        },
-        "status": {
-          "type": "string",
-          "title": "status"
-        },
-        "experimental": {
-          "type": "string",
-          "title": "experimental"
-        },
-        "subjectType": {
-          "type": "string",
-          "title": "subjectType"
-        },
-        "date": {
-          "type": "string",
-          "title": "date"
-        },
-        "publisher": {
-          "type": "string",
-          "title": "publisher"
-        },
-        "description": {
-          "type": "string",
-          "title": "description"
-        },
-        "purpose": {
-          "type": "string",
-          "title": "purpose"
-        },
-        "copyright": {
-          "type": "string",
-          "title": "copyright"
-        },
-        "approvalDate": {
-          "type": "string",
-          "title": "approvalDate"
-        },
-        "lastReviewDate": {
-          "type": "string",
-          "title": "lastReviewDate"
-        },
+  "schema": {
+    "title": "",
+    "type": "object",
+    "properties": {
+      "url": {
+        "className": "flex-1",
+        "type": "string",
+        "title": "url"
+      },
+      "version": {
+        "className": "flex-1",
+        "type": "string",
+        "title": "version"
+      },
+      "name": {
+        "type": "string",
+        "title": "name"
+      },
+      "Title": {
+        "type": "string",
+        "title": "title"
+      },
+      "derivedFrom": {
+        "type": "string",
+        "title": "derivedFrom"
+      },
+      "status": {
+        "type": "string",
+        "title": "status"
+      },
+      "experimental": {
+        "type": "string",
+        "title": "experimental"
+      },
+      "subjectType": {
+        "type": "string",
+        "title": "subjectType"
+      },
+      "date": {
+        "type": "date_picker",
+        "title": "date"
+      },
+      "publisher": {
+        "type": "string",
+        "title": "publisher"
+      },
+      "description": {
+        "type": "string",
+        "title": "description"
+      },
+      "purpose": {
+        "type": "string",
+        "title": "purpose"
+      },
+      "copyright": {
+        "type": "string",
+        "title": "copyright"
+      },
+      "approvalDate": {
+        "type": "string",
+        "title": "approvalDate"
+      },
+      "lastReviewDate": {
+        "type": "string",
+        "title": "lastReviewDate"
+      },
+      "items": {
+        "type": "array",
+        "title": "Item",
         "items": {
-          "type": "array",
-          "title": "Item",
-          "items": {
-            "type": "object",
-            "required": [
-              "title"
-            ],
-            "properties": {
-              "linkId": {
-                "type": "string",
-                "title": "linkId",
-                "description": ""
-              },
-              "definition": {
-                "type": "string",
-                "title": "definition",
-                "description": ""
-              },
-              "prefix": {
-                "type": "string",
-                "title": "prefix"
-              },
-              "text": {
-                "type": "string",
-                "title": "text"
-              },
-              "type": {
-                "type": "string",
-                "title": "type"
-              },
-              "enableBehaviour": {
-                "type": "string",
-                "title": "enableBehaviour"
-              },
-              "required": {
-                "type": "boolean",
-                "title": "required",
-                "default": "false"
-              },
-              "repeats": {
-                "type": "boolean",
-                "title": "repeats",
-                "default": "false"
-              },
-              "readOnly": {
-                "type": "boolean",
-                "title": "readOnly",
-                "default": "false"
-              },
-              "maxLength": {
-                "type": "number",
-                "title": "maxLength"
-              },
-              "answerValueSet": {
-                "type": "string",
-                "title": "answerValueSet"
-              }
+          "type": "object",
+          "required": [
+            "title"
+          ],
+          "properties": {
+            "linkId": {
+              "type": "string",
+              "title": "linkId",
+              "description": ""
+            },
+            "definition": {
+              "type": "string",
+              "title": "definition",
+              "description": ""
+            },
+            "prefix": {
+              "type": "string",
+              "title": "prefix"
+            },
+            "text": {
+              "type": "string",
+              "title": "text"
+            },
+            "type": {
+              "type": "string",
+              "title": "type"
+            },
+            "enableBehaviour": {
+              "type": "string",
+              "title": "enableBehaviour"
+            },
+            "required": {
+              "type": "boolean",
+              "title": "required",
+              "default": "false"
+            },
+            "repeats": {
+              "type": "boolean",
+              "title": "repeats",
+              "default": "false"
+            },
+            "readOnly": {
+              "type": "boolean",
+              "title": "readOnly",
+              "default": "false"
+            },
+            "maxLength": {
+              "type": "number",
+              "title": "maxLength"
+            },
+            "answerValueSet": {
+              "type": "string",
+              "title": "answerValueSet"
             }
           }
         }
       }
-    },
-    "model": {}
-  }
+    }
+  },
+  "model": {}
+}

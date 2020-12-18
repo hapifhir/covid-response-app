@@ -6,7 +6,7 @@ import { FieldArrayType } from '@ngx-formly/core';
   template: `
   <section>
     <section class="add-item-section">
-      <button mat-raised-button color="accent" (click)="add()" type="button">
+      <button mat-raised-button color="accent" (click)="add()" type="button" style="margin-left:15px;">
         {{ to.label }} <mat-icon>add</mat-icon>
       </button>
     </section>
@@ -22,12 +22,8 @@ import { FieldArrayType } from '@ngx-formly/core';
           </section>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <formly-field class="col-10" [field]="field"></formly-field>
+      <formly-field [field]="field"></formly-field>
     </mat-expansion-panel>
 </section>`,
 })
 export class ArrayTypeComponent extends FieldArrayType { }
-
-// <div class="alert alert-danger" role="alert" *ngIf="showError && formControl.errors">
-//       <formly-validation-message [field]="field"></formly-validation-message>
-//     </div>
